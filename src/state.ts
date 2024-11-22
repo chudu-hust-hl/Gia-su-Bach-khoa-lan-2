@@ -7,6 +7,7 @@ import { Cart } from "types/cart";
 import { Notification } from "types/notification";
 import { calculateDistance } from "utils/location";
 import { Store } from "types/delivery";
+import { UserCurrentType } from "types/user";
 import { calcFinalPrice } from "utils/product";
 import { wait } from "utils/async";
 import categories from "../mock/categories.json";
@@ -25,6 +26,14 @@ export const userState = selector({
       };
     }
   },
+});
+
+export const userCurrentState = atom<UserCurrentType>({
+  key: 'userCurrentState',
+  default: (() => {
+    const storedUser = localStorage.getItem('userType');
+    return storedUser ? JSON.parse(storedUser) as UserCurrentType : { userCurrentType: null }; // Default value
+  })(),
 });
 
 export const categoriesState = selector<Category[]>({

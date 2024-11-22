@@ -2,7 +2,7 @@ import { userState } from 'state';
 import React, { FC, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useNavigate } from "react-router-dom";
-import { Page, Button, Box } from 'zmp-ui';
+import { Header,Page, Button, Box } from 'zmp-ui';
 
 
 interface FeedbackModalProps {
@@ -64,16 +64,11 @@ export const UserInfoBox: FC = () => {
   );
 };
 
-export const ActionButtons: FC = () => {
+export const ActionButtons: FC<{ onFeedback: () => void }> = ({ onFeedback }) => {
 	const navigate = useNavigate();
-	const [isModalOpen, setModalOpen] = useState(false);
 
 	const handleChangeType = () => {
 		navigate('/start');
-	};
-
-	const handleFeedback = () => {
-		setModalOpen(true); // Open the feedback modal
 	};
 
 	const handleChat = () => {
@@ -85,13 +80,12 @@ export const ActionButtons: FC = () => {
 			<Button onClick={handleChangeType} className="w-full">
 				Đổi giao diện
 			</Button>
-			<Button onClick={handleFeedback} className="w-full">
+			<Button onClick={onFeedback} className="w-full">
 				Đóng góp ý kiến, phản hồi
 			</Button>
 			<Button onClick={handleChangeType} className="w-full">
 				Chat với Dự án
 			</Button>
-      <FeedbackModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
 		</Box>
 	);
 }
@@ -120,12 +114,18 @@ export const PolicyButtons: FC = () => {
 }
 
 const ProfilePage: React.FunctionComponent=() => {
-
+  const [isModalOpen, setModalOpen] = useState(false);
+  const handleFeedback = () => {
+    setModalOpen(true); // Open the feedback modal
+  }
   return (
     <Page>
+      <Header title="Thông tin tài khoản" showBackIcon={false} />
       <UserInfoBox/>
-      <ActionButtons />
+      <ActionButtons onFeedback={handleFeedback}/>
       <PolicyButtons />
+
+      <FeedbackModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
     </Page>
   );
 }
