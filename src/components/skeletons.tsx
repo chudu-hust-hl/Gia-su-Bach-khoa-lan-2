@@ -62,3 +62,13 @@ export const ProductSearchResultSkeleton: FC = () => {
     </div>
   );
 };
+
+export function SelectSkeleton(props: { width: number }) {
+  return (
+    <div
+      className="h-8 rounded-full bg-skeleton animate-pulse px-3 flex items-center justify-end"
+      style={{ width: props.width }}
+    >
+    </div>
+  );
+}

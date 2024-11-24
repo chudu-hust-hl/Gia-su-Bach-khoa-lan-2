@@ -1,0 +1,72 @@
+[
+  {
+    "ClassID": "2",
+    "LessonID": "2T001",
+    "Date": "2024-01-15",
+    "Status": "Đã xong",
+    "Comment": "Học sinh nắm vững lý thuyết nhưng cần luyện tập thêm."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T002",
+    "Date": "2024-01-17",
+    "Status": "Đã xong",
+    "Comment": "Học sinh nắm vững lý thuyết nhưng cần luyện tập thêm."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T003",
+    "Date": "2024-01-18",
+    "Status": "Xin nghỉ",
+    "Comment": "Học sinh xin nghỉ do lý do gia đình."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T004",
+    "Date": "2024-01-20",
+    "Status": "Đã xong",
+    "Comment": "Học sinh nắm vững lý thuyết nhưng cần luyện tập thêm."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T005",
+    "Date": "2024-01-21",
+    "Status": "Đã xong",
+    "Comment": "Buổi học diễn ra tốt, học sinh đạt kết quả khả quan."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T006",
+    "Date": "2024-01-23",
+    "Status": "Đã xong",
+    "Comment": "Học sinh nắm vững lý thuyết nhưng cần luyện tập thêm."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T007",
+    "Date": "2024-01-24",
+    "Status": "Đã xong",
+    "Comment": "Học sinh tích cực và hoàn thành bài tập sớm."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T008",
+    "Date": "2024-01-26",
+    "Status": "Xin nghỉ",
+    "Comment": "Thông báo nghỉ trước một ngày vì học sinh ốm."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T009",
+    "Date": "2024-01-27",
+    "Status": "Đã xong",
+    "Comment": "Tăng cường bài tập rèn luyện, học sinh tiến bộ rõ rệt."
+  },
+  {
+    "ClassID": "2",
+    "LessonID": "2T010",
+    "Date": "2024-01-29",
+    "Status": "Chuẩn bị",
+    "Comment": ""
+  }
+]
