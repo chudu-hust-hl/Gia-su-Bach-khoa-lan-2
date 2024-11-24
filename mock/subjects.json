@@ -1,0 +1,63 @@
+[
+    {
+      "id": 1,
+      "name": "Toán học",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/ao-len.webp"
+    },
+    {
+      "id": 2,
+      "name": "Vật lý",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/blazer.webp"
+    },
+    {
+      "id": 3,
+      "name": "Hóa học",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/dam.webp"
+    },
+    {
+      "id": 4,
+      "name": "Tin học",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/ao-phong.webp"
+    },
+    {
+      "id": 5,
+      "name": "Sinh học",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/ao-gile.webp"
+    },
+    {
+      "id": 6,
+      "name": "Ngoại ngữ",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/chan-vay.webp"
+    },
+    {
+      "id": 7,
+      "name": "Ngữ Văn",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/quan-short.webp"
+    },
+    {
+      "id": 8,
+      "name": "Đánh gia tư duy Bách khoa",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/quan-jean.webp"
+    },
+    {
+      "id": 9,
+      "name": "Kĩ năng mềm",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/tui-xach.webp"
+    },
+    {
+      "id": 10,
+      "name": "STEM",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/phu-kien.webp"
+    },
+    {
+      "id": 11,
+      "name": "Tin học văn phòng",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/phu-kien.webp"
+    },
+    {
+      "id": 12,
+      "name": "Các môn tiểu học",
+      "image": "https://stc-zmp.zadn.vn/zaui-fashion/category/phu-kien.webp"
+    }
+  ]
+  
