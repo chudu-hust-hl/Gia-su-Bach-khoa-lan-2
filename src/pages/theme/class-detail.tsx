@@ -21,9 +21,8 @@ const ClassDetailPage: FC = () => {
   };
 
   return (
-    <Page>
-    <Header title="Lớp đang tìm gia sư"/>
-    <div className="w-full h-full flex flex-col">
+    <Page className="flex flex-col h-screen">
+      <Header title="Lớp đang tìm gia sư" />
       <div className="flex-1 overflow-y-auto">
         <div className="w-full px-4">
           <div className="py-2">
@@ -60,26 +59,16 @@ const ClassDetailPage: FC = () => {
             </div>
           </>
         )}
-        <div className="bg-section h-2 w-full"></div>
-        <div className="font-medium py-2 px-4">
-          <div className="pt-2 pb-2.5">Các lớp tương tự</div>
-          {/* You can add a component for related classes here */}
-        </div>
       </div>
 
-      <div className="flex-none grid grid-cols-2 gap-2 py-3 px-4">
-        <Button
-          onClick={handleApply}
-        >
+      <div className="bg-white flex-none grid grid-cols-2 gap-2 py-3 px-4">
+        <Button onClick={handleApply}>
           Ứng tuyển
         </Button>
-        <Button
-          onClick={() => navigate("/message")} // Assuming you have a messaging page
-        >
+        <Button onClick={() => navigate("/message")}>
           Nhắn tin
         </Button>
       </div>
-    </div>
     </Page>
   );
 };

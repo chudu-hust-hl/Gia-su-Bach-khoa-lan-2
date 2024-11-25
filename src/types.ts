@@ -10,14 +10,8 @@ export interface Product {
     colors?: Color[];
   }
   
-  export interface User {
-    UserID: string;
-    Type: number;
-    Avatar?: string;
-    StudentID?: string | undefined;
-    PhoneEmail?: string | undefined;
-    Apply: string[];
-    Teaching: string[];
+  export interface UserCurrentType{
+    userCurrentType: 0 | 1 | null; // Allowing only 0, 1, or null
   }
   
   export interface GSParentInfo{

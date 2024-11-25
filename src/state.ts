@@ -7,12 +7,11 @@ import { Cart } from "types/cart";
 import { Notification } from "types/notification";
 import { calculateDistance } from "utils/location";
 import { Store } from "types/delivery";
-import { UserCurrentType } from "types/user";
 import { calcFinalPrice } from "utils/product";
 import { wait } from "utils/async";
 import categories from "../mock/categories.json";
 import mockClasses from "../mock/classes.json";
-import { GSClass, GSLesson, GSStudentInfo } from "types";
+import { GSClass, GSLesson, GSStudentInfo, UserCurrentType } from "types";
 
 export const userState = selector({
   key: "user",
