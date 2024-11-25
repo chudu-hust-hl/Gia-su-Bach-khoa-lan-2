@@ -49,8 +49,9 @@ const ClassListPage: FC = () => {
 
   return (
     <Page>
+      <div className="sticky top-0 bg-white z-10">
       <Header title="Danh sách lớp mới" showBackIcon={false}/>
-      <div className="sticky top-0 bg-white z-10"> {/* Fixed positioning */}
+       {/* Fixed positioning */}
         <ClassFilter />
       </div>
       <div className="pt-5"> {/* Add padding to prevent overlap */}
