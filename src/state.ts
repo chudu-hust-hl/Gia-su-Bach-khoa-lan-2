@@ -157,9 +157,9 @@ export const selectedFormTeachState = atom<string[]>({
   default: [], // Default value
 });
 
-export const classState = selectorFamily({
+export const classState = selectorFamily<GSClass | undefined, string>({
   key: "classState",
-  get: (id: string) => async ({ get }) => {
+  get: (id) => ({ get }) => {
     const classes = get(classesState); // Get the classes state
     return classes.find((classItem) => classItem.id === id); // Find the class by ID
   },
