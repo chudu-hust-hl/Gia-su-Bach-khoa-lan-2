@@ -17,6 +17,8 @@ import ClassDetailPage from "pages/theme/class-detail";
 import AppInfoPage from "pages/home/app-info";
 import StandardInfoPage from "pages/home/standard";
 import DownloadAppPage from "pages/home/download-intro";
+import FormParrent from "pages/form/form-parent";
+import FormStudent from "pages/form/form-student";
 
 if (import.meta.env.DEV) {
   document.body.style.setProperty("--zaui-safe-area-inset-top", "24px");
@@ -42,6 +44,8 @@ export const Layout: FC = () => {
           <Route path="/app-info" element={<AppInfoPage />}></Route>
           <Route path="/app-standards" element={<StandardInfoPage />}></Route>
           <Route path="/download-app" element={<DownloadAppPage />}></Route>
+          <Route path="/formParent" element={<FormParrent />}></Route>
+          <Route path="/formStudent" element={<FormStudent />}></Route>
           <Route path="/search" element={<SearchPage />}></Route>
           <Route path="/allclasses" element={<AvailableClassPage/>}></Route>
           <Route path="/class/:id" element={<ClassDetailPage />}></Route>

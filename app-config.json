@@ -15,6 +15,7 @@
   "template": {
     "name": "zaui-coffee",
     "primaryColor": "#006af5",
+    "apiUrl": "http://202.191.56.172/GIASUAPI/",
     "prefixCurrencySymbol": false,
     "currencySymbol": "đ",
     "headerLogo": ""

@@ -4,6 +4,7 @@ import { RecoilRoot } from "recoil";
 import { getConfig } from "utils/config";
 import { Layout } from "./layout";
 import { ConfigProvider } from "./config-provider";
+import { Toaster } from "react-hot-toast";
 
 const MyApp = () => {
   return (
@@ -18,6 +19,12 @@ const MyApp = () => {
           <SnackbarProvider>
             <ZMPRouter>
               <Layout />
+              <Toaster
+                containerClassName="toast-container"
+                containerStyle={{
+                  top: "calc(50% - 24px)",
+                }}
+              />
             </ZMPRouter>
           </SnackbarProvider>
         </App>

@@ -12,4 +12,5 @@ declare interface Window {
   ZaloJavaScriptInterface?: {
     getStatusBarHeight: () => number;
   };
+  APP_CONFIG: any;
 }
