@@ -14,8 +14,8 @@ const tabs: Record<string, MenuItem> = {
     label: "Danh sách lớp",
     icon: <Icon icon="zi-notif" />,
   },
-  "/cart": {
-    label: "Giỏ hàng",
+  "/your-class": {
+    label: "Lớp của bạn",
     icon: <CartIcon />,
     activeIcon: <CartIcon active />,
   },

@@ -19,6 +19,9 @@ import StandardInfoPage from "pages/home/standard";
 import DownloadAppPage from "pages/home/download-intro";
 import FormParrent from "pages/form/form-parent";
 import FormStudent from "pages/form/form-student";
+import StartPage from "pages/home/start";
+import YourClassPage from "pages/your-class";
+import TeachingDetailPage from "pages/your-class/teaching-detail";
 
 if (import.meta.env.DEV) {
   document.body.style.setProperty("--zaui-safe-area-inset-top", "24px");
@@ -41,6 +44,7 @@ export const Layout: FC = () => {
       <Box className="flex-1 flex flex-col overflow-hidden">
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
+          <Route path="/start" element={<StartPage />}></Route>
           <Route path="/app-info" element={<AppInfoPage />}></Route>
           <Route path="/app-standards" element={<StandardInfoPage />}></Route>
           <Route path="/download-app" element={<DownloadAppPage />}></Route>
@@ -51,6 +55,8 @@ export const Layout: FC = () => {
           <Route path="/class/:id" element={<ClassDetailPage />}></Route>
           <Route path="/category" element={<CategoryPage />}></Route>
           <Route path="/tutor-list" element={<TutorListPage />}></Route>
+          <Route path="/your-class" element={<YourClassPage />}></Route>
+          <Route path="/teaching-detail/:id" element={<TeachingDetailPage />}></Route>
           <Route path="/cart" element={<CartPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
           <Route path="/result" element={<CheckoutResultPage />}></Route>

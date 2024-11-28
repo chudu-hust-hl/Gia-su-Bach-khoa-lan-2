@@ -9,34 +9,22 @@ import React, {FC} from "react";
 
 export default function HomePage() {
   const userType = useRecoilValue(userCurrentState);
+  const navigate = useNavigate();
 
-  {/*useEffect(() => {
-    if (!user || user.Type === null) {
-      navigate("/start"); // Redirect to the Start page
+  {useEffect(() => {
+    if (!localStorage.getItem('userType')) {
+      console.log(userType, "Khong co");
+      navigate("/start"); // Show the selection component
     }
-  }, [user, navigate]);
-
-  // If the user is not defined or the type is null, we don't render anything yet
-  if (!user || user.Type === null) {
-    return null; // You can also return a loading spinner or similar here
-  }*/}
-
-  
-  console.log(localStorage.getItem('userType'), "Dday la user");
-  
-  if (!localStorage.getItem('userType')) {
-    console.log(userType, "Khong co");
-    return <StartPage />; // Show the selection component
-  }
-  else{
-    if (userType.userCurrentType == null) {
-      console.log(userType, "Chua chon");
-      return <StartPage />; // Show the selection component
+    else{
+      if (userType.userCurrentType == null) {
+        console.log(userType, "Chua chon");
+        navigate("/start"); // Show the selection component
+      }
+      console.log(userType, "Co type");
     }
-    console.log(userType, "Co type");
-  }
-
-  // Check the user type and render the appropriate component
+  }, [userType, navigate]);}
+  
   return (
     <>
       {userType.userCurrentType === 0 ? (

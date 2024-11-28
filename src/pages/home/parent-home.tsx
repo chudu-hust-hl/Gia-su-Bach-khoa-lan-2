@@ -1,3 +1,6 @@
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userState, classesState, selectedTabIndexState } from "state";
+import { TeachingList, ApplyingList, DoneList, ClassTypeTabs } from "components/class-type-tabs";
 import { useNavigate } from "react-router-dom";
 import { Banners } from "./banners";
 import Button from "components/button";
@@ -8,6 +11,25 @@ import { Welcome } from "./welcome";
 
 const ParentHomePage: FC = () => {
   const navigate = useNavigate();
+  const [selectedTabIndex, setSelectedIndex] = useRecoilState(selectedTabIndexState);
+  const classes = useRecoilValue(classesState); 
+  const user = useRecoilValue (userState);
+  const studentID = user.studentID;
+  const phoneNumber = user.phoneNumber;
+
+  const renderList = () => {
+    switch (selectedTabIndex) {
+      case 0: // "Đang diễn ra"
+        return <TeachingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />;
+      case 1: // "Đang yêu cầu"
+        return <ApplyingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />;
+      case 2: // "Đã hoàn thành"
+        return <DoneList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <Page>
       <Welcome/>
@@ -29,6 +51,10 @@ const ParentHomePage: FC = () => {
         <div className="p-4">
           <MoreInfoGroup/>
         </div>
+        <Box>
+          <ClassTypeTabs selectedIndex={selectedTabIndex} onChange={setSelectedIndex}/>
+          {renderList()}
+        </Box>
       </div>
     </Page>
   );

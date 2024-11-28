@@ -1,7 +1,7 @@
 import React, { useState, useEffect, FC } from "react";
 import { Page, Box, Text, Input, Select, Checkbox, Button, Radio } from "zmp-ui";
 import { GSParentInfo } from "types";
-import { parentApi, locationApi } from "utils/api";
+import { parentApi, locationApi } from "api/location";
 import {toast} from "react-hot-toast";
 
 const { Option } = Select;
@@ -24,6 +24,9 @@ const FormParrent: FC = () => {
     QuantityStudent: "",
     SexTeacher: "",
     TimeSupport: "",
+    Apply: [],
+    Teaching: [],
+    Done: [],
   });
 
   const levelToClasses: Record<string, string[]> = {
@@ -208,7 +211,10 @@ const FormParrent: FC = () => {
       FormTeach: formData.FormTeach || "",
       QuantityStudent: formData.QuantityStudent || "",
       SexTeacher: formData.SexTeacher || "",
-      TimeSupport: formData.TimeSupport || ""
+      TimeSupport: formData.TimeSupport || "",
+      Apply: [],
+      Teaching: [],
+      Done: [],
     };
   
     // Create the request body

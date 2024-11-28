@@ -4,6 +4,8 @@ import { Box, Page } from 'zmp-ui';
 import Button from 'components/button';
 import { useNavigate } from 'react-router-dom';
 import { userCurrentState } from 'state';
+import { getConfig } from 'utils/config';
+import logo from "static/logo.png";
 
 const StartPage: FC = () => {
   const [userCurrent, setUserCurrentType] = useRecoilState(userCurrentState);
@@ -27,8 +29,12 @@ const StartPage: FC = () => {
 
   return (
     <Page>
-      <div className="min-h-full bg-section flex flex-col items-center justify-center">
-        <h2 className="text-2xl mb-4">Bạn là phụ huynh, người học hay gia sư</h2>
+      <Box className="min-h-full bg-section flex flex-col items-center justify-center">
+        <img
+              className="w-25 h-25 rounded-lg border-inset mb-10"
+              src={getConfig((c) => c.template.headerLogo) || logo}
+            />
+        <h2 className="text-2xl mb-4 text-center">Bạn là phụ huynh, người học <br/> hay gia sư</h2>
         <div className="flex flex-col space-y-4">
           <Button large primary onClick={() => handleUserTypeSelect(0)}>
             Tôi là phụ huynh, người học
@@ -37,7 +43,7 @@ const StartPage: FC = () => {
             Tôi là gia sư
           </Button>
         </div>
-      </div>
+      </Box>
     </Page>
   );
 };
