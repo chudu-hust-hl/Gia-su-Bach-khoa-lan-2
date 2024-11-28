@@ -11,22 +11,25 @@ import { calcFinalPrice } from "utils/product";
 import { wait } from "utils/async";
 import categories from "../mock/categories.json";
 import mockClasses from "../mock/classes.json";
+import mockTutors from "../mock/tutors.json";
+import mockParent from "../mock/parent.json";
 import { GSClass, GSLesson, GSStudentInfo, UserCurrentType } from "types";
 
 export const userState = selector({
   key: "user",
   get: async () => {
-    try {
+    {/*try {
       const { userInfo } = await getUserInfo({ autoRequestPermission: true });
       return userInfo;
-    } catch (error) {
+    } catch (error) {*/}
       return {
         id: "",
         avatar: "",
         name: "Người dùng Zalo",
+        studentID: "20231001",
+        phoneNumber: "0904485061"
       };
-    }
-  },
+  }
 });
 
 export const userCurrentState = atom<UserCurrentType>({
@@ -85,11 +88,7 @@ export const lessonsState = selector<GSLesson[]>({
 
 export const tutorsState = selector<GSStudentInfo[]>({
   key: "tutorsState",
-  get: async () =>{
-    await wait(2000);
-    const lessons = (await import("../mock/tutors.json")).default;
-    return lessons;
-  },
+  get: () => mockTutors,
 });
 
 
@@ -179,8 +178,6 @@ export const tutorState = selectorFamily({
     return tutors.find((tutor) => tutor.StudentID === id) || null; // Return the matching tutor or null
   },
 });
-
-
 
 
 

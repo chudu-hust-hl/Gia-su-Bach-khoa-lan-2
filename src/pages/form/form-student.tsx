@@ -1,7 +1,7 @@
 	import React, { useState, useEffect, FC } from "react";
 	import { Page, Box, Text, Input, Select, Checkbox, Button, Radio } from "zmp-ui";
 	import { GSStudentInfo } from "types";
-	import { locationApi, studentApi } from "utils/api";
+	import { locationApi, studentApi } from "api/location";
 	import toast from "react-hot-toast";
 
 	const { Option } = Select;

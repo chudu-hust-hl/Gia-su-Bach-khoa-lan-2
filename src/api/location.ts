@@ -1,4 +1,3 @@
-// src/utils/api.ts
 import { request } from "utils/request";
 import { GSParentInfo, GSStudentInfo } from "types";
 
@@ -39,6 +38,7 @@ export const studentApi = {
     }
   }
 };
+
 
 export const locationApi = {
   // Get list of cities

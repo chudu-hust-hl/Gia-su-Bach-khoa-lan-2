@@ -1,18 +1,10 @@
-export interface Product {
-    id: number;
-    name: string;
-    price: number;
-    originalPrice?: number;
-    image: string;
-    category: Category;
-    details?: Detail[];
-    sizes?: Size[];
-    colors?: Color[];
-  }
-  
   export interface UserCurrentType{
     userCurrentType: 0 | 1 | null; // Allowing only 0, 1, or null
+    userStudentID?: string;
+    userParrentID?: string;
   }
+
+
   
   export interface GSParentInfo{
     NameParent: string;
@@ -30,9 +22,9 @@ export interface Product {
     QuantityStudent: string;
     SexTeacher: string;
     TimeSupport: string;
-    Apply?: string[];
-    Teaching?: string[];
-    Done?: string[];
+    Apply: string[];
+    Teaching: string[];
+    Done: string[];
   }
   
   export interface GSStudentInfo{
@@ -51,9 +43,9 @@ export interface Product {
     TimeSupport: string;
     Experience: string;
     Achivement: string;
-    Apply?: string[];
-    Teaching?: string[];
-    Done?: string[];
+    Apply: string[];
+    Teaching: string[];
+    Done: string[];
   }
   
   export interface GSClass {
@@ -64,9 +56,9 @@ export interface Product {
     City: string;
     District: string;
     Ward: string;
-    StudentID?: string;
-    StudentName?: string;
-    PhoneStudent?: string; //Phone number of teacher
+    StudentID: string;
+    StudentName: string;
+    PhoneStudent: string; //Phone number of teacher
     Status: number;
     Apply: string[];
     NumberApply: number;
@@ -78,7 +70,7 @@ export interface Product {
     NameSupports?: string;
     Subjects: string;
     ValueClass: string; 
-    AddressParent?: string;
+    AddressParent: string;
     Lessons?: GSLesson[];
   }
   
