@@ -1,7 +1,7 @@
 import { getConfig } from "./config";
 
 // Get the API URL from the configuration
-const API_URL = getConfig((config) => config.template.apiUrls.default);
+const API_URL = getConfig((config) => config.template.apiUrls.location);
 
 // Use globEager to import mock JSON files directly as objects
 const mockUrls: Record<string, { default: string }> = import.meta.globEager("../mock/*.json");

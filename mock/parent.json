@@ -1,5 +1,42 @@
 [
     {
-        
+      "NameParent": "Nguyễn Thị Hoa",
+      "PhoneEmail": "0904485061",
+      "City": "Thành phố Hà Nội",
+      "District": "Quận Hai Bà Trưng",
+      "Ward": "Phường Bạch Mai",
+      "AddressParent": "113 Đường Bạch Mai, Quận Hai Bà Trưng, Hà Nội",
+      "Subjects": "Toán",
+      "Level": "Tiểu học",
+      "ValueClass": "5",
+      "NameSupports": "Tìm người dạy kèm",
+      "InfoMore": "Tìm gia sư dạy vào buổi tối.",
+      "FormTeach": "Offline",
+      "QuantityStudent": "1",
+      "SexTeacher": "Nữ",
+      "TimeSupport": "Buổi tối thứ Hai",
+      "Apply": ["1","2","3"],
+      "Teaching": ["2","3"],
+      "Done": []
+    },
+    {
+      "NameParent": "Trần Văn Minh",
+      "PhoneEmail": "0950445621",
+      "City": "Thành phố Hà Nội",
+      "District": "Quận Thanh Xuân",
+      "Ward": "Phường Nhân Chính",
+      "AddressParent": "68 Đường Nguyễn Trãi, Quận Thanh Xuân, Hà Nội",
+      "Subjects": "Lịch sử",
+      "Level": "Trung học cơ sở",
+      "ValueClass": "6",
+      "NameSupports": "Thi HSG",
+      "InfoMore": "Ưu tiên gia sư nam có kinh nghiệm dạy học sinh trung học.",
+      "FormTeach": "Ofline",
+      "QuantityStudent": "2",
+      "SexTeacher": "Nam",
+      "TimeSupport": "Cuối tuần",
+      "Apply": ["4"],
+      "Teaching": ["4"],
+      "Done": ["5"]
     }
-]
+  ]

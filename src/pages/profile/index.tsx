@@ -2,7 +2,7 @@ import { userState } from 'state';
 import React, { FC, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { useNavigate } from "react-router-dom";
-import { Header,Page, Button, Box } from 'zmp-ui';
+import { Header,Page,Button, Box } from 'zmp-ui';
 
 
 interface FeedbackModalProps {
@@ -25,7 +25,7 @@ export const FeedbackModal: FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
 
   return (
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60">
-          <div className="bg-white p-4 rounded-lg shadow-md w-3/5">
+          <div className="bg-white p-4 rounded-lg shadow-md w-4/5">
               <h2 className="text-lg mb-2">Đóng góp ý kiến</h2>
               <textarea
                   className="w-full h-24 border p-2"
@@ -34,10 +34,10 @@ export const FeedbackModal: FC<FeedbackModalProps> = ({ isOpen, onClose }) => {
                   onChange={(e) => setFeedback(e.target.value)}
               />
               <div className="flex justify-end space-x-2 mt-4">
-                  <Button onClick={onClose} className="bg-gray-300">
+                  <Button onClick={onClose} className="bg-gray text-white flex-1 min-w-0">
                       Đóng
                   </Button>
-                  <Button onClick={handleSend} className="bg-blue text-white">
+                  <Button onClick={handleSend} className="bg-gray text-white flex-1 min-w-0">
                       Gửi
                   </Button>
               </div>
@@ -55,7 +55,7 @@ export const UserInfoBox: FC = () => {
         <img src={user.avatar} alt="User  Avatar" className="w-16 h-16 rounded-full" />
       )}
       <div>
-        <h2 className="text-lg font-semibold">{user.idByOA}</h2>
+        <h2 className="text-lg font-semibold">{user.id}</h2>
         {/*<p className="text-sm text-gray-600">
           {user.Type === 0 ? 'Bạn đang dùng giao diện cho phụ huynh/người học' : 'Bạn đang dùng giao diện cho sinh viên/gia sư'}
         </p>*/}
@@ -83,7 +83,7 @@ export const ActionButtons: FC<{ onFeedback: () => void }> = ({ onFeedback }) =>
 			<Button onClick={onFeedback} className="w-full">
 				Đóng góp ý kiến, phản hồi
 			</Button>
-			<Button onClick={handleChangeType} className="w-full">
+			<Button onClick={onFeedback} className="w-full">
 				Chat với Dự án
 			</Button>
 		</Box>

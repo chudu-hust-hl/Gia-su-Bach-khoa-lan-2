@@ -12,8 +12,8 @@ import { wait } from "utils/async";
 import categories from "../mock/categories.json";
 import mockClasses from "../mock/classes.json";
 import mockTutors from "../mock/tutors.json";
-import mockParent from "../mock/parent.json";
-import { GSClass, GSLesson, GSStudentInfo, UserCurrentType } from "types";
+import mockParents from "../mock/parent.json";
+import { GSClass, GSLesson, GSParentInfo, GSStudentInfo, UserCurrentType } from "types";
 
 export const userState = selector({
   key: "user",
@@ -57,7 +57,7 @@ export const tabsState = atom({
 
 export const selectedTabIndexState = atom({
   key: "selectedTabIndexState",
-  default: 0,
+  default: "Lớp đang diễn ra",
 });
 
 
@@ -91,7 +91,10 @@ export const tutorsState = selector<GSStudentInfo[]>({
   get: () => mockTutors,
 });
 
-
+export const parentsState = selector<GSParentInfo[]>({
+  key: "parentsState",
+  get: () => mockParents,
+})
 
 export const districtsState = atom({
   key: "districtsState",
@@ -179,6 +182,14 @@ export const tutorState = selectorFamily({
   },
 });
 
+
+export const parentState = selectorFamily({
+  key: "parentState",
+  get: (id: string) => ({ get }) => {
+    const parents = get(parentsState); // Access the tutors atom
+    return parents.find((parent) => parent.PhoneEmail  === id) || null; // Return the matching tutor or null
+  },
+});
 
 
 

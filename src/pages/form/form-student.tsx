@@ -1,7 +1,8 @@
 	import React, { useState, useEffect, FC } from "react";
-	import { Page, Box, Text, Input, Select, Checkbox, Button, Radio } from "zmp-ui";
+	import { Page, Box, Text, Input, Select, Checkbox, Button, Radio, Header } from "zmp-ui";
 	import { GSStudentInfo } from "types";
-	import { locationApi, studentApi } from "api/location";
+	import { locationApi } from "api/location";
+	import { studentApi } from "api/student";
 	import toast from "react-hot-toast";
 
 	const { Option } = Select;
@@ -24,6 +25,9 @@
 	TimeSupport: "",
 	Experience: "",
 	Achivement: "",
+	Apply: [],
+	Teaching: [],
+	Done: [],
 	});
 
 	const [cities, setCities] = useState<string[]>([]);
@@ -197,7 +201,10 @@
 		FormTeach: formData.FormTeach || "",
 		TimeSupport: formData.TimeSupport || "",
 		Experience: formData.Experience || "",
-		Achivement: formData.Achivement || ""
+		Achivement: formData.Achivement || "",
+		Apply: [],
+		Teaching: [],
+		Done: []
 	};
 
 	// Create the request body
@@ -227,6 +234,7 @@
 
 	return (
 		<Page className="p-4" hideScrollbar>
+		<Header title="Yêu cầu tìm gia sư"/>
 		<form onSubmit={handleSubmit}>
 			<Box>
 				<Box mt={6}>
@@ -300,6 +308,7 @@
 
 				<Box>
 					<Select
+						closeOnSelect
 						name="City"
 						label="Tỉnh/Thành phố"
 						placeholder="Chọn tỉnh/thành phố"
@@ -308,17 +317,18 @@
 					>
 						<Option value="">Chọn thành phố</Option>
 						{cities.map((city) => (
-                <Option 
-                  key={city} 
-                  value={city} 
-                  title={city} 
-                />
-              ))}
+						<Option 
+						key={city} 
+						value={city} 
+						title={city} 
+						/>
+					))}
 					</Select>
 				</Box>
 
 				<Box>
 					<Select
+						closeOnSelect
 						name="District"
 						label="Quận/Huyện"
 						placeholder="Chọn quận/huyện"
@@ -338,21 +348,22 @@
 
 				<Box>
 				<Select
-              name="Ward"
-              label="Phường/Xã"
-              placeholder="Chọn phường/xã"
-              value={formData.Ward}
-              onChange={handleWardChange}
-              disabled={!formData.District} // Disable if no district selected
-            >
-              {communes.map((commune) => (
-                <Option 
-                  key={commune} 
-                  value={commune} 
-                  title={commune} 
-                />
-              ))}
-            </Select>
+					closeOnSelect
+					name="Ward"
+					label="Phường/Xã"
+					placeholder="Chọn phường/xã"
+					value={formData.Ward}
+					onChange={handleWardChange}
+					disabled={!formData.District} // Disable if no district selected
+					>
+					{communes.map((commune) => (
+						<Option 
+						key={commune} 
+						value={commune} 
+						title={commune} 
+						/>
+					))}
+					</Select>
 				</Box>
 
 				<Box>

@@ -10,7 +10,7 @@ export interface TabsProps<T> {
 export default function Tabs<T>(props: TabsProps<T>) {
   return (
     <div
-      className="grid h-11 border-b-[0.5px] border-black/10"
+      className="grid h-11 border-b-[0.5px] border-black/10 overflow-x-auto"
       style={{
         gridTemplateColumns: `repeat(${props.items.length}, minmax(0, 1fr))`,
       }}

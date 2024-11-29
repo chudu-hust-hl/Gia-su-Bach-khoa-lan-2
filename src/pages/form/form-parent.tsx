@@ -1,7 +1,8 @@
 import React, { useState, useEffect, FC } from "react";
-import { Page, Box, Text, Input, Select, Checkbox, Button, Radio } from "zmp-ui";
+import { Page, Box, Text, Input, Select, Checkbox, Button, Radio, Header } from "zmp-ui";
 import { GSParentInfo } from "types";
-import { parentApi, locationApi } from "api/location";
+import { locationApi } from "api/location";
+import { parentApi } from "api/parrent";
 import {toast} from "react-hot-toast";
 
 const { Option } = Select;
@@ -86,7 +87,7 @@ const FormParrent: FC = () => {
       District: district,
       Ward: ""
     }));
-
+    console.log("Lay dc city")
     try {
       const fetchedCommunes = await locationApi.getCommunes(formData.City, district);
       console.log("Fetched Communes:", fetchedCommunes);
@@ -244,6 +245,7 @@ const FormParrent: FC = () => {
 
   return (
     <Page className="p-6 bg-cover bg-[url('https://i.pinimg.com/736x/84/ec/db/84ecdb6ff0b560c9621f491adf58067e.jpg')]" hideScrollbar>
+      <Header title="Yêu cầu làm gia sư" className="w-full"/>
       <div className="rounded-[8px] bg-[rgba(255,255,255,0.8)] p-4">
       <form onSubmit={handleSubmit}>
         <Box>
@@ -275,6 +277,7 @@ const FormParrent: FC = () => {
 
           <Box>
             <Select
+              closeOnSelect
               name="City"
               label="Tỉnh/Thành phố"
               placeholder="Chọn tỉnh/thành phố"
@@ -295,6 +298,7 @@ const FormParrent: FC = () => {
           {/* District Dropdown - Enabled only after City is selected */}
           <Box>
             <Select
+              closeOnSelect
               name="District"
               label="Quận/Huyện"
               placeholder="Chọn quận/huyện"
@@ -315,6 +319,7 @@ const FormParrent: FC = () => {
           {/* Ward Dropdown - Enabled only after District is selected */}
           <Box>
             <Select
+              closeOnSelect
               name="Ward"
               label="Phường/Xã"
               placeholder="Chọn phường/xã"
