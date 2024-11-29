@@ -21,37 +21,34 @@ export default function TutorDetailPage() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col">
-      <div className="flex-1 overflow-y-auto">
-        <div className="w-full px-4">
-          <div className="py-2">
-            <h1 className="text-2xl font-bold">
-              Gia sư: {tutorItem.StudentName} {/* Display tutor's name */}
-            </h1>
+    <Page className="flex flex-col h-screen">
+      <Header title="Thông tin gia sư" />
+        <div className="flex-1 overflow-y-auto">
+          <div className="w-full px-4">
+            <div className="py-2">
+              <h1 className="text-2xl font-bold">
+                Gia sư: {tutorItem.StudentName} {/* Display tutor's name */}
+              </h1>
+            </div>
+            <div className="text-sm mt-1">Giới tính: {tutorItem.SexStudent}</div> {/* Display gender */}
+            <div className="text-sm mt-1">Trường: {tutorItem.SelectSchool}</div> {/* Display school */}
+            <div className="text-sm mt-1">Môn học: {tutorItem.Subjects}</div> {/* Display subjects */}
+            <div className="text-sm mt-1">Hình thức dạy: {tutorItem.FormTeach}</div> {/* Display teaching method */}
+            <div className="text-sm mt-1">Địa chỉ: {tutorItem.Address}</div> {/* Display address */}
+            <div className="text-sm mt-1">Kinh nghiệm: {tutorItem.Experience}</div> {/* Display experience */}
+            <div className="text-sm mt-1">Thành tích: {tutorItem.Achivement}</div> {/* Display achievements */}
+            {/* Share button for the tutor have not been created*/}
           </div>
-          <div className="text-sm mt-1">Giới tính: {tutorItem.SexStudent}</div> {/* Display gender */}
-          <div className="text-sm mt-1">Trường: {tutorItem.SelectSchool}</div> {/* Display school */}
-          <div className="text-sm mt-1">Môn học: {tutorItem.Subjects}</div> {/* Display subjects */}
-          <div className="text-sm mt-1">Hình thức dạy: {tutorItem.FormTeach}</div> {/* Display teaching method */}
-          <div className="text-sm mt-1">Địa chỉ: {tutorItem.Address}</div> {/* Display address */}
-          <div className="text-sm mt-1">Kinh nghiệm: {tutorItem.Experience}</div> {/* Display experience */}
-          <div className="text-sm mt-1">Thành tích: {tutorItem.Achivement}</div> {/* Display achievements */}
-          {/* Share button for the tutor have not been created*/}
         </div>
-      </div>
 
-      <div className="flex-none grid grid-cols-2 gap-2 py-3 px-4">
-        <Button
-          onClick={handleApply} // Apply to the tutor
-        >
-          Yêu thích gia sư
+      <div className="bg-white flex-none grid grid-cols-2 gap-2 py-3 px-4">
+        <Button onClick={handleApply}>
+          Ứng tuyển
         </Button>
-        <Button
-          onClick={() => navigate("/message")} // Navigate to messaging page
-        >
-          Nhắn tin với Admin
+        <Button onClick={() => navigate("/message")}>
+          Nhắn tin
         </Button>
       </div>
-    </div>
+    </Page>
   );
 }

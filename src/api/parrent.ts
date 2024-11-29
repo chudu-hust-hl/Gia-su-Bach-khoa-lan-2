@@ -20,3 +20,22 @@ export const getParrentListApi = {
       }  
   }
   
+  export const parentApi = {
+    createParentInfo: async (parentInfo: { ParentInfo: GSParentInfo }) => {
+      try {
+        const result = await request<{ RespCode: number; RespText: string }>("GSParent/CreateParentInfo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(parentInfo),
+        });
+  
+        return result;
+      } catch (error) {
+        console.error("Error creating parent info:", error);
+        throw error;
+      }
+    }
+  };
+  

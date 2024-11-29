@@ -33,6 +33,7 @@ const StartPage: FC = () => {
         <img
               className="w-25 h-25 rounded-lg border-inset mb-10"
               src={getConfig((c) => c.template.headerLogo) || logo}
+              alt="Logo"
             />
         <h2 className="text-2xl mb-4 text-center">Bạn là phụ huynh, người học <br/> hay gia sư</h2>
         <div className="flex flex-col space-y-4">

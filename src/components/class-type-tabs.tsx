@@ -1,7 +1,7 @@
-import { tabsState, tutorState, userCurrentState } from "state";
+import { tabsState, tutorState, parentState, userCurrentState } from "state";
 import { useRecoilState, useRecoilValue } from "recoil";
 import React, { FC } from "react";
-import Tabs from "components/tabs";
+import {Tabs} from "zmp-ui";
 import { ClassGrid } from "components/class-grid";
 import { GSClass } from "types";
 import { TeachingGrid } from "components/teaching-grid";
@@ -14,13 +14,13 @@ interface ClassTypeTabsProps {
 export const ApplyingList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: string }> = ({ classes, studentID, phoneNumber }) => {
   const userType = useRecoilValue(userCurrentState);
   const userAsTutor = useRecoilValue(tutorState(studentID));
-  const userAsParent = useRecoilValue(tutorState(phoneNumber));
+  const userAsParent = useRecoilValue(parentState(phoneNumber));
 
   const appliedClasses = userType.userCurrentType === 0
     ? classes.filter(classItem => userAsParent?.Apply.includes(classItem.id.toString()))
     : classes.filter(classItem => userAsTutor?.Apply.includes(classItem.id.toString()));
 
-    console.log(studentID, "nguoi dung")
+    console.log(phoneNumber, "nguoi dung")
     console.log(userAsTutor?.Apply)
 
   return (
@@ -37,11 +37,14 @@ export const ApplyingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
 export const TeachingList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: string }> = ({ classes, studentID, phoneNumber }) => {
   const userType = useRecoilValue(userCurrentState);
   const userAsTutor = useRecoilValue(tutorState(studentID));
-  const userAsParent = useRecoilValue(tutorState(phoneNumber));
+  const userAsParent = useRecoilValue(parentState(phoneNumber));
 
   const appliedClasses = userType.userCurrentType === 0
     ? classes.filter(classItem => userAsParent?.Teaching.includes(classItem.id.toString()))
     : classes.filter(classItem => userAsTutor?.Teaching.includes(classItem.id.toString()));
+
+  console.log(phoneNumber, "nguoi dung")
+  console.log(userAsParent, "Dang day")
 
   return (
     <div className="grid grid-cols-1 px-4 py-2 gap-4">
@@ -57,7 +60,7 @@ export const TeachingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
 export const DoneList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: string }> = ({ classes, studentID, phoneNumber }) => {
   const userType = useRecoilValue(userCurrentState);
   const userAsTutor = useRecoilValue(tutorState(studentID));
-  const userAsParent = useRecoilValue(tutorState(phoneNumber));
+  const userAsParent = useRecoilValue(parentState(phoneNumber));
 
   const appliedClasses = userType.userCurrentType === 0
     ? classes.filter(classItem => userAsParent?.Done.includes(classItem.id.toString()))
@@ -74,15 +77,24 @@ export const DoneList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: 
   );
 }
 
-export const ClassTypeTabs: FC<ClassTypeTabsProps> = ({ selectedIndex, onChange }) => {
+export const ClassTypeTabs: FC<{classes: GSClass[], studentID: string, phoneNumber: string}> = ({classes, studentID, phoneNumber}) => { 
   const tabs = useRecoilValue(tabsState);
 
   return (
     <Tabs
-      items={tabs}
-      value={tabs[selectedIndex]}
-      onChange={(tab) => onChange(tabs.indexOf(tab))}
-      renderLabel={(item) => item}
-    />
+    scrollable
+    defaultActiveKey="tab_1"
+    className="category-tabs"
+    >
+      <Tabs.Tab key="tab_1" label= "Lớp đang diễn ra">
+        <TeachingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
+      </Tabs.Tab>
+      <Tabs.Tab key="tab_2" label= "Lớp đang gửi yêu cầu">
+        <ApplyingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
+      </Tabs.Tab>
+      <Tabs.Tab key="tab_3" label= "Lớp đã kết thúc">
+      <DoneList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
+      </Tabs.Tab>
+    </Tabs>
   );
 };
