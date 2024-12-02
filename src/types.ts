@@ -1,10 +1,10 @@
+import { ReactNode } from "react";
+  
   export interface UserCurrentType{
     userCurrentType: 0 | 1 | null; // Allowing only 0, 1, or null
     userStudentID?: string;
     userParrentID?: string;
   }
-
-
   
   export interface GSParentInfo{
     NameParent: string;
@@ -109,4 +109,11 @@
     size?: Size;
     color?: Color["name"];
   };
+  
+
+  export interface MenuItem {
+    label: string;
+    icon: ReactNode;
+    activeIcon?: ReactNode;
+  }
   

@@ -3,11 +3,7 @@ import { Route, Routes } from "react-router";
 import { Box } from "zmp-ui";
 import { Navigation } from "./navigation";
 import HomePage from "pages/home";
-import CategoryPage from "pages/category";
-import CartPage from "pages/cart";
 import ProfilePage from "pages/profile/index";
-import SearchPage from "pages/search";
-import CheckoutResultPage from "pages/result";
 import { getSystemInfo } from "zmp-sdk";
 import { ScrollRestoration } from "./scroll-restoration";
 import { useHandlePayment } from "hooks";
@@ -51,17 +47,13 @@ export const Layout: FC = () => {
           <Route path="/download-app" element={<DownloadAppPage />}></Route>
           <Route path="/formParent" element={<FormParrent />}></Route>
           <Route path="/formStudent" element={<FormStudent />}></Route>
-          <Route path="/search" element={<SearchPage />}></Route>
           <Route path="/allclasses" element={<AvailableClassPage/>}></Route>
           <Route path="/class/:id" element={<ClassDetailPage />}></Route>
           <Route path="/tutor/:id" element={<TutorDetailPage />}></Route>
-          <Route path="/category" element={<CategoryPage />}></Route>
           <Route path="/tutor-list" element={<TutorListPage />}></Route>
           <Route path="/your-class" element={<YourClassPage />}></Route>
           <Route path="/teaching-detail/:id" element={<TeachingDetailPage />}></Route>
-          <Route path="/cart" element={<CartPage />}></Route>
           <Route path="/profile" element={<ProfilePage />}></Route>
-          <Route path="/result" element={<CheckoutResultPage />}></Route>
         </Routes>
       </Box>
       <Navigation />

@@ -1,9 +1,8 @@
 import { useVirtualKeyboardVisible } from "hooks";
 import React, { FC, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { MenuItem } from "types/menu";
+import { MenuItem } from "types";
 import { BottomNavigation, Icon } from "zmp-ui";
-import { CartIcon } from "./cart-icon";
 
 const tabs: Record<string, MenuItem> = {
   "/": {
@@ -16,8 +15,7 @@ const tabs: Record<string, MenuItem> = {
   },
   "/your-class": {
     label: "Lớp của bạn",
-    icon: <CartIcon />,
-    activeIcon: <CartIcon active />,
+    icon: <Icon icon="zi-notif" />,
   },
   "/profile": {
     label: "Cá nhân",
@@ -27,7 +25,7 @@ const tabs: Record<string, MenuItem> = {
 
 export type TabKeys = keyof typeof tabs;
 
-export const NO_BOTTOM_NAVIGATION_PAGES = ["/search", "/category", "/result", "/start", "/formParent", "/formStudent"];
+export const NO_BOTTOM_NAVIGATION_PAGES = ["/start", "/formParent", "/formStudent"];
 
 export const Navigation: FC = () => {
   const keyboardVisible = useVirtualKeyboardVisible();
