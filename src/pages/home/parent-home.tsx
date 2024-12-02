@@ -1,6 +1,6 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userState, classesState, selectedTabIndexState } from "state";
-import { TeachingList, ApplyingList, DoneList, ClassTypeTabs } from "components/class-type-tabs";
+import { ClassTypeTabs } from "components/class-type-tabs";
 import { useNavigate } from "react-router-dom";
 import { Banners } from "./banners";
 import Button from "components/button";
@@ -11,9 +11,8 @@ import { Welcome } from "./welcome";
 
 const ParentHomePage: FC = () => {
   const navigate = useNavigate();
-  const [selectedTabIndex, setSelectedIndex] = useRecoilState(selectedTabIndexState);
   const classes = useRecoilValue(classesState); 
-  const user = useRecoilValue (userState);
+  const user = useRecoilValue(userState);
   const studentID = user.studentID;
   const phoneNumber = user.phoneNumber;
 
