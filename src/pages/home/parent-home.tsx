@@ -1,46 +1,58 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import { userState, classesState, selectedTabIndexState } from "state";
-import { TeachingList, ApplyingList, DoneList, ClassTypeTabs } from "components/class-type-tabs";
+import { useRecoilValue } from "recoil";
+import { userState, classesState } from "state";
+import { ClassTypeTabs } from "components/class-type-tabs";
 import { useNavigate } from "react-router-dom";
 import { Banners } from "./banners";
 import Button from "components/button";
-import { Box, Icon, Page } from "zmp-ui";
+import { Box, Page } from "zmp-ui";
 import { MoreInfoGroup } from "./info-group";
-import React, {FC} from "react";
+import React, { FC } from "react";
 import { Welcome } from "./welcome";
 
 const ParentHomePage: FC = () => {
   const navigate = useNavigate();
-  const [selectedTabIndex, setSelectedIndex] = useRecoilState(selectedTabIndexState);
-  const classes = useRecoilValue(classesState); 
-  const user = useRecoilValue (userState);
+  const classes = useRecoilValue(classesState);
+  const user = useRecoilValue(userState);
   const studentID = user.studentID;
   const phoneNumber = user.phoneNumber;
 
   return (
     <Page>
-      <Welcome/>
-      <div className="min-h-full bg-section">
-        <div className="bg-background pt-2 w-3/4 mx-auto">
+      {/* Phần chào mừng */}
+      <Welcome />
+
+      <div className="min-h-full bg-section relative">
+        {/* Nhóm thông tin thêm */}
+        <div className="p-0">
+          <MoreInfoGroup />
+        </div>
+
+        {/* Phần banner */}
+        <div className="bg-background w-full relative">
           <Banners />
+          {/* Nút Tạo yêu cầu đè lên banner */}
+          <div className="absolute top-[80%] left-0 right-0 z-10 flex justify-center">
+            <Button
+              large
+              primary
+              className="w-[85%] max-w-[500px] !rounded-[24px] shadow-md !bg-[#FFA726] text-[#ffffff]"
+              onClick={() => navigate("/formParent")}
+            >
+              Tạo yêu cầu tìm gia sư
+            </Button>
+          </div>
         </div>
-        <div className="p-4 w-full">
-          <Button
-            large
-            primary
-            className="w-full"
-            onClick={() => navigate("/formParent")}
-          >
-            <Icon icon="zi-plus-circle" className="inline-block mr-2" />
-            Tạo yêu cầu tìm gia sư
-          </Button>
+
+        {/* Tabs danh sách */}
+        <div className="mt-6 px-4">
+          <Box>
+            <ClassTypeTabs
+              classes={classes}
+              studentID={studentID}
+              phoneNumber={phoneNumber}
+            />
+          </Box>
         </div>
-        <div className="p-4">
-          <MoreInfoGroup/>
-        </div>
-        <Box>
-          <ClassTypeTabs classes={classes} studentID={studentID} phoneNumber={phoneNumber}/>
-        </Box>
       </div>
     </Page>
   );

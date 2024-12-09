@@ -13,6 +13,10 @@ module.exports = {
         background: "#ffffff",
         skeleton: "rgba(0, 0, 0, 0.1)",
       },
+
+      fontFamily: {
+        opensan: ['"Open Sans"']
+      }
     },
   },
 };

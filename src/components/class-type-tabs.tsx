@@ -84,7 +84,7 @@ export const ClassTypeTabs: FC<{classes: GSClass[], studentID: string, phoneNumb
     <Tabs
     scrollable
     defaultActiveKey="tab_1"
-    className="category-tabs"
+    className="category-tabs relative top-4"
     >
       <Tabs.Tab key="tab_1" label= "Lớp đang diễn ra">
         <TeachingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />

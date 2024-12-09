@@ -54,7 +54,7 @@ const ParentTeachingDetailPage: FC = () => {
             ]}
           />
         </div>
-
+<hr />
         {/* Tutor Information Section */}
         <div className="mb-4">
           <h2 className="text-xl font-semibold">Thông tin gia sư</h2>
@@ -83,7 +83,7 @@ const ParentTeachingDetailPage: FC = () => {
           <textarea
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
-            className="w-full h-24 border border-gray-300 rounded p-2"
+            className="w-full h-24 border border-blue-500 rounded p-2"
             placeholder="Nhập nhận xét"
           />
         </div>
