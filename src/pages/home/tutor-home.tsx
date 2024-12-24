@@ -20,32 +20,30 @@ const TutorHomePage: FC = () => {
   return (
     <Page hideScrollbar={true}>
       <Welcome/>
-      <div className="min-h-full bg-section">
-        <div className="bg-background pt-2 w-3/4 mx-auto">
+      <div className="p-0">
+          <MoreInfoGroup/>
+      </div>
+      <div className="min-h-full bg-section relative">
+        <div className="bg-background w-full">
           <Banners />
         </div>
-        <div className="p-4 w-full">
+        <div className="absolute top-[25%] left-0 right-0 z-10 flex justify-center">
           <Button
             large
             primary
-            className="w-full mb-4"
+            className="inline-block w-[50%] max-w-[500px] rounded-none shadow-md !bg-[#FFA726] text-[#ffffff]"
             onClick={() => navigate("/formStudent")}
           >
-            <Icon icon="zi-plus-circle" className="inline-block mr-2" />
             Đăng kí làm gia sư
           </Button>
           <Button
             large
             primary
-            className="w-full"
+            className="inline-block w-[50%] max-w-[500px] rounded-none shadow-md !bg-[#FFA726] text-[#ffffff]"
             onClick={() => navigate("/formParent")}
           >
-            <Icon icon="zi-plus-circle" className="inline-block mr-2" />
-            Tạo yêu cầu tìm gia sư
+            Yêu cầu tìm gia sư
           </Button>
-        </div>
-        <div className="p-4">
-          <MoreInfoGroup/>
         </div>
         <Box>
           <ClassTypeTabs classes={classes} studentID={studentID} phoneNumber={phoneNumber}/>
