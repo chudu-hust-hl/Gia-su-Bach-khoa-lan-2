@@ -98,11 +98,7 @@ const ParentTeachingDetailPage: FC = () => {
           <textarea
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
-<<<<<<< HEAD
             className="w-full h-24 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-=======
-            className="w-full h-24 border border-blue-500 rounded p-2"
->>>>>>> 89930cb610dcd635d78ba8062ba8d4af60a174ee
             placeholder="Nhập nhận xét"
           />
         </div>
