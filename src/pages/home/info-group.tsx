@@ -7,24 +7,24 @@ export const MoreInfoGroup: FC=() => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-around p-4">
+    <div className="flex justify-around h-11">
       <Button
-        className="rounded-full w-1/3 ml-2 bg-blue-500 text-white"
+        className="w-1/3 bg-[#0056B3] border-r-white text-white rounded-none"
         onClick={() => navigate("/app-info")}
       >
-        Thông tin ứng dụng
+        Thông tin
       </Button>
       <Button
-        className="rounded-full w-1/3 ml-2 bg-blue-500 text-white"
+        className="w-1/3 !border-r-white bg-[#0056B3] text-white rounded-none"
         onClick={() => navigate("/app-standards")}
       >
-        Tiêu chuẩn tìm lớp
+        Tiêu chuẩn
       </Button>
       <Button
-        className="rounded-full w-1/3 ml-2 bg-blue-500 text-white"
+        className="w-1/3 bg-[#0056B3] text-white rounded-none"
         onClick={() => navigate("/download-app")}
       >
-        Cài ứng dụng về màn hình
+        Cài đặt
       </Button>
     </div>
   );

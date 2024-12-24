@@ -1,8 +1,5 @@
 module.exports = {
-  purge: {
-    enabled: true,
-    content: ["./src/**/*.{js,jsx,ts,tsx,vue}"],
-  },
+  content: ["./src/**/*.{js,jsx,ts,tsx,vue}"], // Thay `purge` bằng `content`
   theme: {
     extend: {
       colors: {
