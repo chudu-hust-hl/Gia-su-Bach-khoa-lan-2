@@ -8,8 +8,8 @@ import { TeachingList, ApplyingList, DoneList, ClassTypeTabs } from "components/
 const YourClassPage: FC = () => {
   const classes = useRecoilValue(classesState); 
   const user = useRecoilValue (userState);
-  const studentID = user.studentID;
-  const phoneNumber = user.phoneNumber;
+  const studentID = user.StudentID;
+  const phoneNumber = user.PhoneNumber;
 
 
   return (

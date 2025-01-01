@@ -13,8 +13,10 @@ const ParentHomePage: FC = () => {
   const navigate = useNavigate();
   const classes = useRecoilValue(classesState);
   const user = useRecoilValue(userState);
-  const studentID = user.studentID;
-  const phoneNumber = user.phoneNumber;
+  const studentID = user.StudentID;
+  const phoneNumber = user.PhoneNumber;
+
+  console.log("User information:", studentID, phoneNumber);
 
   return (
     <Page>
