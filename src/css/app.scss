@@ -1,6 +1,9 @@
+
 body {
   background-color: var(--zmp-background-color);
   user-select: none;
+  margin: 0px;
+  padding: 0px;
 }
 
 .zaui-routes {
@@ -115,4 +118,29 @@ body {
       transform: scale(1.5);
     }
   }
+}
+
+.input-field {
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: white; /* Màu viền khi focus */
+  background-color: rgb(5, 12, 51, 0.7); /* Màu nền khi focus */
+  outline: none; /* Bỏ viền mặc định của trình duyệt */
+}
+
+.textarea-field {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.textarea-field:focus {
+  border-color: white; /* Màu viền khi focus */
+  background-color: rgb(5, 12, 51, 0.7); /* Màu nền khi focus */
+  outline: none;
 }

@@ -24,7 +24,7 @@ export const ApplyingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
     console.log(userAsTutor?.Apply)
 
   return (
-    <div className="grid grid-cols-1 px-4 py-2 gap-4">
+    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">
       {appliedClasses.length > 0 ? (
         <ClassGrid classes={appliedClasses} />
       ) : (
@@ -47,7 +47,7 @@ export const TeachingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
   console.log(userAsParent, "Dang day")
 
   return (
-    <div className="grid grid-cols-1 px-4 py-2 gap-4">
+    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">
       {appliedClasses.length > 0 ? (
         <TeachingGrid classes={appliedClasses} />
       ) : (
@@ -67,7 +67,7 @@ export const DoneList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: 
     : classes.filter(classItem => userAsTutor?.Done.includes(classItem.ClassID.toString()));
 
   return (
-    <div className="grid grid-cols-1 px-4 py-2 gap-4">
+    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">
       {appliedClasses.length > 0 ? (
         <TeachingGrid classes={appliedClasses} />
       ) : (
@@ -84,7 +84,7 @@ export const ClassTypeTabs: FC<{classes: GSClass[], studentID: string, phoneNumb
     <Tabs
     scrollable
     defaultActiveKey="tab_1"
-    className="category-tabs"
+    className="category-tabs relative top-4"
     >
       <Tabs.Tab key="tab_1" label= "Lớp đang diễn ra">
         <TeachingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />

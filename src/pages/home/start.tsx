@@ -81,20 +81,34 @@ const StartPage: FC = () => {
 
   return (
     <Page>
-      <Box className="min-h-full bg-section flex flex-col items-center justify-center">
-        <img
-              className="w-25 h-25 rounded-lg border-inset mb-10"
-              src={getConfig((c) => c.template.headerLogo) || logo}
-              alt="Logo"
-            />
-        <h2 className="text-2xl mb-4 text-center">Bạn là phụ huynh, người học <br/> hay gia sư</h2>
-        <div className="flex flex-col space-y-4">
-          <Button large primary onClick={() => handleUserTypeSelect(0)}>
-            Tôi là phụ huynh, người học
-          </Button>
-          <Button large primary onClick={() => handleUserTypeSelect(1)}>
-            Tôi là gia sư
-          </Button>
+      <Box className="min-h-screen bg-white flex flex-col items-center justify-center">
+        {/* Container chính */}
+        <div className="relative w-[90%] max-w-md bg-[#060f44] p-6 rounded-2xl drop-shadow-md">
+          {/* Logo */}
+          <img
+            className="absolute top-[-50px] left-1/2 transform -translate-x-1/2 w-[100px] h-[100px] rounded-full border-4 border-white"
+            src={getConfig((c) => c.template.headerLogo) || logo}
+            alt="Logo"
+          />
+          {/* Tiêu đề */}
+          <h2 className="mt-12 text-center text-[#ffffff] text-2xl font-semibold">
+            Tham gia với vai trò:
+          </h2>
+          {/* Nút chọn vai trò */}
+          <div className="mt-6 flex flex-col space-y-4 items-center">
+            <Button
+              className="border-none w-[80%] py-3 text-lg font-semibold bg-[#FFB600] text-[#050C33] rounded-lg hover:bg-blue-600"
+              onClick={() => handleUserTypeSelect(0)}
+            >
+              Phụ huynh / người học
+            </Button>
+            <Button
+              className="border-none w-[80%] py-3 text-lg font-semibold bg-[#FFB600] text-[#050C33] rounded-lg hover:bg-blue-600"
+              onClick={() => handleUserTypeSelect(1)}
+            >
+              Gia sư
+            </Button>
+          </div>
         </div>
       </Box>
     </Page>
