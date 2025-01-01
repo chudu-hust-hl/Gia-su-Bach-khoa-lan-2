@@ -1,4 +1,4 @@
-import { GSParentInfo } from "types";
+import { GSParentInfo, GSParentReqInfo } from "types";
 import { request } from "utils/request";
 
 export const getParrentListApi = {
@@ -21,14 +21,18 @@ export const getParrentListApi = {
   }
   
   export const parentApi = {
-    createParentInfo: async (parentInfo: { ParentInfo: GSParentInfo }) => {
+    createParentInfo: async (ParentInfo: GSParentReqInfo ) => {
+
+      const requestBody = {
+        ParentInfo,
+      };
       try {
         const result = await request<{ RespCode: number; RespText: string }>("GSParent/CreateParentInfo", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(parentInfo),
+          body: JSON.stringify(requestBody),
         });
   
         return result;

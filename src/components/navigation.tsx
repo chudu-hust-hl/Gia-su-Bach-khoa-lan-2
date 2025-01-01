@@ -11,11 +11,11 @@ const tabs: Record<string, MenuItem> = {
   },
   "/allclasses": {
     label: "Danh sách lớp",
-    icon: <Icon icon="zi-notif" />,
+    icon: <Icon icon="zi-more-grid" />,
   },
   "/your-class": {
     label: "Lớp của bạn",
-    icon: <Icon icon="zi-notif" />,
+    icon: <Icon icon="zi-favorite-list" />,
   },
   "/profile": {
     label: "Cá nhân",

@@ -31,7 +31,7 @@ const ParentTeachingDetailPage: FC = () => {
 
   return (
     <Page>
-      <Header title="Danh sách lớp "/>
+      <Header title="Danh sách lớp " backgroundColor="red"/>
       <div className="w-full h-full flex flex-col p-4">
         {/* Class Information Section */}
         <div className="mb-4">
@@ -44,7 +44,7 @@ const ParentTeachingDetailPage: FC = () => {
                 title: "Thông tin chi tiết",
                 content: (
                   <div>
-                    <p>Mục tiêu học tập: {classItem.NameSupport}</p>
+                    <p>Mục tiêu học tập: {classItem.NameSupports}</p>
                     <p>Thông tin bổ sung: {classItem.InfoMore}</p>
                     <p>Học phí: {classItem.Money}</p>
                     <p>Địa chỉ: {classItem.AddressParent}</p>
@@ -66,8 +66,6 @@ const ParentTeachingDetailPage: FC = () => {
                 title: "Thông tin chi tiết",
                 content: (
                   <div>
-                    <p>Trường: {tutorItem.SelectSchool}</p>
-                    <p>Chuyên ngành: {tutorItem.Subjects}</p>
                     <p>Thành tích: {tutorItem.Achivement}</p>
                     <p>Kinh nghiệm: {tutorItem.Experience}</p>
                   </div>

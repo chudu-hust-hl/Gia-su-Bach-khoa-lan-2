@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FC } from "react";
 import { Page, Box, Text, Input, Select, Checkbox, Button, Radio, Header } from "zmp-ui";
-import { GSParentInfo } from "types";
+import { GSParentReqInfo } from "types";
 import { locationApi } from "api/location";
 import { parentApi } from "api/parrent";
 import {toast} from "react-hot-toast";
@@ -9,25 +9,25 @@ const { Option } = Select;
 
 const FormParrent: FC = () => {
   // State to hold form data
-  const [formData, setFormData] = useState<GSParentInfo>({
+  const [formData, setFormData] = useState<GSParentReqInfo>({
+    ParentID: "", 
     NameParent: "",
-    PhoneEmail: "",
+    PhoneParent: "",
+    AddressParent: "",
+    FormTeach: "",
+    InfoMore: "",
+    Level: "",
+    NeedMore: "",
+    SexTeacher: "",
+    QuantityStudent: "",
+    SelectSchool: "",
+    ValueClass: "",
+    NameSupports: "",
+    Subjects: "",
+    TimeSupport: "",
     City: "Thành phố Hà Nội",
     District: "",
     Ward: "",
-    AddressParent: "",
-    Subjects: "",
-    Level: "",
-    ValueClass: "",
-    NameSupports: "",
-    InfoMore: "",
-    FormTeach: "",
-    QuantityStudent: "",
-    SexTeacher: "",
-    TimeSupport: "",
-    Apply: [],
-    Teaching: [],
-    Done: [],
   });
 
   const levelToClasses: Record<string, string[]> = {
@@ -114,7 +114,7 @@ const FormParrent: FC = () => {
     }));
   };
 
-  const handleSelectChange = (name: keyof GSParentInfo) => (value: string) => {
+  const handleSelectChange = (name: keyof GSParentReqInfo) => (value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -122,7 +122,7 @@ const FormParrent: FC = () => {
   };
 
   // Handle checkbox changes
-  const handleCheckboxChange = (name: keyof GSParentInfo, value: string) => {
+  const handleCheckboxChange = (name: keyof GSParentReqInfo, value: string) => {
     setFormData((prevData) => {
       const currentValues = prevData[name] as string;
       const valuesArray = currentValues ? currentValues.split(', ') : [];
@@ -141,7 +141,7 @@ const FormParrent: FC = () => {
     });
   };
 
-  const handleRadioChange = (name: keyof GSParentInfo) => (value: string) => {
+  const handleRadioChange = (name: keyof GSParentReqInfo) => (value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -173,6 +173,9 @@ const FormParrent: FC = () => {
     });
   };
 
+  const generateRandomDigits = () => {
+    return Math.floor(10000 + Math.random() * 90000).toString(); // Generates a 5-digit number
+  };
   
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -183,7 +186,7 @@ const FormParrent: FC = () => {
     setIsSubmitting(true);
   
     // Basic validation
-    if (!formData.NameParent || !formData.PhoneEmail) {
+    if (!formData.NameParent || !formData.PhoneParent) {
       toast.error("Vui lòng điền đầy đủ thông tin bắt buộc!");
       setIsSubmitting(false);
       return;
@@ -191,33 +194,34 @@ const FormParrent: FC = () => {
   
     // Phone number validation
     const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(formData.PhoneEmail)) {
+    if (!phoneRegex.test(formData.PhoneParent)) {
       toast.error("Số điện thoại không hợp lệ!");
       setIsSubmitting(false);
       return;
     }
 
-    const parentInfo: GSParentInfo = {
+
+    const parentInfo: GSParentReqInfo = {
+      ParentID: formData.PhoneParent,
       NameParent: formData.NameParent || "",
-      PhoneEmail: formData.PhoneEmail || "",
+      PhoneParent: formData.PhoneParent || "",
+      AddressParent: formData.AddressParent || "",
+      FormTeach: formData.FormTeach || "",
+      InfoMore: formData.InfoMore || "",
+      Level: formData.Level || "",
+      NeedMore: formData.NeedMore || "",
+      SexTeacher: formData.SexTeacher || "",
+      QuantityStudent: formData.QuantityStudent || "",
+      SelectSchool: formData.SelectSchool || "",
+      ValueClass: formData.ValueClass || "",
       City: formData.City || "Thành phố Hà Nội",
       District: formData.District || "",
       Ward: formData.Ward || "",
-      AddressParent: formData.AddressParent || "",
       Subjects: formData.Subjects || "",
-      Level: formData.Level || "",
-      ValueClass: formData.ValueClass || "",
       NameSupports: formData.NameSupports || "",
-      InfoMore: formData.InfoMore || "",
-      FormTeach: formData.FormTeach || "",
-      QuantityStudent: formData.QuantityStudent || "",
-      SexTeacher: formData.SexTeacher || "",
       TimeSupport: formData.TimeSupport || "",
-      Apply: [],
-      Teaching: [],
-      Done: [],
     };
-  
+
     // Create the request body
     const requestBody = {
       ParentInfo: parentInfo
@@ -226,7 +230,7 @@ const FormParrent: FC = () => {
     try {
       console.log("Sending data:", requestBody); // Log the data being sent
       
-      const result = await parentApi.createParentInfo(requestBody);
+      const result = await parentApi.createParentInfo(parentInfo);
   
       console.log("API Response:", result);
   
@@ -245,7 +249,6 @@ const FormParrent: FC = () => {
 
   return (
     <Page className="p-6 bg-cover bg-[url('https://i.pinimg.com/736x/84/ec/db/84ecdb6ff0b560c9621f491adf58067e.jpg')]" hideScrollbar>
-      <Header title="Yêu cầu làm gia sư" className="w-full"/>
       <div className="rounded-[8px] bg-[rgba(255,255,255,0.8)] p-4">
       <form onSubmit={handleSubmit}>
         <Box>
@@ -267,10 +270,10 @@ const FormParrent: FC = () => {
           <Box>
             <Input
               type="text"
-              name="PhoneEmail"
+              name="PhoneParent"
               label="SĐT của bạn"
               placeholder="Nhập số điện thoại"
-              value={formData.PhoneEmail}
+              value={formData.PhoneParent}
               onChange={handleChange}
             />
           </Box>
@@ -359,7 +362,7 @@ const FormParrent: FC = () => {
             <Radio.Group 
               value={formData.Subjects}
               onChange={handleRadioChange("Subjects")}
-              className="grid grid-cols-3 gap-4"
+              className="grid grid-cols-3 gap-2"
             >
               {["Toán học", "Vật lý", "Hóa học", "Tin học", "Sinh học", "Ngoại ngữ", "Ngữ văn", "Giá tư duy Bách khoa", "Kĩ năng mềm", "STEM", "Tin học văn phòng", "Các môn tiểu học"].map((subject) => (
                 <Radio
@@ -378,13 +381,14 @@ const FormParrent: FC = () => {
               <Radio.Group
                 value={formData.Level}
                 onChange={handleRadioChange('Level')}
-                className="grid grid-cols-4"
+                className="flex flex-col"
               >
                 {["Tiểu học", "THCS", "THPT", "Đại học"].map((level) => (
                   <Radio
                     key={level}
                     label={level}
                     value={level}
+                    className = "mb-2"
                   />
                 ))}
               </Radio.Group>
@@ -396,13 +400,14 @@ const FormParrent: FC = () => {
                 <Radio.Group
                   value={formData.ValueClass}
                   onChange={handleRadioChange('ValueClass')}
-                  className="grid grid-cols-4"
+                  className="flex flex-col"
                 >
                   {levelToClasses[formData.Level]?.map((classValue) => (
                     <Radio
                       key={classValue}
                       label={classValue}
                       value={classValue}
+                      className = "mb-2"
                     />
                   ))}
                 </Radio.Group>
@@ -415,7 +420,7 @@ const FormParrent: FC = () => {
           <Box>
             <Text>Mục tiêu:</Text>
             <Checkbox.Group>
-              {["Mục tiêu 1", "Mục tiêu 2", "Mục tiêu 3"].map((goal) => (
+              {["Thi học sinh giỏi quốc gia", "Thi học sinh giỏi tỉnh/thành phố", "Ôn thi cấp 3", "Lấy lại gốc", "Ôn chắc kiến thức", "Ôn thi đại học", "Đạt 8+ cho môn học"].map((goal) => (
                 <Checkbox
                   key={goal}
                   label={goal}
@@ -483,6 +488,17 @@ const FormParrent: FC = () => {
                 />
               ))}
             </Radio.Group>
+          </Box>
+
+          <Box>
+          <Input
+            type="text"
+            name="NeedMore"
+            label="Yêu cầu thêm với gia sư"
+            placeholder="Yêu cầu với gia sư"
+            value={formData.NeedMore}
+            onChange={handleChange}
+          />
           </Box>
 
           <Box>

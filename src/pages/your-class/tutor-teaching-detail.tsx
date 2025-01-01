@@ -4,7 +4,7 @@ import {  useRecoilValue } from "recoil";
 import { classState } from "state";
 import Collapse from "components/collapse"; // Assuming you have a Collapse component
 import { useState } from "react";
-import { Box, Button, Header, Input, Page } from "zmp-ui"; // Import Button and Input from zmp-ui
+import { Box, Button, Header, Input, Page, Calendar } from "zmp-ui"; // Import Button and Input from zmp-ui
 import { DatePicker } from "zmp-ui"; // Import DatePicker from zmp-ui
 import { openPhone } from "zmp-sdk/apis"; // Import the openPhone function
 import React, {FC} from "react";
@@ -39,7 +39,7 @@ const TutorTeachingDetailPage:FC = () => {
 
   return (
     <Page>
-    <Header title="Lớp bạn đang dạy"/>
+    <Header title="Lớp bạn đang dạy" backgroundColor="#AD493A"/>
     <div className="w-full h-full flex flex-col p-4">
       {/* Class Information Section */}
       <div className="mb-4">
@@ -52,7 +52,7 @@ const TutorTeachingDetailPage:FC = () => {
               title: "Thông tin chi tiết",
               content: (
                 <div>
-                  <p>Mục tiêu học tập: {classItem.NameSupport}</p>
+                  <p>Mục tiêu học tập: {classItem.NameSupports}</p>
                   <p>Thông tin bổ sung: {classItem.InfoMore}</p>
                   <p>Địa chỉ: {classItem.AddressParent}</p>
                 </div>
@@ -61,8 +61,8 @@ const TutorTeachingDetailPage:FC = () => {
           ]}
         />
         <div className="text-lg">Tên phụ huynh: {classItem.NameParent}</div>
-        <div className="text-lg" onClick={() => handlePhoneClick(classItem.PhoneEmail)}>
-          Số điện thoại phụ huynh: {classItem.PhoneEmail}
+        <div className="text-lg" onClick={() => handlePhoneClick(classItem.PhoneParent)}>
+          Số điện thoại phụ huynh: {classItem.PhoneParent}
         </div>        
         <div className="text-lg">Học phí: {classItem.Money}</div>
       </div>
@@ -79,18 +79,21 @@ const TutorTeachingDetailPage:FC = () => {
       {/* Schedule Section */}
       <Box className="mt-4 p-4 border rounded shadow">
         <h2 className="text-xl font-semibold">Lịch học</h2>
-        <DatePicker
-          label="Chọn ngày học"
-          helperText="Chọn ngày cho lịch học"
-          mask
-          maskClosable
-          dateFormat="dd/mm/yyyy"
-          title="DatePicker"
-          onChange={(date) => {
-            // Convert the Date object to a string in the desired format
-            const formattedDate = date.toLocaleDateString("en-GB"); // Format as dd/mm/yyyy
-            setSelectedDate(formattedDate);
-          }} 
+        <Calendar
+          fullscreen={false} // Không hiển thị toàn màn hình
+          numberOfWeek={1}
+          onSelect={(date, selectedDate) => {
+            // `date` is a DateType. Convert it to a JavaScript Date object.
+            const jsDate = new Date(date); // Ensure valid JS Date conversion
+            if (!isNaN(jsDate.getTime())) {
+              // Chuyển đổi ngày sang định dạng dd/mm/yyyy
+              const formattedDate = jsDate.toLocaleDateString("en-GB");
+              setSelectedDate(formattedDate);
+            } else {
+              console.error("Invalid date selected:", date);
+            }
+          }}
+          dayOfWeekNameFormat="short" // Hiển thị tên thứ đầy đủ
         />
 
         {/* Input field for the note */}

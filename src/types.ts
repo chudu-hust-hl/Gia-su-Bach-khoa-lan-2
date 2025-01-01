@@ -27,6 +27,27 @@ import { ReactNode } from "react";
     Done: string[];
   }
   
+  export interface GSParentReqInfo{
+    ParentID: string;
+    NameParent: string;
+    PhoneParent: string;
+    AddressParent: string;
+    FormTeach: string;
+    InfoMore: string;
+    Level: string;
+    NeedMore: string;
+    SexTeacher: string;
+    QuantityStudent: string;
+    SelectSchool: string;
+    ValueClass: string;
+    NameSupports: string;
+    Subjects: string;
+    TimeSupport: string;
+    City: string;
+    District: string;
+    Ward: string;
+  }
+
   export interface GSStudentInfo{
     StudentID: string;
     StudentName: string;
@@ -47,31 +68,50 @@ import { ReactNode } from "react";
     Teaching: string[];
     Done: string[];
   }
-  
-  export interface GSClass {
-    id: string;
-    ParentID: string;
-    NameParent: string;
-    PhoneEmail: string;
+
+  export interface GSStudentInfo{
+    StudentID: string;
+    StudentName: string;
+    Phone: string;
+    Address: string;
+    FormTeach: string;
+    InfoMore: string;
+    SexStudent: string;
+    SelectSchool: string;
     City: string;
     District: string;
     Ward: string;
+    Subjects: string;
+    TimeSupport: string;
+    Experience: string;
+    Achivement: string;
+    Apply: string[];
+    Teaching: string[];
+    Done: string[];
+  }
+  
+  export interface GSClass {
+    ClassID: string;
+    ReqParentID: string;
+    NameParent: string;
+    PhoneParent: string;
+    AddressParent: string;
     StudentID: string;
     StudentName: string;
     PhoneStudent: string; //Phone number of teacher
-    Status: number;
-    Apply: string[];
-    NumberApply: number;
-    NameSupport: string
-    Money: string;
-    MoneyStatus: string;
     FormTeach: string;
     InfoMore?: string;
-    NameSupports?: string;
-    Subjects: string;
+    Level: string;
     ValueClass: string; 
-    AddressParent: string;
-    Lessons?: GSLesson[];
+    NameSupports: string;
+    Subjects: string;
+    Money: string;
+    MoneyStatus: string;
+    Apply: string;
+    NumberApply: number;
+    City: string;
+    District: string;
+    Ward: string;
   }
   
   export interface GSLesson {
