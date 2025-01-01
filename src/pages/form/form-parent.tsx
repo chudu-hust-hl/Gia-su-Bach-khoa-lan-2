@@ -272,9 +272,9 @@ const FormParrent: FC = () => {
     <span>SĐT của bạn:</span>
     <Input
       type="text"
-      name="PhoneEmail"
+      name="PhoneParent"
       placeholder="Nhập số điện thoại"
-      value={formData.PhoneEmail}
+      value={formData.PhoneParent}
       onChange={handleChange}
       className="input-field"
     />
@@ -289,6 +289,7 @@ const FormParrent: FC = () => {
       onChange={handleCityChange}
       defaultValue={"Thành phố Hà Nội"}
       className="input-field"
+      closeOnSelect
     >
       {cities.map((city) => (
         <Option 
@@ -310,6 +311,7 @@ const FormParrent: FC = () => {
       onChange={handleDistrictChange}
       disabled={!formData.City} // Disable if no city selected
       className="input-field"
+      closeOnSelect
     >
       {districts.map((district) => (
         <Option 
@@ -331,6 +333,7 @@ const FormParrent: FC = () => {
       onChange={handleWardChange}
       disabled={!formData.District} // Disable if no district selected
       className="input-field"
+      closeOnSelect
     >
       {communes.map((commune) => (
         <Option 
@@ -356,106 +359,6 @@ const FormParrent: FC = () => {
   </Box>
 </Box>
 
-        <Box className="border border-[#050C33] p-2 rounded-lg">
-          <Box mt={6}>
-            <Text.Title className="font-bold pb-1">Thông tin lớp học</Text.Title>
-          </Box>
-          <Box>
-          <Input
-            type="text"
-            name="NameParent"
-            label="Tên của bạn"
-            placeholder="Nhập tên"
-            value={formData.NameParent}
-            onChange={handleChange}
-          />
-          </Box>
-
-          <Box>
-            <Input
-              type="text"
-              name="PhoneParent"
-              label="SĐT của bạn"
-              placeholder="Nhập số điện thoại"
-              value={formData.PhoneParent}
-              onChange={handleChange}
-            />
-          </Box>
-
-          <Box>
-            <Select
-              closeOnSelect
-              name="City"
-              label="Tỉnh/Thành phố"
-              placeholder="Chọn tỉnh/thành phố"
-              value={formData.City}
-              onChange={handleCityChange}
-              defaultValue={"Thành phố Hà Nội"}
-            >
-              {cities.map((city) => (
-                <Option 
-                  key={city} 
-                  value={city} 
-                  title={city} 
-                />
-              ))}
-            </Select>
-          </Box>
-
-          {/* District Dropdown - Enabled only after City is selected */}
-          <Box>
-            <Select
-              closeOnSelect
-              name="District"
-              label="Quận/Huyện"
-              placeholder="Chọn quận/huyện"
-              value={formData.District}
-              onChange={handleDistrictChange}
-              disabled={!formData.City} // Disable if no city selected
-            >
-              {districts.map((district) => (
-                <Option 
-                  key={district} 
-                  value={district} 
-                  title={district} 
-                />
-              ))}
-            </Select>
-          </Box>
-
-          {/* Ward Dropdown - Enabled only after District is selected */}
-          <Box>
-            <Select
-              closeOnSelect
-              name="Ward"
-              label="Phường/Xã"
-              placeholder="Chọn phường/xã"
-              value={formData.Ward}
-              onChange={handleWardChange}
-              disabled={!formData.District} // Disable if no district selected
-            >
-              {communes.map((commune) => (
-                <Option 
-                  key={commune} 
-                  value={commune} 
-                  title={commune} 
-                />
-              ))}
-            </Select>
-          </Box>
-
-          <Box>
-            <Input
-              type="text"
-              name="AddressParent"
-              label="Địa chỉ cụ thể"
-              placeholder="Nhập địa chỉ cụ thể"
-              value={formData.AddressParent}
-              onChange={handleChange}
-            />
-          </Box>
-        </Box>
-
         <Box>
           <Box mt={6}>
             <Text.Title size="small">Thông tin lớp học</Text.Title>
@@ -471,15 +374,12 @@ const FormParrent: FC = () => {
               {["Toán học", "Vật lý", "Hóa học", "Tin học", "Sinh học", "Ngoại ngữ", "Ngữ văn", "Giá tư duy Bách khoa", "Kĩ năng mềm", "STEM", "Tin học văn phòng", "Các môn tiểu học"].map((subject) => (
                 <Radio
                   key={subject}
-                  className={`flex items-center justify-center col-span-1 cursor-pointer rounded-md text-center text-black transition duration-300 ease-in-out h-[10vh] ${
-                    formData.Subjects === subject ? "bg-[#060f44] text-white font-bold transition duration-200" : "bg-white"
-                  }`}
-                  onClick={() => handleRadioChange("Subjects")(subject)}
-                >
-                  {subject}
-                </div>
+                  label={subject}
+                  value={subject}
+                  className="col-span-1"
+                />
               ))}
-            </div>
+            </Radio.Group>
           </Box>
           <br />
           <hr className="mb-2" />
@@ -603,37 +503,8 @@ const FormParrent: FC = () => {
                 />
               ))}
             </Radio.Group>
-          </Box>
-<hr className="mt-4" />
-<Box className="py-4">
-  <Text className="font-semibold text-xl mb-4">Lịch có thể học:</Text>
-  <div className="space-y-6">
-    {(["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 7", "Chủ nhật"] as DayOfWeek[]).map((day) => (
-      <Box key={day} className="bg-white p-3 rounded-lg shadow-md">
-        <Text className="font-medium text-lg mb-2 text-blue-600">{day}:</Text>
-        <div className="grid grid-cols-3 gap-1"> {/* Chỉnh sửa tại đây */}
-          {(["Buổi sáng", "Buổi chiều", "Buổi tối"] as TimeSlot[]).map((time) => (
-            <div
-              key={`${day}-${time}`}
-              onClick={() => handleTimeChange(day, time, !formData.TimeSupport.split('; ').includes(`${time} ${day}`))}
-              className={`flex items-center gap-2 px-2 py-3 rounded-lg cursor-pointer transition duration-200 ease-in-out ${
-                formData.TimeSupport.split('; ').includes(`${time} ${day}`)
-                  ? "bg-[rgb(5,12,51)] text-white"
-                  : "bg-gray-100 text-gray-700"
-              } hover:bg-[rgb(5,12,51,0.5)] hover:text-white`}
-            >
-              {/* Biểu tượng hoặc icon thay cho checkbox */}
-              <i className={`fa ${formData.TimeSupport.split('; ').includes(`${time} ${day}`) ? "fa-check-circle" : "fa-circle"} text-xl`}></i>
-              <span>{time}</span>
-            </div>
-          ))}
-        </div>
-      </Box>
-    ))}
-  </div>
-</Box>
-
           <Box>
+            
           <Input
             type="text"
             name="NeedMore"
@@ -644,28 +515,35 @@ const FormParrent: FC = () => {
           />
           </Box>
 
-          <Box>
-          <Text>Lịch có thể học:</Text>
-          <div className="space-y-4">
-            {(["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 7", "Chủ nhật"] as DayOfWeek[]).map((day) => (
-              <Box key={day}>
-                <Text>{day}:</Text>
-                <div className="flex flex-wrap gap-4">
-                  {(["Buổi sáng", "Buổi chiều", "Buổi tối"] as TimeSlot[]).map((time) => (
-                    <Checkbox
-                      key={`${day}-${time}`}
-                      label={time}
-                      value={`${time} ${day}`}
-                      checked={formData.TimeSupport.split('; ').includes(`${time} ${day}`)}
-                      onChange={(e) => handleTimeChange(day, time, e.target.checked)}
-                    />
-                  ))}
-                </div>
-              </Box>
-            ))}
-          </div>
           </Box>
-
+          <hr className="mt-4" />
+          <Box className="py-4">
+            <Text className="font-semibold text-xl mb-4">Lịch có thể học:</Text>
+            <div className="space-y-6">
+              {(["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 7", "Chủ nhật"] as DayOfWeek[]).map((day) => (
+                <Box key={day} className="bg-white p-3 rounded-lg shadow-md">
+                  <Text className="font-medium text-lg mb-2 text-blue-600">{day}:</Text>
+                  <div className="grid grid-cols-3 gap-1"> {/* Chỉnh sửa tại đây */}
+                    {(["Buổi sáng", "Buổi chiều", "Buổi tối"] as TimeSlot[]).map((time) => (
+                      <div
+                        key={`${day}-${time}`}
+                        onClick={() => handleTimeChange(day, time, !formData.TimeSupport.split('; ').includes(`${time} ${day}`))}
+                        className={`flex items-center gap-2 px-2 py-3 rounded-lg cursor-pointer transition duration-200 ease-in-out ${
+                          formData.TimeSupport.split('; ').includes(`${time} ${day}`)
+                            ? "bg-[rgb(5,12,51)] text-white"
+                            : "bg-gray-100 text-gray-700"
+                        } hover:bg-[rgb(5,12,51,0.5)] hover:text-white`}
+                      >
+                        {/* Biểu tượng hoặc icon thay cho checkbox */}
+                        <i className={`fa ${formData.TimeSupport.split('; ').includes(`${time} ${day}`) ? "fa-check-circle" : "fa-circle"} text-xl`}></i>
+                        <span>{time}</span>
+                      </div>
+                    ))}
+                  </div>
+                </Box>
+              ))}
+            </div>
+          </Box>
           <Box mt={6}>
             <div className="flex justify-center items-center">
               <Button className="!bg-[#FFB600]" variant="primary" onClick={handleSubmit} disabled={isSubmitting}>

@@ -49,7 +49,7 @@ const ParentTeachingDetailPage: FC = () => {
                 title: "Thông tin chi tiết",
                 content: (
                   <div className="animate-fadeIn">
-                    <p>Mục tiêu học tập: {classItem.NameSupport}</p>
+                    <p>Mục tiêu học tập: {classItem.NameSupports}</p>
                     <p>Thông tin bổ sung: {classItem.InfoMore}</p>
                     <p>Học phí: {classItem.Money}</p>
                     <p>Địa chỉ: {classItem.AddressParent}</p>
