@@ -5,6 +5,12 @@ import { ReactNode } from "react";
     userStudentID?: string;
     userParrentID?: string;
   }
+
+  export interface GSZaloUserInfo{
+    PhoneNumber: string;
+    Name: string;
+    StudentID: string;
+  }
   
   export interface GSParentInfo{
     NameParent: string;

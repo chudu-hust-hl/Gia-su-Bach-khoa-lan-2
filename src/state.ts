@@ -5,24 +5,47 @@ import { wait } from "utils/async";
 import mockClasses from "../mock/classes.json";
 import mockTutors from "../mock/tutors.json";
 import mockParents from "../mock/parent.json";
-import { GSClass, GSLesson, GSParentInfo, GSStudentInfo, UserCurrentType } from "types";
+import { GSClass, GSLesson, GSParentInfo, GSStudentInfo, GSZaloUserInfo, UserCurrentType } from "types";
+import { getToken, getUserZaloID } from "utils/auth";
+import { authApi } from "api/auth";
+
+
+const token = getToken();
+const userID = getUserZaloID();
+
+const exampleUser: GSZaloUserInfo = {PhoneNumber: "0904485061", Name: "Nguyen Trung Dung", StudentID: "20226030"}
 
 export const userState = selector({
   key: "user",
+  // get: async () => {
+  //   {/*try {
+  //     const { userInfo } = await getUserInfo({ autoRequestPermission: true });
+  //     return userInfo;
+  //   } catch (error) {*/}
+  //     return {
+  //       id: "Zalo123456",
+  //       avatar: "",
+  //       token: "example-token-code",
+  //       name: "Người dùng Zalo",
+  //       studentID: "20231001",
+  //       phoneNumber: "0904485061"
+  //     };
+  // }
   get: async () => {
-    {/*try {
-      const { userInfo } = await getUserInfo({ autoRequestPermission: true });
-      return userInfo;
-    } catch (error) {*/}
-      return {
-        id: "Zalo123456",
-        avatar: "",
-        token: "example-token-code",
-        name: "Người dùng Zalo",
-        studentID: "20231001",
-        phoneNumber: "0904485061"
-      };
-  }
+    try {
+      const result = (await authApi.getZaloUserInfo());
+      if (result.RespCode === 0) { // Assuming 0 indicates success
+        console.log("Success", result.ZaloUserInfo)
+        return result.ZaloUserInfo; // Return the ClassList from the response
+      } else {
+        console.error("Error fetching user Info:", result.RespText);
+        return exampleUser; // Return an empty array or handle the error as needed
+      }
+    }catch (error) {
+      console.error("Error fetching user Info:", error);
+      return exampleUser;
+    }
+  },
 });
 
 //Write an API to await getZaloUserInfo 

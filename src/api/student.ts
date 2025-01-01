@@ -19,10 +19,8 @@ export const studentApi = {
       }
     },
 
-    getStudentInfo: async (UserID: string, Token: string, StudentID: string) => {
+    getStudentInfo: async (StudentID: string) => {
       const requestBody = {
-          UserID: UserID,
-          Token: Token,
           StudentID: StudentID,
       };
       
@@ -42,10 +40,36 @@ export const studentApi = {
 
           return result;
       } catch (error) {
+          console.error("Error fetching student info:", error);
+          throw error;
+      }
+    },
+
+    studentApplyClass: async (StudentID: string, ClassID: string) => {
+      const requestBody = {
+          StudentID: StudentID,
+          ClassID: ClassID,
+      };
+      
+      try {
+          const result = await request<{
+              RespCode: number;
+              RespText: string;
+          }>("GSStudent/StudentApplyClass", {
+              method: "POST", 
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestBody),
+          });
+
+          return result;
+      } catch (error) {
           console.error("Error fetching class list:", error);
           throw error;
       }
-  }
+    }
+
   };
 
 

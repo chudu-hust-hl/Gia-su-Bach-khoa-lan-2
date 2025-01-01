@@ -2,23 +2,40 @@ import { useRecoilValue } from "recoil";
 import {useParams,useNavigate} from "react-router-dom";
 import { classState } from "state";
 import { ShareButton } from "./share-button";
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import { Button, Header, Page } from "zmp-ui";
 import toast from "react-hot-toast";
+import { studentApi } from "api/student";
+import { getStudentID } from "utils/auth";
 
 const ClassDetailPage: FC = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const classItem = useRecoilValue(classState(String(id)));
+  const studentID = getStudentID();
+  
 
   if (!classItem) {
     return <div>Loading...</div>; // Handle loading state or if the classItem is not found
   }
 
-  const handleApply = () => {
-    // Implement the logic for applying to the class
-    toast.success("Đã gửi yêu cầu ứng tuyển");
+  const handleApply = async () => {
+    try {
+      if (studentID) {
+        console.log("Apply a class: ", studentID);
+        const result = await studentApi.studentApplyClass(studentID, String(id));
+        toast.success("Đã gửi yêu cầu ứng tuyển");
+      } else {
+        toast.error("Bạn cần điền form để ứng tuyển");
+        navigate("/formStudent");
+      }
+    } catch (error) {
+      console.error('Failed to apply:', error);
+      toast.error("Có lỗi xảy ra khi ứng tuyển");
+    }
   };
+
+
 
   return (
     <Page className="flex flex-col h-screen">

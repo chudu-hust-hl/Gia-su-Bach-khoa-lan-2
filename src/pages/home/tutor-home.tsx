@@ -14,8 +14,8 @@ const TutorHomePage: FC = () => {
   const [selectedTabIndex, setSelectedIndex] = useRecoilState(selectedTabIndexState);
   const classes = useRecoilValue(classesState); 
   const user = useRecoilValue (userState);
-  const studentID = user.studentID;
-  const phoneNumber = user.phoneNumber;
+  const studentID = user.StudentID;
+  const phoneNumber = user.PhoneNumber;
 
   return (
     <Page hideScrollbar={true}>

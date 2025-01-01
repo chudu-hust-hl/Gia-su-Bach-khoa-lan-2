@@ -11,7 +11,7 @@ import ClassFilter from "./class-filter";
 import { Header, Page } from "zmp-ui";
 
 const mapValueClassToLevel = (ValueClass: string) => {
-  const classNum = parseInt(ValueClass);
+  const classNum = parseInt(ValueClass.replace(/\D/g, ''));
   if (classNum >= 1 && classNum <= 5) return "Tiểu học";
   if (classNum >= 6 && classNum <= 9) return "THCS";
   if (classNum >= 10 && classNum <= 12) return "THPT";

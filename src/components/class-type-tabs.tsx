@@ -20,7 +20,6 @@ export const ApplyingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
     ? classes.filter(classItem => userAsParent?.Apply.includes(classItem.ClassID.toString()))
     : classes.filter(classItem => userAsTutor?.Apply.includes(classItem.ClassID.toString()));
 
-    console.log(phoneNumber, "nguoi dung")
     console.log(userAsTutor?.Apply)
 
   return (
@@ -43,8 +42,6 @@ export const TeachingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
     ? classes.filter(classItem => userAsParent?.Teaching.includes(classItem.ClassID.toString()))
     : classes.filter(classItem => userAsTutor?.Teaching.includes(classItem.ClassID.toString()));
 
-  console.log(phoneNumber, "nguoi dung")
-  console.log(userAsParent, "Dang day")
 
   return (
     <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">
