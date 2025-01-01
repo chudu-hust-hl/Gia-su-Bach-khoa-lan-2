@@ -7,7 +7,7 @@ export const TeachingItem: FC<{propClass: GSClass}> = ({propClass}) => {
   return (
     <TransitionLink
       className="flex flex-col cursor-pointer group bg-white p-4 rounded-lg shadow-md"
-      to={`/teaching-detail/${propClass.id}`}
+      to={`/teaching-detail/${propClass.ClassID}`}
     >
       <div className="text-lg font-semibold mb-2">
         Bạn đang có lớp gia sư {propClass.Subjects}
@@ -34,7 +34,7 @@ export const TeachingGrid : FC<{classes: GSClass[]}> = ({classes}) => {
       className={"grid grid-cols-1 px-4 py-2 gap-4 "}
     >
       {classes.map((classItem) => (
-        <TeachingItem key={classItem.id} propClass={classItem}/>
+        <TeachingItem key={classItem.ClassID} propClass={classItem}/>
       ))}
     </Box>
   );

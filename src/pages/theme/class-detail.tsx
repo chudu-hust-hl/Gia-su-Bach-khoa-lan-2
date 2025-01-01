@@ -35,7 +35,7 @@ const ClassDetailPage: FC = () => {
           </div>
           <div className="text-sm mt-1">Địa chỉ: {classItem.AddressParent}</div>
           <div className="py-2">
-            <ShareButton key={classItem.id} classItem={classItem} />
+            <ShareButton key={classItem.ClassID} classItem={classItem} />
           </div>
         </div>
         {classItem.InfoMore && (
@@ -43,7 +43,7 @@ const ClassDetailPage: FC = () => {
             <div className="bg-section h-2 w-full"></div>
             <div className="px-4 py-2">
               <h2 className="text-lg font-semibold">Mục tiêu học tập</h2>
-              <p>{classItem.NameSupport}</p>
+              <p>{classItem.NameSupports}</p>
             </div>
             <div className="px-4 py-2">
               <h2 className="text-lg font-semibold">Thông tin bổ sung</h2>

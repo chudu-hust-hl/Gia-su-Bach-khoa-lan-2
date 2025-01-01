@@ -20,6 +20,7 @@ const mapValueClassToLevel = (ValueClass: string) => {
 
 const ClassListPage: FC = () => {
   const classes =  useRecoilValue(classesState);
+  console.log("classe: ", classes);
   const selectedDistricts =  useRecoilValue(selectedDistrictsState);
   const selectedLevels =  useRecoilValue(selectedLevelsState);
   const selectedSubjects =  useRecoilValue(selectedSubjectsState);

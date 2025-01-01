@@ -1,4 +1,6 @@
+import { useRecoilValue } from "recoil";
 import { getConfig } from "./config";
+import { userState } from "state";
 
 // Get the API URL from the configuration
 const API_URL = getConfig((config) => config.template.apiUrls.default);
@@ -9,8 +11,26 @@ const mockUrls: Record<string, { default: string }> = import.meta.globEager("../
 // Function to make API requests
 export async function request<T>(
   path: string,
-  options?: RequestInit
+  options?: RequestInit & { body?: any }
 ): Promise<T> {
+// Ensure options and body are initialized
+  options = options || {};
+  options.body = options.body || {};
+
+  // Pre-request modifications (similar to interceptor behavior)
+  const token = "example-token-code" //getToken();
+  if (token) {
+    // Ensure the body is parsed if it's a string
+    const parsedBody = typeof options.body === "string" ? JSON.parse(options.body) : options.body;
+
+    // Add Token and UserID to the payload
+    parsedBody.Token = token;
+    parsedBody.UserID = "Zalo123456"  //getUserName();
+
+    // Convert the modified body back to a string
+    options.body = JSON.stringify(parsedBody);
+  }
+
   // Determine the URL to use: either the API URL or a mock URL
   const url = API_URL
     ? `${API_URL}${path}`
@@ -20,6 +40,8 @@ export async function request<T>(
   if (!API_URL) {
     await new Promise((resolve) => setTimeout(resolve, 500));
   }
+
+  
 
   // Perform the fetch request
   const response = await fetch(url, options);

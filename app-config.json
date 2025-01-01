@@ -14,9 +14,9 @@
   "listAsyncJS": [],
   "template": {
     "name": "zaui-coffee",
-    "primaryColor": "#006af5",
+    "primaryColor": "#AD493A",
     "apiUrls":{
-      "default": "http://202.191.56.172/GIASUAPI/",
+      "default": "http://202.191.56.71/GiaSuBKAPI/",
       "location": "https://ctsv.hust.edu.vn/"
     },
     "prefixCurrencySymbol": false,

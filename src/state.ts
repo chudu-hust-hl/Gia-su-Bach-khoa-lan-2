@@ -1,5 +1,6 @@
 import { atom, selector, selectorFamily } from "recoil";
-import { getLocation, getPhoneNumber, getUserInfo } from "zmp-sdk";
+import { getLocation, getPhoneNumber, getUserInfo, authorize } from "zmp-sdk/apis";
+import { classApi } from "api/class";
 import { wait } from "utils/async";
 import mockClasses from "../mock/classes.json";
 import mockTutors from "../mock/tutors.json";
@@ -14,8 +15,9 @@ export const userState = selector({
       return userInfo;
     } catch (error) {*/}
       return {
-        id: "",
+        id: "Zalo123456",
         avatar: "",
+        token: "example-token-code",
         name: "Người dùng Zalo",
         studentID: "20231001",
         phoneNumber: "0904485061"
@@ -23,12 +25,31 @@ export const userState = selector({
   }
 });
 
+//Write an API to await getZaloUserInfo 
+
+
+
 export const userCurrentState = atom<UserCurrentType>({
   key: 'userCurrentState',
   default: (() => {
     const storedUser = localStorage.getItem('userType');
     return storedUser ? JSON.parse(storedUser) as UserCurrentType : { userCurrentType: null }; // Default value
   })(),
+});
+
+export const grantAuthorization =selector({
+  key: 'grantAuthorization',
+  get: async () => {
+    try {
+      const data = await authorize({
+        scopes: ["scope.userLocation", "scope.userPhonenumber"],
+      });
+      return data; // Return the authorization data
+    } catch (error) {
+      console.error("Authorization failed:", error);
+      throw error; // Rethrow the error for handling in the component
+    }
+  },
 });
 
 
@@ -65,7 +86,21 @@ export const selectedTabIndexState = atom({
 
 export const classesState = selector<GSClass[]>({
   key: "classesState",
-  get: () => mockClasses,
+  get: async () => {
+    try {
+        const result = (await classApi.getClassList(1, 20,""));
+        if (result.RespCode === 0) { // Assuming 0 indicates success
+            console.log("Success", result.ClassList)
+            return result.ClassList; // Return the ClassList from the response
+        } else {
+            console.error("Error fetching class list:", result.RespText);
+            return []; // Return an empty array or handle the error as needed
+        }
+    } catch (error) {
+        console.error("Error in classesState selector:", error);
+        return []; // Return an empty array or handle the error as needed
+    }
+},
 })
 
 export const lessonsState = selector<GSLesson[]>({
@@ -153,7 +188,7 @@ export const classState = selectorFamily<GSClass | undefined, string>({
   key: "classState",
   get: (id) => ({ get }) => {
     const classes = get(classesState); // Get the classes state
-    return classes.find((classItem) => classItem.id === id); // Find the class by ID
+    return classes.find((classItem) => classItem.ClassID === id); // Find the class by ID
   },
 });
 

@@ -17,8 +17,8 @@ export const ApplyingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
   const userAsParent = useRecoilValue(parentState(phoneNumber));
 
   const appliedClasses = userType.userCurrentType === 0
-    ? classes.filter(classItem => userAsParent?.Apply.includes(classItem.id.toString()))
-    : classes.filter(classItem => userAsTutor?.Apply.includes(classItem.id.toString()));
+    ? classes.filter(classItem => userAsParent?.Apply.includes(classItem.ClassID.toString()))
+    : classes.filter(classItem => userAsTutor?.Apply.includes(classItem.ClassID.toString()));
 
     console.log(phoneNumber, "nguoi dung")
     console.log(userAsTutor?.Apply)
@@ -40,8 +40,8 @@ export const TeachingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
   const userAsParent = useRecoilValue(parentState(phoneNumber));
 
   const appliedClasses = userType.userCurrentType === 0
-    ? classes.filter(classItem => userAsParent?.Teaching.includes(classItem.id.toString()))
-    : classes.filter(classItem => userAsTutor?.Teaching.includes(classItem.id.toString()));
+    ? classes.filter(classItem => userAsParent?.Teaching.includes(classItem.ClassID.toString()))
+    : classes.filter(classItem => userAsTutor?.Teaching.includes(classItem.ClassID.toString()));
 
   console.log(phoneNumber, "nguoi dung")
   console.log(userAsParent, "Dang day")
@@ -63,8 +63,8 @@ export const DoneList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: 
   const userAsParent = useRecoilValue(parentState(phoneNumber));
 
   const appliedClasses = userType.userCurrentType === 0
-    ? classes.filter(classItem => userAsParent?.Done.includes(classItem.id.toString()))
-    : classes.filter(classItem => userAsTutor?.Done.includes(classItem.id.toString()));
+    ? classes.filter(classItem => userAsParent?.Done.includes(classItem.ClassID.toString()))
+    : classes.filter(classItem => userAsTutor?.Done.includes(classItem.ClassID.toString()));
 
   return (
     <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">

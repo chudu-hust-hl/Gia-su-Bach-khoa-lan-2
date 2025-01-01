@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FC } from "react";
 import { Page, Box, Text, Input, Select, Checkbox, Button, Radio, Header } from "zmp-ui";
-import { GSParentInfo } from "types";
+import { GSParentReqInfo } from "types";
 import { locationApi } from "api/location";
 import { parentApi } from "api/parrent";
 import {toast} from "react-hot-toast";
@@ -9,25 +9,25 @@ const { Option } = Select;
 
 const FormParrent: FC = () => {
   // State to hold form data
-  const [formData, setFormData] = useState<GSParentInfo>({
+  const [formData, setFormData] = useState<GSParentReqInfo>({
+    ParentID: "", 
     NameParent: "",
-    PhoneEmail: "",
+    PhoneParent: "",
+    AddressParent: "",
+    FormTeach: "",
+    InfoMore: "",
+    Level: "",
+    NeedMore: "",
+    SexTeacher: "",
+    QuantityStudent: "",
+    SelectSchool: "",
+    ValueClass: "",
+    NameSupports: "",
+    Subjects: "",
+    TimeSupport: "",
     City: "Thành phố Hà Nội",
     District: "",
     Ward: "",
-    AddressParent: "",
-    Subjects: "",
-    Level: "",
-    ValueClass: "",
-    NameSupports: "",
-    InfoMore: "",
-    FormTeach: "",
-    QuantityStudent: "",
-    SexTeacher: "",
-    TimeSupport: "",
-    Apply: [],
-    Teaching: [],
-    Done: [],
   });
 
   const levelToClasses: Record<string, string[]> = {
@@ -114,7 +114,7 @@ const FormParrent: FC = () => {
     }));
   };
 
-  const handleSelectChange = (name: keyof GSParentInfo) => (value: string) => {
+  const handleSelectChange = (name: keyof GSParentReqInfo) => (value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -122,7 +122,7 @@ const FormParrent: FC = () => {
   };
 
   // Handle checkbox changes
-  const handleCheckboxChange = (name: keyof GSParentInfo, value: string) => {
+  const handleCheckboxChange = (name: keyof GSParentReqInfo, value: string) => {
     setFormData((prevData) => {
       const currentValues = prevData[name] as string;
       const valuesArray = currentValues ? currentValues.split(', ') : [];
@@ -141,7 +141,7 @@ const FormParrent: FC = () => {
     });
   };
 
-  const handleRadioChange = (name: keyof GSParentInfo) => (value: string) => {
+  const handleRadioChange = (name: keyof GSParentReqInfo) => (value: string) => {
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -173,6 +173,9 @@ const FormParrent: FC = () => {
     });
   };
 
+  const generateRandomDigits = () => {
+    return Math.floor(10000 + Math.random() * 90000).toString(); // Generates a 5-digit number
+  };
   
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -183,7 +186,7 @@ const FormParrent: FC = () => {
     setIsSubmitting(true);
   
     // Basic validation
-    if (!formData.NameParent || !formData.PhoneEmail) {
+    if (!formData.NameParent || !formData.PhoneParent) {
       toast.error("Vui lòng điền đầy đủ thông tin bắt buộc!");
       setIsSubmitting(false);
       return;
@@ -191,33 +194,34 @@ const FormParrent: FC = () => {
   
     // Phone number validation
     const phoneRegex = /^[0-9]{10}$/;
-    if (!phoneRegex.test(formData.PhoneEmail)) {
+    if (!phoneRegex.test(formData.PhoneParent)) {
       toast.error("Số điện thoại không hợp lệ!");
       setIsSubmitting(false);
       return;
     }
 
-    const parentInfo: GSParentInfo = {
+
+    const parentInfo: GSParentReqInfo = {
+      ParentID: formData.PhoneParent,
       NameParent: formData.NameParent || "",
-      PhoneEmail: formData.PhoneEmail || "",
+      PhoneParent: formData.PhoneParent || "",
+      AddressParent: formData.AddressParent || "",
+      FormTeach: formData.FormTeach || "",
+      InfoMore: formData.InfoMore || "",
+      Level: formData.Level || "",
+      NeedMore: formData.NeedMore || "",
+      SexTeacher: formData.SexTeacher || "",
+      QuantityStudent: formData.QuantityStudent || "",
+      SelectSchool: formData.SelectSchool || "",
+      ValueClass: formData.ValueClass || "",
       City: formData.City || "Thành phố Hà Nội",
       District: formData.District || "",
       Ward: formData.Ward || "",
-      AddressParent: formData.AddressParent || "",
       Subjects: formData.Subjects || "",
-      Level: formData.Level || "",
-      ValueClass: formData.ValueClass || "",
       NameSupports: formData.NameSupports || "",
-      InfoMore: formData.InfoMore || "",
-      FormTeach: formData.FormTeach || "",
-      QuantityStudent: formData.QuantityStudent || "",
-      SexTeacher: formData.SexTeacher || "",
       TimeSupport: formData.TimeSupport || "",
-      Apply: [],
-      Teaching: [],
-      Done: [],
     };
-  
+
     // Create the request body
     const requestBody = {
       ParentInfo: parentInfo
@@ -226,7 +230,7 @@ const FormParrent: FC = () => {
     try {
       console.log("Sending data:", requestBody); // Log the data being sent
       
-      const result = await parentApi.createParentInfo(requestBody);
+      const result = await parentApi.createParentInfo(parentInfo);
   
       console.log("API Response:", result);
   
@@ -356,12 +360,116 @@ const FormParrent: FC = () => {
           <Box mt={6}>
             <Text.Title className="font-bold pb-1">Thông tin lớp học</Text.Title>
           </Box>
-          <hr />
+          <Box>
+          <Input
+            type="text"
+            name="NameParent"
+            label="Tên của bạn"
+            placeholder="Nhập tên"
+            value={formData.NameParent}
+            onChange={handleChange}
+          />
+          </Box>
+
+          <Box>
+            <Input
+              type="text"
+              name="PhoneParent"
+              label="SĐT của bạn"
+              placeholder="Nhập số điện thoại"
+              value={formData.PhoneParent}
+              onChange={handleChange}
+            />
+          </Box>
+
+          <Box>
+            <Select
+              closeOnSelect
+              name="City"
+              label="Tỉnh/Thành phố"
+              placeholder="Chọn tỉnh/thành phố"
+              value={formData.City}
+              onChange={handleCityChange}
+              defaultValue={"Thành phố Hà Nội"}
+            >
+              {cities.map((city) => (
+                <Option 
+                  key={city} 
+                  value={city} 
+                  title={city} 
+                />
+              ))}
+            </Select>
+          </Box>
+
+          {/* District Dropdown - Enabled only after City is selected */}
+          <Box>
+            <Select
+              closeOnSelect
+              name="District"
+              label="Quận/Huyện"
+              placeholder="Chọn quận/huyện"
+              value={formData.District}
+              onChange={handleDistrictChange}
+              disabled={!formData.City} // Disable if no city selected
+            >
+              {districts.map((district) => (
+                <Option 
+                  key={district} 
+                  value={district} 
+                  title={district} 
+                />
+              ))}
+            </Select>
+          </Box>
+
+          {/* Ward Dropdown - Enabled only after District is selected */}
+          <Box>
+            <Select
+              closeOnSelect
+              name="Ward"
+              label="Phường/Xã"
+              placeholder="Chọn phường/xã"
+              value={formData.Ward}
+              onChange={handleWardChange}
+              disabled={!formData.District} // Disable if no district selected
+            >
+              {communes.map((commune) => (
+                <Option 
+                  key={commune} 
+                  value={commune} 
+                  title={commune} 
+                />
+              ))}
+            </Select>
+          </Box>
+
+          <Box>
+            <Input
+              type="text"
+              name="AddressParent"
+              label="Địa chỉ cụ thể"
+              placeholder="Nhập địa chỉ cụ thể"
+              value={formData.AddressParent}
+              onChange={handleChange}
+            />
+          </Box>
+        </Box>
+
+        <Box>
+          <Box mt={6}>
+            <Text.Title size="small">Thông tin lớp học</Text.Title>
+          </Box>
+
           <Box>
             <Text className="col-span-3 my-2">Kiến thức/Kỹ năng:</Text>
-            <div className="grid grid-cols-3 gap-4">
-              {["Toán học", "Vật lý", "Hóa học", "Tin học", "Sinh học", "Ngoại ngữ", "Ngữ văn", "Đánh giá tư duy", "Kĩ năng mềm", "STEM", "Tin học văn phòng", "Các môn tiểu học"].map((subject) => (
-                <div
+            <Radio.Group 
+              value={formData.Subjects}
+              onChange={handleRadioChange("Subjects")}
+              className="grid grid-cols-3 gap-4"
+            >
+              {["Toán học", "Vật lý", "Hóa học", "Tin học", "Sinh học", "Ngoại ngữ", "Ngữ văn", "Giá tư duy Bách khoa", "Kĩ năng mềm", "STEM", "Tin học văn phòng", "Các môn tiểu học"].map((subject) => (
+                <Radio
                   key={subject}
                   className={`flex items-center justify-center col-span-1 cursor-pointer rounded-md text-center text-black transition duration-300 ease-in-out h-[10vh] ${
                     formData.Subjects === subject ? "bg-[#060f44] text-white font-bold transition duration-200" : "bg-white"
@@ -422,7 +530,7 @@ const FormParrent: FC = () => {
           <Box>
             <Text className="my-2 font-semibold">Mục tiêu:</Text>
             <Checkbox.Group>
-              {["Mục tiêu 1", "Mục tiêu 2", "Mục tiêu 3"].map((goal) => (
+              {["Thi học sinh giỏi quốc gia", "Thi học sinh giỏi tỉnh/thành phố", "Ôn thi cấp 3", "Lấy lại gốc", "Ôn chắc kiến thức", "Ôn thi đại học", "Đạt 8+ cho môn học"].map((goal) => (
                 <Checkbox
                   key={goal}
                   label={goal}
@@ -525,7 +633,38 @@ const FormParrent: FC = () => {
   </div>
 </Box>
 
+          <Box>
+          <Input
+            type="text"
+            name="NeedMore"
+            label="Yêu cầu thêm với gia sư"
+            placeholder="Yêu cầu với gia sư"
+            value={formData.NeedMore}
+            onChange={handleChange}
+          />
+          </Box>
 
+          <Box>
+          <Text>Lịch có thể học:</Text>
+          <div className="space-y-4">
+            {(["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 7", "Chủ nhật"] as DayOfWeek[]).map((day) => (
+              <Box key={day}>
+                <Text>{day}:</Text>
+                <div className="flex flex-wrap gap-4">
+                  {(["Buổi sáng", "Buổi chiều", "Buổi tối"] as TimeSlot[]).map((time) => (
+                    <Checkbox
+                      key={`${day}-${time}`}
+                      label={time}
+                      value={`${time} ${day}`}
+                      checked={formData.TimeSupport.split('; ').includes(`${time} ${day}`)}
+                      onChange={(e) => handleTimeChange(day, time, e.target.checked)}
+                    />
+                  ))}
+                </div>
+              </Box>
+            ))}
+          </div>
+          </Box>
 
           <Box mt={6}>
             <div className="flex justify-center items-center">

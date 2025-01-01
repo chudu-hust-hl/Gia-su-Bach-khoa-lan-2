@@ -3,16 +3,68 @@ import { useRecoilState } from 'recoil';
 import { Box, Page } from 'zmp-ui';
 import Button from 'components/button';
 import { useNavigate } from 'react-router-dom';
-import { userCurrentState } from 'state';
+import { userCurrentState, grantAuthorization } from 'state';
 import { getConfig } from 'utils/config';
 import logo from "static/logo.png";
+import { authorize, showToast, setStorage, getStorage } from "zmp-sdk/apis";
 
 const StartPage: FC = () => {
   const [userCurrent, setUserCurrentType] = useRecoilState(userCurrentState);
   const navigate = useNavigate();
 
+  // const authorizeUser = async () => {
+  //   try {
+  //     const data = await authorize({
+  //       scopes: ["scope.userLocation", "scope.userPhonenumber"],
+  //     });
+  //     console.log("cai gi day", data);
+  //   } catch (error) {
+  //     // xử lý khi gọi api thất bại
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   authorizeUser();
+  // }, []);
+
+  // const setDataToStorage = async () => {
+  //   try {
+  //     const { errorKeys } = await setStorage({
+  //       data: {
+  //         studentID: "20226030",
+  //       }
+  //     });
+  //     console.log("key", errorKeys)
+  //   } catch (error) {
+  //     // xử lý khi gọi api thất bại
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //    setDataToStorage();
+  // }, []);
+
+//   const getDataFromStorage = async () => {
+//     try {
+//       const { studentID } = await getStorage({
+//         keys: ["studentID"]
+//       });
+//       console.log(studentID)
+//     } catch (error) {
+//       // xử lý khi gọi api thất bại
+//       console.log(error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     getDataFromStorage();
+//  }, []);
+
   const handleUserTypeSelect = (type: 0|1) => {
     // Create an updated user type object
+      
     const updatedUserType = {
       userCurrentType: type, // Set the user type based on the selection
     };

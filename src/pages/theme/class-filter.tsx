@@ -69,6 +69,7 @@ export default function ClassFilter() {
           label="Khu vực"
           placeholder="Chọn khu vực"
           multiple
+          closeOnSelect
           value={selectedDistricts}
           onChange={handleDistrictChange}
         >
@@ -87,6 +88,7 @@ export default function ClassFilter() {
           label="Cấp học"
           placeholder="Chọn cấp học"
           multiple
+          closeOnSelect
           value={selectedLevels}
           onChange={handleLevelChange}
         >
@@ -105,6 +107,7 @@ export default function ClassFilter() {
           label="Hình thức dạy"
           placeholder="Chọn hình thức dạy"
           multiple
+          closeOnSelect
           value={selectedFormTeach}
           onChange={handleFormTeachChange}
         >
@@ -123,6 +126,7 @@ export default function ClassFilter() {
           label="Môn học"
           placeholder="Chọn môn học"
           multiple
+          closeOnSelect
           value={selectedSubjects}
           onChange={handleSubjectChange}
         >
