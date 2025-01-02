@@ -16,8 +16,6 @@ const ParentHomePage: FC = () => {
   const studentID = user.StudentID;
   const phoneNumber = user.PhoneNumber;
 
-  console.log("User information:", studentID, phoneNumber);
-
   return (
     <Page>
       {/* Phần chào mừng */}

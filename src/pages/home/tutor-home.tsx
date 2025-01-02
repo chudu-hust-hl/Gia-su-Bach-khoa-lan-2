@@ -11,7 +11,6 @@ import { Welcome } from "./welcome";
 
 const TutorHomePage: FC = () => {
   const navigate = useNavigate();
-  const [selectedTabIndex, setSelectedIndex] = useRecoilState(selectedTabIndexState);
   const classes = useRecoilValue(classesState); 
   const user = useRecoilValue (userState);
   const studentID = user.StudentID;
@@ -20,7 +19,7 @@ const TutorHomePage: FC = () => {
   return (
     <Page hideScrollbar={true}>
       <Welcome/>
-      <div className="min-h-full bg-section">
+      <div className="min-h-full bg-section relative">
         <div className="bg-background pt-2 w-3/4 mx-auto">
           <Banners />
         </div>

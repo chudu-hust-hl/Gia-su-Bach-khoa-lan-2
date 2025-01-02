@@ -1,13 +1,15 @@
 import { atom, selector, selectorFamily } from "recoil";
 import { getLocation, getPhoneNumber, getUserInfo, authorize } from "zmp-sdk/apis";
 import { classApi } from "api/class";
+import { studentApi } from "api/student";
 import { wait } from "utils/async";
 import mockClasses from "../mock/classes.json";
 import mockTutors from "../mock/tutors.json";
 import mockParents from "../mock/parent.json";
-import { GSClass, GSLesson, GSParentInfo, GSStudentInfo, GSZaloUserInfo, UserCurrentType } from "types";
+import { GSClass, GSLesson, GSParentBasicInfo, GSStudentInfo, GSZaloUserInfo, UserCurrentType } from "types";
 import { getToken, getUserZaloID } from "utils/auth";
 import { authApi } from "api/auth";
+import { parentApi } from "api/parrent";
 
 
 const token = getToken();
@@ -123,7 +125,7 @@ export const classesState = selector<GSClass[]>({
         console.error("Error in classesState selector:", error);
         return []; // Return an empty array or handle the error as needed
     }
-},
+  },
 })
 
 export const lessonsState = selector<GSLesson[]>({
@@ -137,13 +139,22 @@ export const lessonsState = selector<GSLesson[]>({
 
 export const tutorsState = selector<GSStudentInfo[]>({
   key: "tutorsState",
-  get: () => mockTutors,
+  get: async () => {
+    try {
+        const result = (await studentApi.getStudentReqList(1, 20,""));
+        if (result.RespCode === 0) { // Assuming 0 indicates success
+            console.log("Success", result.StudentList)
+            return result.StudentList; // Return the ClassList from the response
+        } else {
+            console.error("Error fetching student list:", result.RespText);
+            return []; // Return an empty array or handle the error as needed
+        }
+    } catch (error) {
+        console.error("Error in studentesState selector:", error);
+        return []; // Return an empty array or handle the error as needed
+    }
+  },
 });
-
-export const parentsState = selector<GSParentInfo[]>({
-  key: "parentsState",
-  get: () => mockParents,
-})
 
 export const districtsState = atom({
   key: "districtsState",
@@ -225,18 +236,40 @@ export const lessonState = selectorFamily({
 
 export const tutorState = selectorFamily({
   key: "tutorState",
-  get: (id: string) => ({ get }) => {
-    const tutors = get(tutorsState); // Access the tutors atom
-    return tutors.find((tutor) => tutor.StudentID === id) || null; // Return the matching tutor or null
+  get: (id: string) => async () => {
+    try {
+      // Fetch tutor information from the API using the provided ID
+      const result = await studentApi.getStudentInfo(id);
+      if (result.RespCode === 0) {
+        return result.StudentInfo; // Return the fetched tutor info
+      } else {
+        console.error("Error fetching tutor info:", result.RespText);
+        return null; // Return null if there's an error
+      }
+    } catch (error) {
+      console.error("Error in tutorState selector:", error);
+      return null; // Return null in case of an exception
+    }
   },
 });
 
 
 export const parentState = selectorFamily({
   key: "parentState",
-  get: (id: string) => ({ get }) => {
-    const parents = get(parentsState); // Access the tutors atom
-    return parents.find((parent) => parent.PhoneEmail  === id) || null; // Return the matching tutor or null
+  get: (id: string) => async () => {
+    try {
+      // Fetch parent information from the API using the provided ID
+      const result = await parentApi.getParentInfo(id);
+      if (result.RespCode === 0) {
+        return result.ParentInfo; // Return the fetched parent info
+      } else {
+        console.error("Error fetching parent info:", result.RespText);
+        return null; // Return null if there's an error
+      }
+    } catch (error) {
+      console.error("Error in parentState selector:", error);
+      return null; // Return null in case of an exception
+    }
   },
 });
 

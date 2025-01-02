@@ -17,8 +17,8 @@ export const ApplyingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
   const userAsParent = useRecoilValue(parentState(phoneNumber));
 
   const appliedClasses = userType.userCurrentType === 0
-    ? classes.filter(classItem => userAsParent?.Apply.includes(classItem.ClassID.toString()))
-    : classes.filter(classItem => userAsTutor?.Apply.includes(classItem.ClassID.toString()));
+    ? classes.filter(classItem => (userAsParent?.Apply || []).includes(classItem.ClassID.toString()))
+    : classes.filter(classItem => (userAsTutor?.Apply || []).includes(classItem.ClassID.toString()));
 
     console.log(userAsTutor?.Apply)
 
@@ -39,8 +39,8 @@ export const TeachingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
   const userAsParent = useRecoilValue(parentState(phoneNumber));
 
   const appliedClasses = userType.userCurrentType === 0
-    ? classes.filter(classItem => userAsParent?.Teaching.includes(classItem.ClassID.toString()))
-    : classes.filter(classItem => userAsTutor?.Teaching.includes(classItem.ClassID.toString()));
+    ? classes.filter(classItem => (userAsParent?.Teaching || []).includes(classItem.ClassID.toString()))
+    : classes.filter(classItem => (userAsTutor?.Teaching || []).includes(classItem.ClassID.toString()));
 
 
   return (
@@ -59,14 +59,14 @@ export const DoneList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: 
   const userAsTutor = useRecoilValue(tutorState(studentID));
   const userAsParent = useRecoilValue(parentState(phoneNumber));
 
-  const appliedClasses = userType.userCurrentType === 0
-    ? classes.filter(classItem => userAsParent?.Done.includes(classItem.ClassID.toString()))
-    : classes.filter(classItem => userAsTutor?.Done.includes(classItem.ClassID.toString()));
+  const doneClasses = userType.userCurrentType === 0
+    ? classes.filter(classItem => (userAsParent?.Done || []).includes(classItem.ClassID.toString()))
+    : classes.filter(classItem => (userAsTutor?.Done || []).includes(classItem.ClassID.toString()));
 
   return (
     <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">
-      {appliedClasses.length > 0 ? (
-        <TeachingGrid classes={appliedClasses} />
+      {doneClasses.length > 0 ? (
+        <TeachingGrid classes={doneClasses} />
       ) : (
         <p className="text-gray-500">Bạn chưa có lớp nào đã hoàn thành.</p>
       )}
