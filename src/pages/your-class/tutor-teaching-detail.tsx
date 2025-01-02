@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import {  useRecoilValue } from "recoil";
 import { classState } from "state";
 import Collapse from "components/collapse"; // Assuming you have a Collapse component
-import { useState } from "react";
-import { Box, Button, Header, Input, Page, Calendar } from "zmp-ui"; // Import Button and Input from zmp-ui
-import { DatePicker } from "zmp-ui"; // Import DatePicker from zmp-ui
+import { classApi } from "api/class";
+import { Box, Button, Header, Input, Page, Calendar, Select } from "zmp-ui";
 import { openPhone } from "zmp-sdk/apis"; // Import the openPhone function
-import React, {FC} from "react";
+import React, {FC, useEffect, useState} from "react";
+import { getStudentID } from "utils/auth";
 
 const TutorTeachingDetailPage:FC = () => {
   const { id } = useParams();
@@ -15,12 +15,75 @@ const TutorTeachingDetailPage:FC = () => {
   const [schedule, setSchedule] = useState<{ date: string; note: string }[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // State to hold the selected date
   const [note, setNote] = useState<string>(''); // State to hold the note input
+  const [selectedMonth, setSelectedMonth] = useState<string>(new Date().toISOString().slice(0, 7)); // Default to current month
 
-  const handleAddSchedule = () => {
+  // Generate a list of months for the Select component
+  const months = Array.from({ length: 12 }, (_, i) => {
+    const date = new Date();
+    date.setMonth(i);
+    return date.toISOString().slice(0, 7); // Format: "yyyy-mm"
+  });
+
+  const fetchScheduleData = async () => {
+    try {
+      const result = await classApi.getStudentDailyComment(
+        classItem.PhoneParent, // Assuming PhoneParent is required
+        selectedMonth,
+        classItem.ClassID
+      );
+
+      if (result.RespCode === 0) {
+        // Transform the LessonList into the format expected by the schedule state
+        const transformedSchedule = result.LessonList.map(lesson => ({
+          date: lesson.Date,
+          note: lesson.Comment
+        }));
+        setSchedule(transformedSchedule);
+      } else {
+        console.error("Error fetching schedule data:", result.RespText);
+      }
+    } catch (error) {
+      console.error("Error in fetchScheduleData:", error);
+    }
+  };
+
+  const handleMonthChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedMonth(event.target.value);
+  };
+
+  // Fetch schedule data when the component mounts or the selected month changes
+  useEffect(() => {
+    fetchScheduleData();
+  }, [selectedMonth]);
+
+
+  const handleAddSchedule = async () => {
     if (selectedDate && note) {
-      setSchedule((prev) => [...prev, { date: selectedDate, note }]);
-      setSelectedDate(null); // Reset the selected date after adding to the schedule
-      setNote(''); // Clear the note input after adding
+      try {
+        // Assuming you have access to the StudentID and ClassID
+        const StudentID = getStudentID() || "20226030"; // Replace with actual StudentID
+        const ClassID = classItem.ClassID; // Use the ClassID from the classItem
+  
+        // Call the API to create a daily comment
+        const result = await classApi.createStudentDailyComment(
+          StudentID,
+          ClassID,
+          selectedDate,
+          note
+        );
+  
+        // Check if the API call was successful
+        if (result.RespCode === 0) {
+          // Add the schedule to the local state
+          setSchedule((prev) => [...prev, { date: selectedDate, note }]);
+          setSelectedDate(null); // Reset the selected date
+          setNote(''); // Clear the note input
+        } else {
+          console.error("Error creating daily comment:", result.RespText);
+        }
+      } catch (error) {
+        console.error("Error in handleAddSchedule:", error);
+      }
     }
   };
 
@@ -81,7 +144,7 @@ const TutorTeachingDetailPage:FC = () => {
         <h2 className="text-xl font-semibold">Lịch học</h2>
         <Calendar
           fullscreen={false} // Không hiển thị toàn màn hình
-          numberOfWeek={1}
+          //numberOfWeek={1}
           onSelect={(date, selectedDate) => {
             // `date` is a DateType. Convert it to a JavaScript Date object.
             const jsDate = new Date(date); // Ensure valid JS Date conversion
@@ -89,6 +152,12 @@ const TutorTeachingDetailPage:FC = () => {
               // Chuyển đổi ngày sang định dạng dd/mm/yyyy
               const formattedDate = jsDate.toLocaleDateString("en-GB");
               setSelectedDate(formattedDate);
+
+              // Extract the month in "yyyy-mm" format and update the selectedMonth state
+              const year = jsDate.getFullYear();
+              const month = String(jsDate.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+              const monthString = `${year}-${month}`;
+              setSelectedMonth(monthString);
             } else {
               console.error("Invalid date selected:", date);
             }
@@ -112,20 +181,26 @@ const TutorTeachingDetailPage:FC = () => {
           Thêm lịch
         </Button>
 
-        <div className="mt-2">
+        <Box className="mb-4">
           <h3 className="font-medium">Lịch đã thêm:</h3>
           {schedule.length > 0 ? (
             <ul>
-              {schedule.map((item, index) => (
-                <li key={index}>
-                  {item.date}: {item.note}
-                </li>
-              ))}
+              {schedule.map((item, index) => {
+                // Convert the date from "yyyy-mm-dd" to "dd-mm-yyyy"
+                const [year, month, day] = item.date.split('-');
+                const outputDate = `${day}-${month}-${year}`;
+
+                return (
+                  <li key={index}>
+                    <span className="font-semibold">{outputDate}:</span> {item.note}
+                  </li>
+                );
+              })}
             </ul>
             ) : (
             <p className="text-gray-500">Bạn chưa thêm lịch dạy nào.</p>
           )}
-        </div>
+        </Box>
       </Box>
     </div>
     </Page>
