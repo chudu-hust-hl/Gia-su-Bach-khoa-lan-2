@@ -27,7 +27,7 @@ const TutorHomePage: FC = () => {
         <div className="bg-background w-full">
           <Banners />
         </div>
-        <div className="absolute top-[25%] left-0 right-0 z-10 flex justify-center">
+        <div className="absolute top-[20%] left-0 right-0 z-10 flex justify-center">
           <Button
             large
             primary

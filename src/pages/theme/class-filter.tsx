@@ -63,10 +63,10 @@ export default function ClassFilter() {
   };
 
   return (
-    <div className="flex px-4 py-3 space-x-2 overflow-x-auto">
+    <div className="grid grid-cols-2 gap-2 p-4 overflow-x-auto">
       <Suspense fallback={<SelectSkeleton width={110} />}>
         <Select
-          label="Khu vực"
+          label-none="Khu vực"
           placeholder="Chọn khu vực"
           multiple
           value={selectedDistricts}
@@ -84,7 +84,7 @@ export default function ClassFilter() {
 
       <Suspense fallback={<SelectSkeleton width={110} />}>
         <Select
-          label="Cấp học"
+          label-none="Cấp học"
           placeholder="Chọn cấp học"
           multiple
           value={selectedLevels}
@@ -102,7 +102,7 @@ export default function ClassFilter() {
 
       <Suspense fallback={<SelectSkeleton width={110} />}>
         <Select
-          label="Hình thức dạy"
+          label-none="Hình thức dạy"
           placeholder="Chọn hình thức dạy"
           multiple
           value={selectedFormTeach}
@@ -120,7 +120,7 @@ export default function ClassFilter() {
 
       <Suspense fallback={<SelectSkeleton width={110} />}>
         <Select
-          label="Môn học"
+          label-none="Môn học"
           placeholder="Chọn môn học"
           multiple
           value={selectedSubjects}

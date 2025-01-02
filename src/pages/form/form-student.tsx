@@ -233,41 +233,45 @@
 	};
 
 	return (
-		<Page className="p-4" hideScrollbar>
-		<Header title="Yêu cầu tìm gia sư"/>
+		<Page className="bg-cover bg-[#A5B4FC]" hideScrollbar>
+		<Header className="absolute left-0" title="Yêu cầu tìm gia sư"/>
+		<div className="rounded-[8px] m-4 bg-[rgba(255,255,255,0.6)] p-3 text-[#050C33]">
 		<form onSubmit={handleSubmit}>
-			<Box>
+			<Box className="border border-[#050C33] p-2 rounded-lg mb-1">
 				<Box mt={6}>
-					<Text.Title size="small">Thông tin liên hệ</Text.Title>
+					<Text.Title className="font-bold pb-1">Thông tin liên hệ</Text.Title>
 				</Box>
-
+				<hr />
 				<Box>
+					<span className="font-semibold my-2">Tên sinh viên:</span>
 					<Input
-						type="text"
-						name="StudentName"
-						label="Tên sinh viên"
-						placeholder="Nhập tên"
-						value={formData.StudentName}
-						onChange={handleChange}
+					  type="text"
+					  name="NameParent"
+					  placeholder="Nhập tên"
+					  value={formData.StudentName}
+					  onChange={handleChange}
+					  className="input-field"
 					/>
 				</Box>
 
 				<Box>
+					<span className="font-semibold my-2">SĐT của bạn:</span>
 					<Input
-						type="text"
-						name="Phone"
-						label="SĐT của sinh viên"
-						placeholder="Nhập số điện thoại"
-						value={formData.Phone}
-						onChange={handleChange}
+					  type="text"
+					  name="PhoneEmail"
+					  placeholder="Nhập số điện thoại"
+					  value={formData.Phone}
+					  onChange={handleChange}
+					  className="input-field"
 					/>
 				</Box>
 
 				<Box>
-				<Text>Giới tính của bạn:</Text>
+				<Text className="font-semibold my-2">Giới tính của bạn:</Text>
             <Radio.Group
               value={formData.SexStudent}
               onChange={handleRadioChange("SexStudent")}
+			  className="grid grid-cols-3 gap-2 border p-2"
             >
               {["Nam", "Nữ"].map((sexStudent) => (
                 <Radio
@@ -280,10 +284,11 @@
 				</Box>
 
 				<Box>
-				<Text>Trường/Đại học bạn đang theo học:</Text>
+				<Text className="font-semibold my-2">Trường/Đại học bạn đang theo học:</Text>
             <Radio.Group
               value={formData.SelectSchool}
               onChange={handleRadioChange("SelectSchool")}
+			  className="border p-2"
             >
               {["Đại học Bách khoa Hà Nội","Không thuộc Đại học Bách khoa Hà Nội"].map((school) => (
                 <Radio
@@ -296,61 +301,63 @@
 				</Box>
 
 				<Box>
+					<span className="font-semibold my-2">Mã số sinh viên:</span>
 					<Input
 						type="text"
 						name="StudentID"
-						label="Mã số sinh viên"
 						placeholder="Mã số sinh viên"
 						value={formData.StudentID}
 						onChange={handleChange}
+						className="input-field"
 					/>
 				</Box>
 
 				<Box>
+					<span className="font-semibold my-2">Tỉnh/Thành phố:</span>
 					<Select
-						closeOnSelect
-						name="City"
-						label="Tỉnh/Thành phố"
-						placeholder="Chọn tỉnh/thành phố"
-						value={formData.City}
-						onChange={handleCityChange}
+					  name="City"
+					  placeholder="Chọn tỉnh/thành phố"
+					  value={formData.City}
+					  onChange={handleCityChange}
+					  defaultValue={"Thành phố Hà Nội"}
+					  className="input-field"
 					>
-						<Option value="">Chọn thành phố</Option>
-						{cities.map((city) => (
+					  {cities.map((city) => (
 						<Option 
-						key={city} 
-						value={city} 
-						title={city} 
+						  key={city} 
+						  value={city} 
+						  title={city} 
 						/>
-					))}
+					  ))}
 					</Select>
-				</Box>
+				  </Box>
 
 				<Box>
+					<span className="font-semibold my-2">Quận/Huyện:</span>
 					<Select
-						closeOnSelect
-						name="District"
-						label="Quận/Huyện"
-						placeholder="Chọn quận/huyện"
-						value={formData.District}
-						onChange={handleDistrictChange}
-						disabled={!formData.City} // Disable if no city selected
+					  name="District"
+					  placeholder="Chọn quận/huyện"
+					  value={formData.District}
+					  onChange={handleDistrictChange}
+					  disabled={!formData.City} // Disable if no city selected
+					  className="input-field"
 					>
-						{districts.map((district) => (
-							<Option 
-								key={district} 
-								value={district} 
-								title={district} 
-							/>
-						))}
+					  {districts.map((district) => (
+						<Option 
+						  key={district} 
+						  value={district} 
+						  title={district} 
+						/>
+					  ))}
 					</Select>
-				</Box>
+				  </Box>
 
 				<Box>
+					<span className="font-semibold my-2">Phường/Xã:</span>
 				<Select
 					closeOnSelect
 					name="Ward"
-					label="Phường/Xã"
+					label-none="Phường/Xã"
 					placeholder="Chọn phường/xã"
 					value={formData.Ward}
 					onChange={handleWardChange}
@@ -367,10 +374,11 @@
 				</Box>
 
 				<Box>
+					<span className="font-semibold my-2">Địa chỉ:</span>
 					<Input
 						type="text"
 						name="Address"
-						label="Địa chỉ"
+						label-none="Địa chỉ"
 						placeholder="Nhập địa chỉ"
 						value={formData.Address}
 						onChange={handleChange}
@@ -378,10 +386,11 @@
 				</Box>
 
 				<Box>
+					<span className="font-semibold my-2">Thông tin thêm:</span>
 					<Input
 						type="text"
 						name="InfoMore"
-						label="Thông tin thêm"
+						label-none="Thông tin thêm"
 						placeholder="Nhập thông tin thêm"
 						value={formData.InfoMore}
 						onChange={handleChange}
@@ -389,24 +398,49 @@
 				</Box>
 
 				<Box>
-            <Text>Kiến thức/Kỹ năng:</Text>
-            <Checkbox.Group>
-              {["Toán học", "Vật lý", "Hóa học", "Tin học", "Sinh học", "Ngoại ngữ", "Ngữ văn", "Giá tư duy Bách khoa", "Kĩ năng mềm", "STEM", "Tin học văn phòng", "Các môn tiểu học"].map((subject) => (
-                <Checkbox
-                  key={subject}
-                  label={subject}
-                  value={subject}
-									onChange={() => handleCheckboxChange('Subjects',subject)}
-                />
-              ))}
-            </Checkbox.Group>
-          </Box>
+  <Text className="col-span-3 my-2 font-semibold">Kiến thức/Kỹ năng:</Text>
+  <div className="grid grid-cols-3 gap-4">
+    {[
+      "Toán học",
+      "Vật lý",
+      "Hóa học",
+      "Tin học",
+      "Sinh học",
+      "Ngoại ngữ",
+      "Ngữ văn",
+      "Giá tư duy Bách khoa",
+      "Kĩ năng mềm",
+      "STEM",
+      "Tin học văn phòng",
+      "Các môn tiểu học",
+    ].map((subject) => (
+      <label
+        key={subject}
+        className={`flex items-center justify-center col-span-1 cursor-pointer rounded-md text-center text-black transition duration-300 ease-in-out h-[10vh] ${
+          formData.Subjects.includes(subject)
+            ? "bg-[#060f44] text-white font-bold transition duration-200"
+            : "bg-white"
+        }`}
+      >
+        <input
+          type="checkbox"
+          className="hidden"
+          value={subject}
+          onChange={() => handleCheckboxChange("Subjects", subject)}
+        />
+        {subject}
+      </label>
+    ))}
+  </div>
+</Box>
+
 
 				<Box>
-					<Text>Hình thức dạy:</Text>
+					<Text className="font-semibold my-2">Hình thức dạy:</Text>
 					<Radio.Group
 						value={formData.FormTeach}  
 						onChange={handleRadioChange("FormTeach")}
+						className="border p-2 w-full mb-2"
 					>
 						{["Online", "Offline", "Cả 2"].map((mode) => (
 							<Radio
@@ -419,60 +453,72 @@
 				</Box>
 
 				<Box>
+					<span className="font-semibold my-2"> Kinh nghiêm:</span>
 					<Input
 						type="text"
 						name="Experience"
-						label="Kinh nghiệm"
+						label-none="Kinh nghiệm"
 						placeholder="VD: Đã dạy học sinh lớp 12 đỗ chuyên Toán"
 						value={formData.Experience}
 						onChange={handleChange}
+						className="input-field"
 					/>
 				</Box>
 
 				<Box>
+					<span className="font-semibold my-2">Thành tích:</span>
 					<Input
 						type="text"
 						name="Achivement"
-						label="Thành tích"
+						label-none="Thành tích"
 						placeholder="VD: Giải nhì Toán cấp huyện lớp 11"
 						value={formData.Achivement}
 						onChange={handleChange}
+						className="input-field"
 					/>
 				</Box>
 
-				<Box>
-          <Text>Lịch có thể học:</Text>
-          <div className="space-y-4">
-            {(["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 7", "Chủ nhật"] as DayOfWeek[]).map((day) => (
-              <Box key={day}>
-                <Text>{day}:</Text>
-                <div className="flex flex-wrap gap-4">
-                  {(["Buổi sáng", "Buổi chiều", "Buổi tối"] as TimeSlot[]).map((time) => (
-                    <Checkbox
-                      key={`${day}-${time}`}
-                      label={time}
-                      value={`${time} ${day}`}
-                      checked={formData.TimeSupport.split('; ').includes(`${time} ${day}`)}
-                      onChange={(e) => handleTimeChange(day, time, e.target.checked)}
-                    />
-                  ))}
-                </div>
-              </Box>
-            ))}
-          </div>
-          </Box>
+<hr className="mt-4" />
+<Box className="py-4">
+  <Text className="font-semibold text-xl mb-4">Lịch có thể học:</Text>
+  <div className="space-y-6">
+	{(["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 7", "Chủ nhật"] as DayOfWeek[]).map((day) => (
+	  <Box key={day} className="bg-white p-3 rounded-lg shadow-md">
+		<Text className="font-medium text-lg mb-2 text-blue-600">{day}:</Text>
+		<div className="grid grid-cols-3 gap-1"> {/* Chỉnh sửa tại đây */}
+		  {(["Buổi sáng", "Buổi chiều", "Buổi tối"] as TimeSlot[]).map((time) => (
+			<div
+			  key={`${day}-${time}`}
+			  onClick={() => handleTimeChange(day, time, !formData.TimeSupport.split('; ').includes(`${time} ${day}`))}
+			  className={`flex items-center gap-2 px-2 py-3 rounded-lg cursor-pointer transition duration-200 ease-in-out ${
+				formData.TimeSupport.split('; ').includes(`${time} ${day}`)
+				  ? "bg-[rgb(5,12,51)] text-white"
+				  : "bg-gray-100 text-gray-700"
+			  } hover:bg-[rgb(5,12,51,0.5)] hover:text-white`}
+			>
+			  {/* Biểu tượng hoặc icon thay cho checkbox */}
+			  <i className={`fa ${formData.TimeSupport.split('; ').includes(`${time} ${day}`) ? "fa-check-circle" : "fa-circle"} text-xl`}></i>
+			  <span>{time}</span>
+			</div>
+		  ))}
+		</div>
+	  </Box>
+	))}
+  </div>
+</Box>
 
-				
-
-				<Box mt={6}>
-					<Button variant="primary" onClick={handleSubmit} disabled={isSubmitting}>
-						{isSubmitting ? "Đang gửi..." : "Gửi thông tin"}
-					</Button>
-				</Box>
+			 <Box mt={6}>
+				<div className="flex justify-center items-center">
+				  <Button className="!bg-[#FFB600]" variant="primary" onClick={handleSubmit} disabled={isSubmitting}>
+					{isSubmitting ? "Đang gửi..." : "Gửi thông tin"}
+				  </Button>
+				</div>
+			  </Box>
 			</Box>
-		</form>
-	</Page>
-	);
-};
+		  </form>
+		  </div>
+		</Page>
+	  );
+	};
 
 export default FormStudent;

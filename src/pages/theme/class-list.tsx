@@ -49,12 +49,12 @@ const ClassListPage: FC = () => {
 
   return (
     <Page>
-      <div className="sticky top-0 bg-white z-10">
+      <div className="sticky top-0 bg-[#2F529B] z-10">
       <Header title="Danh sách lớp mới" showBackIcon={false}/>
        {/* Fixed positioning */}
         <ClassFilter />
       </div>
-      <div className="pt-5"> {/* Add padding to prevent overlap */}
+      <div className="bg-[#A5B4FC] pt-5"> {/* Add padding to prevent overlap */}
         <ClassGrid classes={filteredClasses}/>
       </div>
     </Page>

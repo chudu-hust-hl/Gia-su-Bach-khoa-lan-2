@@ -44,11 +44,7 @@ const ParentHomePage: FC = () => {
         </div>
 
         {/* Tabs danh sách */}
-<<<<<<< HEAD
         <div>
-=======
-        <div className="mt-6 px-4">
->>>>>>> 89930cb610dcd635d78ba8062ba8d4af60a174ee
           <Box>
             <ClassTypeTabs
               classes={classes}
