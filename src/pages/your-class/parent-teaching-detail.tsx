@@ -2,10 +2,13 @@ import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { classState, tutorState } from "state";
 import Collapse from "components/collapse";
-import { useState } from "react";
-import { Box, Button, Header, Input, Page } from "zmp-ui";
+import { useState, useEffect } from "react";
+import { classApi } from "api/class";
+import { Box, Button, Header, Input, Page, Select } from "zmp-ui";
 import { openPhone } from "zmp-sdk/apis";
 import React, { FC } from "react";
+
+const {Option} = Select;
 
 const ParentTeachingDetailPage: FC = () => {
   const { id } = useParams();
@@ -14,6 +17,58 @@ const ParentTeachingDetailPage: FC = () => {
 
   const [feedback, setFeedback] = useState<string>("");
   const [schedule, setSchedule] = useState<{ date: string; note: string }[]>([]);
+
+  const [comments, setComments] = useState<{ date: string; note: string }[]>([]);
+  const [selectedMonth, setSelectedMonth] = useState<string>(new Date().toISOString().slice(0, 7));
+
+
+  // Generate a list of months for the last year, this year, and next year
+  const generateMonths = () => {
+    const months: string[] = [];
+    const currentDate = new Date();
+    for (let yearOffset = -1; yearOffset <= 1; yearOffset++) {
+      for (let month = 0; month < 12; month++) {
+        const date = new Date(currentDate.getFullYear() + yearOffset, month, 1);
+        months.push(date.toISOString().slice(0, 7)); // Format: "yyyy-mm"
+      }
+    }
+    return months;
+  };
+
+  const months = generateMonths();
+
+  // Fetch comments for the selected month
+  const fetchComments = async () => {
+    try {
+      const result = await classApi.getStudentDailyComment(
+        classItem.PhoneParent, // Assuming PhoneParent is required
+        selectedMonth,
+        classItem.ClassID
+      );
+
+      if (result.RespCode === 0) {
+        // Transform the LessonList into the format expected by the comments state
+        const transformedComments = result.LessonList.map(lesson => ({
+          date: lesson.Date,
+          note: lesson.Comment
+        }));
+        setComments(transformedComments);
+      } else {
+        console.error("Error fetching comments:", result.RespText);
+      }
+    } catch (error) {
+      console.error("Error in fetchComments:", error);
+    }
+  };
+
+  // Fetch comments when the component mounts or the selected month changes
+  useEffect(() => {
+    fetchComments();
+  }, [selectedMonth]);
+
+  const handleMonthChange = (value: string) => {
+    setSelectedMonth(value);
+  };
 
   const handlePhoneClick = (phoneNumber: string) => {
     openPhone({
@@ -93,7 +148,7 @@ const ParentTeachingDetailPage: FC = () => {
         {/* Feedback Section */}
         <div className="mb-4 bg-white p-4 shadow-lg rounded-lg transition-all hover:shadow-xl">
           <h2 className="text-xl font-semibold mb-2">Nhận xét chung về gia sư</h2>
-          <textarea
+          <Input
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
             className="w-full h-24 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -102,21 +157,33 @@ const ParentTeachingDetailPage: FC = () => {
         </div>
 
         {/* Schedule Section */}
-        <Box className="p-4 border rounded shadow bg-white transition-all hover:shadow-xl">
-          <h2 className="text-xl font-semibold mb-2">Lịch học</h2>
-          <div className="mt-2">
-            <h3 className="font-medium">Ghi chú cho các ngày:</h3>
-            {schedule.length > 0 ? (
-              <ul>
-                {schedule.map((item, index) => (
-                  <li key={index} className="text-gray-800">
-                    {item.date}: {item.note}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="text-gray-500">Bạn chưa thêm ghi chú nào.</p>
-            )}
+        <Box>
+        <Select
+          name="Month"
+          placeholder="Chọn tháng"
+          value={selectedMonth}
+          onChange={handleMonthChange}
+          defaultValue={new Date().toISOString().slice(0, 7)} // Default to current month
+          className="input-field"
+          closeOnSelect
+        >
+          {months.map((month) => (
+            <Option
+              key={month}
+              value={month}
+              title={month}
+            />
+          ))}
+        </Select>
+
+          {/* Comments Section */}
+          <div className="comments-section">
+            {comments.map(comment => (
+              <div key={comment.date} className="comment-item">
+                <p><b>Date:</b> {comment.date}</p>
+                <p><b>Comment:</b> {comment.note}</p>
+              </div>
+            ))}
           </div>
         </Box>
       </div>

@@ -106,6 +106,8 @@ import { ReactNode } from "react";
     City: string;
     District: string;
     Ward: string;
+    ParentCmt: string;
+    StudentCmt: string;
   }
   
   export interface GSLesson {
