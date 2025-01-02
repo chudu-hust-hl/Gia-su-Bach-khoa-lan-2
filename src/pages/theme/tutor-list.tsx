@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import {  useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { Box, Header, Page } from 'zmp-ui';
 import { tutorsState } from 'state';
 import { GSStudentInfo } from 'types';
@@ -9,7 +9,7 @@ export const TutorItem: FC<{ student: GSStudentInfo}> = ({ student }) => {
   return (
     <TransitionLink
       className="flex flex-col cursor-pointer group bg-white p-4 rounded-lg shadow-md"
-      to={`/tutor/${student.StudentID}`} // Link to the tutor's detail page
+      to={`/tutor/${student.RowID}`} // Link to the tutor's detail page
     >
       <div className="text-lg font-bold mb-2 text-center border rounded-md bg-[#465888] text-white p-1">
         {student.StudentName} {/* Display the tutor's name */}
@@ -40,23 +40,27 @@ export const TutorItem: FC<{ student: GSStudentInfo}> = ({ student }) => {
   );
 }
 
-export const TutorGrid: FC = () => {
-  const tutors = useRecoilValue(tutorsState); // Get the tutors data from the Reco
+export const TutorGrid: FC<{tutors: GSStudentInfo[]}> = ({ tutors }) => {
 
   return(
     <Box className="grid grid-cols-1 px-4 py-2 gap-4">
       {tutors.map((student) => (
-        <TutorItem key={student.StudentID} student={student} />
+        <TutorItem key={student.RowID} student={student} />
       ))}
     </Box>
-  )
+  );
 }
 
-export const TutorListPage: FC = () => {
+const TutorListPage: FC = () => {
+  const tutorsList = useRecoilValue(tutorsState);
+
+  console.log("Danh sách gia sư", tutorsList);
   return (
     <Page className='bg-gradient-to-b from-[#bbc7ff] to-[#2F529B]'>
       <Header title='Danh sách gia sư' showBackIcon={false}/>
-      <TutorGrid/>
+      <TutorGrid tutors={tutorsList}/>
     </Page>  
   );
 }
+
+export default TutorListPage;

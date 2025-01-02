@@ -31,7 +31,6 @@ export default function TutorDetailPage() {
               </h1>
             </div>
             <div className="text-sm mt-1">Giới tính: {tutorItem.SexStudent}</div> {/* Display gender */}
-            <div className="text-sm mt-1">Trường: {tutorItem.SelectSchool}</div> {/* Display school */}
             <div className="text-sm mt-1">Môn học: {tutorItem.Subjects}</div> {/* Display subjects */}
             <div className="text-sm mt-1">Hình thức dạy: {tutorItem.FormTeach}</div> {/* Display teaching method */}
             <div className="text-sm mt-1">Địa chỉ: {tutorItem.Address}</div> {/* Display address */}

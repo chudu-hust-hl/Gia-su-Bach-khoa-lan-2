@@ -27,7 +27,7 @@ const ClassListPage: FC = () => {
   const selectedFormTeach =  useRecoilValue(selectedFormTeachState);
 
   // Filter classes to show only those matching the selected subject
-    const filteredClasses = classes.filter((classItem) => {
+  const filteredClasses = classes.filter((classItem) => {
     //const subjectMatch = id ? classItem.subject.id === Number(id) : true;
     const districtMatch = selectedDistricts.length === 0 || 
       selectedDistricts.some(district => 

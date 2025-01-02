@@ -1,5 +1,5 @@
 import {  useRecoilValue } from "recoil";
-import { TutorListPage } from "./tutor-list"; // Import the TutorListPage component
+import TutorListPage from "./tutor-list"; // Import the TutorListPage component
 import ClassListPage from "./class-list"; // Import the ClassListPage component
 import { userCurrentState} from "state"; // Assuming userState holds the user information
 import React,{ FC } from "react";

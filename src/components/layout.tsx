@@ -7,7 +7,7 @@ import ProfilePage from "pages/profile/index";
 import { getSystemInfo } from "zmp-sdk";
 import { ScrollRestoration } from "./scroll-restoration";
 import { useHandlePayment } from "hooks";
-import { TutorListPage } from "pages/theme/tutor-list";
+import TutorListPage from "pages/theme/tutor-list";
 import AvailableClassPage from "pages/theme";
 import ClassDetailPage from "pages/theme/class-detail";
 import AppInfoPage from "pages/home/app-info";
