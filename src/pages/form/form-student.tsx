@@ -10,24 +10,23 @@
 	const FormStudent: FC = () => {
 	// State to hold form data
 	const [formData, setFormData] = useState<GSStudentInfo>({
-	StudentID: "",
-	StudentName: "",
-	Phone: "",
-	SexStudent: "",
-	SelectSchool: "",
-	InfoMore: "",
-	City: "Thành phố Hà Nội",
-	District: "",
-	Ward: "",
-	Address: "",
-	Subjects: "",
-	FormTeach: "",
-	TimeSupport: "",
-	Experience: "",
-	Achivement: "",
-	Apply: [],
-	Teaching: [],
-	Done: [],
+		ReqStudentID: "",
+		StudentID: "",
+		StudentName: "",
+		Phone: "",
+		Address: "",
+		FormTeach: "",
+		SexStudent: "",
+		SelectSchool: "",
+		NameSupports: "",
+		Subjects: "",
+		TimeSupport: "",
+		InfoMore: "",
+		City: "Thành phố Hà Nội",
+		District: "",
+		Ward: "",
+		Experience: "",
+		Achievement: "",
 	});
 
 	const [cities, setCities] = useState<string[]>([]);
@@ -187,11 +186,13 @@
 	}
 
 	const studentInfo: GSStudentInfo = {
+		ReqStudentID: formData.ReqStudentID || "",
 		StudentID: formData.StudentID || "",
 		StudentName: formData.StudentName || "",
 		Phone: formData.Phone || "",
 		SexStudent: formData.SexStudent || "",
 		SelectSchool: formData.SelectSchool || "",
+		NameSupports: formData.NameSupports || "",
 		InfoMore: formData.InfoMore || "",
 		City: formData.City || "Thành phố Hà Nội",
 		District: formData.District || "",
@@ -201,10 +202,7 @@
 		FormTeach: formData.FormTeach || "",
 		TimeSupport: formData.TimeSupport || "",
 		Experience: formData.Experience || "",
-		Achivement: formData.Achivement || "",
-		Apply: [],
-		Teaching: [],
-		Done: []
+		Achievement: formData.Achievement || "",
 	};
 
 	// Create the request body
@@ -432,10 +430,21 @@
 				<Box>
 					<Input
 						type="text"
-						name="Achivement"
+						name="Achievement"
 						label="Thành tích"
 						placeholder="VD: Giải nhì Toán cấp huyện lớp 11"
-						value={formData.Achivement}
+						value={formData.Achievement}
+						onChange={handleChange}
+					/>
+				</Box>
+
+				<Box>
+					<Input
+						type="text"
+						name="NameSupports"
+						label="Năng lực của bạn"
+						placeholder="Điều bạn mang tới cho học sinh"
+						value={formData.NameSupports}
 						onChange={handleChange}
 					/>
 				</Box>

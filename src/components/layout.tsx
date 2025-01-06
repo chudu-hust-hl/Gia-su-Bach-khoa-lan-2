@@ -33,7 +33,6 @@ if (import.meta.env.DEV) {
 }
 
 export const Layout: FC = () => {
-  useHandlePayment();
 
   return (
     <Box flex flexDirection="column" className="h-screen">

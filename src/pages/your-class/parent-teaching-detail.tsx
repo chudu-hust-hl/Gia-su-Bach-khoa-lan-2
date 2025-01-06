@@ -136,7 +136,7 @@ const ParentTeachingDetailPage: FC = () => {
                 title: "Thông tin chi tiết",
                 content: (
                   <div className="animate-fadeIn rounded-md border-[#D9D9D9] border-[2px] p-2">
-                    <p><b>Thành tích:</b> {tutorItem.Achivement}</p>
+                    <p><b>Thành tích:</b> {tutorItem.Achievement}</p>
                     <p><b>Kinh nghiệm:</b> {tutorItem.Experience}</p>
                   </div>
                 ),

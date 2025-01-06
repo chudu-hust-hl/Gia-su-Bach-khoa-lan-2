@@ -35,7 +35,7 @@ export default function TutorDetailPage() {
             <div className="text-sm mt-1">Hình thức dạy: {tutorItem.FormTeach}</div> {/* Display teaching method */}
             <div className="text-sm mt-1">Địa chỉ: {tutorItem.Address}</div> {/* Display address */}
             <div className="text-sm mt-1">Kinh nghiệm: {tutorItem.Experience}</div> {/* Display experience */}
-            <div className="text-sm mt-1">Thành tích: {tutorItem.Achivement}</div> {/* Display achievements */}
+            <div className="text-sm mt-1">Thành tích: {tutorItem.Achievement}</div> {/* Display achievements */}
             {/* Share button for the tutor have not been created*/}
           </div>
         </div>

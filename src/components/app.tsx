@@ -18,7 +18,7 @@ const MyApp = () => {
       try {
         const id = await getUserID({}); // Call the API to get the user ID
         setUserZaloID(id); // Update the state with the fetched user ID
-        console.log('User  ID:', id);
+        console.log('UserID:', id);
       } catch (error) {
         console.error('Failed to fetch user ID:', error);
       }

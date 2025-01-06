@@ -44,14 +44,13 @@ import { ReactNode } from "react";
   }
 
   export interface GSStudentInfo{
-    RowID: string;
+    ReqStudentID: string;
     StudentID: string;
     StudentName: string;
     Phone: string;
     Address: string;
     FormTeach: string;
     InfoMore: string;
-    Level: string;
     SexStudent: string;
     SelectSchool: string;
     NameSupports: string;
@@ -61,7 +60,7 @@ import { ReactNode } from "react";
     District: string;
     Ward: string;
     Experience: string;
-    Achivement: string;
+    Achievement: string;
   }
 
   export interface GSStudentBasicInfo{
@@ -78,7 +77,7 @@ import { ReactNode } from "react";
     District: string;
     Ward: string;
     Experience: string;
-    Achivement: string;
+    Achievement: string;
     Apply: string[];
     Teaching: string[];
     Done: string[];
