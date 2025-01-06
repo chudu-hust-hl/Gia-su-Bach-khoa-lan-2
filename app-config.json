@@ -16,7 +16,8 @@
     "name": "zaui-coffee",
     "primaryColor": "#AD493A",
     "apiUrls":{
-      "default": "http://202.191.56.71/GiaSuBKAPI/",
+      
+      "default": "https://localhost:44354/",
       "location": "https://ctsv.hust.edu.vn/"
     },
     "prefixCurrencySymbol": false,

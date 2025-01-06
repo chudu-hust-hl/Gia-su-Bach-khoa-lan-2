@@ -6,11 +6,12 @@ import React,{ FC } from "react";
 
 const AvailableClassPage: FC = () => {
 	const userType = useRecoilValue(userCurrentState);
-  // Check the user type and render the appropriate component
+  	// Check the user type and render the appropriate component
       if(userType.userCurrentType === 0){
 				return <TutorListPage/>;
 			}
       else{
+				console.log("Error here: " + userType);
 				return <ClassListPage/>;
 			}
 }

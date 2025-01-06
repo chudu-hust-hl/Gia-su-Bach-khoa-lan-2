@@ -30,38 +30,38 @@ export const studentApi = {
     }
   },
 
-  // getStudentExcelList: async (PageNumber: number, RowsPage: number, Search: string) => {
-  //   const requestBody = {
-  //       PageNumber: PageNumber,
-  //       RowsPage: RowsPage,
-  //       Search: Search,
-  //   };
+  getExcelStudentList: async (PageNumber: number, RowsPage: number, Search: string) => {
+    const requestBody = {
+        PageNumber: PageNumber,
+        RowsPage: RowsPage,
+        Search: Search,
+    };
     
-  //   try {
-  //       const result = await request<{
-  //           RespCode: number;
-  //           RespText: string;
-  //           TotalRows: number;
-  //           StudentList: Array<GSStudentInfo>;
-  //       }>("GSStudent/GetStudentReqList", {
-  //           method: "POST", 
-  //           headers: {
-  //               "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify(requestBody),
-  //       });
+    try {
+        const result = await request<{
+            RespCode: number;
+            RespText: string;
+            TotalRows: number;
+            StudentList: Array<GSStudentInfo>;
+        }>("GSStudent/GetExcelStudentReqList", {
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
+        });
 
-  //       return result;
-  //   } catch (error) {
-  //       console.error("Error fetching class list:", error);
-  //       throw error;
-  //   }
-  // },
+        return result;
+    } catch (error) {
+        console.error("Error fetching class list:", error);
+        throw error;
+    }
+  },
 
   
   createStudentInfo: async (studentInfo: { StudentInfo: GSStudentInfo }) => {
     try {
-      const result = await request<{ RespCode: number; RespText: string }>("GSStudent/GSCreateStudent", {
+      const result = await request<{ RespCode: number; RespText: string }>("GSStudent/CreateStudentInfo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

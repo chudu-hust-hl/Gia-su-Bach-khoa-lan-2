@@ -156,6 +156,25 @@ export const tutorsState = selector<GSStudentInfo[]>({
   },
 });
 
+export const excelTutorsState = selector<GSStudentInfo[]>({
+  key: "excelTutorsState",
+  get: async () => {
+    try {
+        const result = (await studentApi.getExcelStudentList(1, 20,""));
+        if (result.RespCode === 0) { // Assuming 0 indicates success
+            console.log("Success", result.StudentList)
+            return result.StudentList; // Return the ExcelStudentList from the response
+        } else {
+            console.error("Error fetching student list:", result.RespText);
+            return []; // Return an empty array or handle the error as needed
+        }
+    } catch (error) {
+        console.error("Error in studentState selector:", error);
+        return []; // Return an empty array or handle the error as needed
+    }
+  },
+});
+
 export const districtsState = atom({
   key: "districtsState",
   default: [
