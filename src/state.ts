@@ -15,7 +15,7 @@ import { parentApi } from "api/parrent";
 const token = getToken();
 const userID = getUserZaloID();
 
-const exampleUser: GSZaloUserInfo = {PhoneNumber: "0904485061", Name: "Nguyen Trung Dung", StudentID: "20226030"}
+const exampleUser: GSZaloUserInfo = {UserID: "Zalo123456", Token: "example-token-code", Avatar: "urlforAvatar", PhoneNumber: "0904485061", Name: "Nguyen Trung Dung", StudentID: "20226030"}
 
 export const userState = selector({
   key: "user",

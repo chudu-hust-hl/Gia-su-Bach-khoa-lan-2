@@ -51,11 +51,11 @@ export const UserInfoBox: FC = () => {
 
   return (
     <Box className="bg-white p-4 rounded-lg shadow-md flex items-center space-x-4">
-      {user.avatar && (
-        <img src={user.avatar} alt="User  Avatar" className="w-16 h-16 rounded-full" />
+      {user.Avatar && (
+        <img src={user.Avatar} alt="User  Avatar" className="w-16 h-16 rounded-full" />
       )}
       <div>
-        <h2 className="text-lg font-semibold">{user.id}</h2>
+        <h2 className="text-lg font-semibold">{user.UserID}</h2>
         {/*<p className="text-sm text-gray-600">
           {user.Type === 0 ? 'Bạn đang dùng giao diện cho phụ huynh/người học' : 'Bạn đang dùng giao diện cho sinh viên/gia sư'}
         </p>*/}

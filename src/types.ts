@@ -7,7 +7,10 @@ import { ReactNode } from "react";
   }
 
   export interface GSZaloUserInfo{
+    UserID: string;
+    Token: string;
     PhoneNumber: string;
+    Avatar: string;
     Name: string;
     StudentID: string;
   }

@@ -124,7 +124,33 @@ export const studentApi = {
         console.error("Error fetching class list:", error);
         throw error;
     }
-  }
+  },
+
+  getStudentApplyList: async (ClassID: string) => {
+    const requestBody = {
+        ClassID: ClassID,
+    };
+    
+    try {
+        const result = await request<{
+            RespCode: number;
+            RespText: string;
+            TotalApplyNumber: number;
+            StudentList: Array<GSStudentBasicInfo>;
+        }>("GSStudent/GetStudentApplyClassList", {
+            method: "POST", 
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody),
+        });
+
+        return result;
+    } catch (error) {
+        console.error("Error fetching student Apply class list:", error);
+        throw error;
+    }
+  },
 };
 
 
