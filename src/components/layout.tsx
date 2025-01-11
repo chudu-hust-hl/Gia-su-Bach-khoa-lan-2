@@ -46,7 +46,7 @@ export const Layout: FC = () => {
           <Route path="/download-app" element={<DownloadAppPage />}></Route>
           <Route path="/formParent" element={<FormParrent />}></Route>
           <Route path="/formStudent" element={<FormStudent />}></Route>
-          <Route path="/allclasses" element={<AvailableClassPage/>}></Route>
+          <Route path="/allClasses" element={<AvailableClassPage/>}></Route>
           <Route path="/class/:id" element={<ClassDetailPage />}></Route>
           <Route path="/tutor/:id" element={<TutorDetailPage />}></Route>
           <Route path="/tutor-list" element={<TutorListPage />}></Route>

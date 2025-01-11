@@ -4,6 +4,8 @@ const TokenKey = "TokenGSBK";
 const UserZaloID = "UserZaloIDGSBK";
 const PhoneNumber = "PhoneNumberGSBK";
 
+const Name = "NameGSBK";
+const Avatar = "AvatarGSBK";
 const StudentID = "StudentIDGSBK"
 const PageNumber = "PageNumberGSBK";
 const RowspPage = "RowspPageGSBK";
@@ -31,26 +33,48 @@ export function removeUserZaloID(): void {
 }
 
 // PhoneNumber
-export function setPhoneNumber(phoneNumber: string): void {
+export function setPhoneNum(phoneNumber: string): void {
   Cookies.set(PhoneNumber, phoneNumber);
 }
-export function getPhoneNumber(): string | undefined {
+export function getPhoneNum(): string | undefined {
   return Cookies.get(PhoneNumber);
 }
-export function removePhoneNumber(): void {
+export function removePhoneNum(): void {
   Cookies.remove(PhoneNumber);
 }
 
 //StudentID
 export function setStudentID(studentID: string): void {
-    Cookies.set(StudentID, studentID);
-  }
-  export function getStudentID(): string | undefined {
-    return Cookies.get(StudentID);
-  }
-  export function removeStudentID(): void {
-    Cookies.remove(StudentID);
-  }
+  Cookies.set(StudentID, studentID);
+}
+export function getStudentID(): string | undefined {
+  return Cookies.get(StudentID);
+}
+export function removeStudentID(): void {
+  Cookies.remove(StudentID);
+}
+
+// Avatar
+export function setAvatar(studentID: string): void {
+  Cookies.set(Avatar, studentID);
+}
+export function getAvatar(): string | undefined {
+  return Cookies.get(Avatar);
+}
+export function removeAvatar(): void {
+  Cookies.remove(Avatar);
+}
+
+// Avatar
+export function setName(studentID: string): void {
+  Cookies.set(Name, studentID);
+}
+export function getName(): string | undefined {
+  return Cookies.get(Name);
+}
+export function removeName(): void {
+  Cookies.remove(Name);
+}
 
 // PageNumber
 export function setPageNumber(pageNumber: string): void {
