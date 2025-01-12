@@ -12,6 +12,7 @@ import { getStudentID } from "utils/auth";
 const TutorTeachingDetailPage:FC = () => {
   const { id } = useParams();
   const classItem =  useRecoilValue(classState(String(id)))!;
+  const [feedback, setFeedback] = useState<string>("");
   const [schedule, setSchedule] = useState<{ date: string; note: string }[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null); // State to hold the selected date
   const [note, setNote] = useState<string>(''); // State to hold the note input
@@ -102,13 +103,20 @@ const TutorTeachingDetailPage:FC = () => {
 
   return (
     <Page>
-    <Header title="Lớp bạn đang dạy" backgroundColor="#AD493A"/>
-    <div className="w-full h-full flex flex-col p-4">
+    <Header title="Lớp bạn đang dạy"/>
+    <div className="w-full min-h-screen flex flex-col p-4 bg-gradient-to-b from-[#e0e8ff] to-[#c0caff]">
       {/* Class Information Section */}
-      <div className="mb-4">
-        <h1 className="text-2xl font-bold">Thông tin lớp học</h1>
-        <div className="text-lg">Môn học: {classItem.Subjects}</div>
-        <div className="text-lg">Lớp: {classItem.ValueClass}</div>
+      <div className="relative my-8 bg-white p-4 shadow-lg rounded-lg transition-all hover:shadow-xl">
+        <h1 className="absolute top-[-25px] left-[10vh] text-xl font-semibold text-center border text-white rounded-lg bg-[#AD493A] w-[50vw] p-1">
+          Thông tin lớp học
+        </h1>
+        <hr className="my-2" />
+        <div className="text-lg mb-2">
+          <b>Môn học:</b> {classItem.Subjects}
+        </div>
+        <div className="text-lg mb-2">
+          <b>Lớp:</b> {classItem.ValueClass}
+        </div>
         <Collapse
           items={[
             {
@@ -131,13 +139,15 @@ const TutorTeachingDetailPage:FC = () => {
       </div>
 
       {/* Feedback Section */}
-      <div className="mb-4">
-        <h2 className="text-xl font-semibold">Phản hồi</h2>
-        <textarea
-          className="w-full h-24 border border-gray-300 rounded p-2"
-          placeholder="Nhập phản hồi của bạn..."
-        />
-      </div>
+      <div className="mb-4 bg-white p-4 shadow-lg rounded-lg transition-all hover:shadow-xl">
+          <h2 className="text-xl font-semibold mb-2">Nhận xét chung về gia sư</h2>
+          <Input
+            value={feedback}
+            onChange={(e) => setFeedback(e.target.value)}
+            className="w-full h-24 border border-gray-300 rounded-lg p-2"
+            placeholder="Nhập nhận xét"
+          />
+        </div>
 
       {/* Schedule Section */}
       <Box className="mt-4 p-4 border rounded shadow">
@@ -166,13 +176,14 @@ const TutorTeachingDetailPage:FC = () => {
         />
 
         {/* Input field for the note */}
-        <Input
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          placeholder="Nhập ghi chú cho ngày này..."
-          className="mt-2"
-        />
-
+        <Box className="mt-4">
+          <Input
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="Nhập ghi chú cho ngày này..."
+            className="mt-2"
+          />
+        </Box>
         {/* Button from zmp-ui */}
         <Button
           className="mt-2"

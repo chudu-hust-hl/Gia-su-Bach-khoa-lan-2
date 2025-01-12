@@ -128,8 +128,12 @@ body {
 
 .input-field:focus {
   border-color: white; /* Màu viền khi focus */
-  background-color: rgb(5, 12, 51, 0.7); /* Màu nền khi focus */
+  background-color: #f6dde0; /* Màu nền khi focus */
   outline: none; /* Bỏ viền mặc định của trình duyệt */
+}
+
+.checkbox:checked::before {
+  background-color: #AD493A;
 }
 
 .textarea-field {

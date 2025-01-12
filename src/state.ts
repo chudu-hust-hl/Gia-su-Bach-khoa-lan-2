@@ -1,4 +1,4 @@
-import { atom, selector, selectorFamily } from "recoil";
+import { atom, selector, selectorFamily, useSetRecoilState, useRecoilValue } from "recoil";
 import { getLocation, getPhoneNumber, getUserInfo, authorize } from "zmp-sdk/apis";
 import { classApi } from "api/class";
 import { studentApi } from "api/student";
@@ -120,9 +120,9 @@ export const classesState = selector<GSClass[]>({
         } else {
             console.error("Error fetching class list:", result.RespText);
             return []; // Return an empty array or handle the error as needed
-        }
+      }
     } catch (error) {
-        console.error("Error in classesState selector:", error);
+      console.error("Error in classesState selector:", error);
         return []; // Return an empty array or handle the error as needed
     }
   },
@@ -290,6 +290,11 @@ export const parentState = selectorFamily({
       return null; // Return null in case of an exception
     }
   },
+});
+
+export const loadingState = atom<boolean>({
+  key: 'loadingState',
+  default: false, // Default value is false, meaning not loading initially
 });
 
 

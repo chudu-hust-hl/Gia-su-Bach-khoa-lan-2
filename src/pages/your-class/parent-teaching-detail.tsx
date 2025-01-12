@@ -85,10 +85,10 @@ const ParentTeachingDetailPage: FC = () => {
   return (
     <Page>
       <Header title="Danh sách lớp " />
-      <div className="w-full h-full flex flex-col p-4 text-[#050C33] bg-gradient-to-b from-[#e0e8ff] to-[#c0caff]">
+      <div className="w-full h-full flex flex-col p-4 bg-gradient-to-b from-[#e0e8ff] to-[#c0caff]">
         {/* Class Information Section */}
         <div className="relative my-8 bg-white p-4 shadow-lg rounded-lg transition-all hover:shadow-xl">
-          <h1 className="absolute top-[-25px] left-[10vh] text-xl font-semibold text-center border text-white rounded-lg bg-[#39437c] w-[50vw] p-1">
+          <h1 className="absolute top-[-25px] left-[10vh] text-xl font-semibold text-center border text-white rounded-lg bg-[#AD493A] w-[50vw] p-1">
             Thông tin lớp học
           </h1>
           <hr className="my-2" />
@@ -117,7 +117,7 @@ const ParentTeachingDetailPage: FC = () => {
 
         {/* Tutor Information Section */}
         <div className="relative mb-4 bg-white shadow-lg rounded-lg p-4 transition-all hover:shadow-xl">
-          <h2 className="absolute top-[-25px] left-[10vh] text-xl font-semibold text-center border text-white rounded-lg bg-[#39437c] w-[50vw] p-1">
+          <h2 className="absolute top-[-25px] left-[10vh] text-xl font-semibold text-center border text-white rounded-lg bg-[#AD493A] w-[50vw] p-1">
             Thông tin gia sư
           </h2>
           <hr className="my-2" />
@@ -135,7 +135,7 @@ const ParentTeachingDetailPage: FC = () => {
               {
                 title: "Thông tin chi tiết",
                 content: (
-                  <div className="animate-fadeIn rounded-md border-[#D9D9D9] border-[2px] p-2">
+                  <div className="animate-fadeIn">
                     <p><b>Thành tích:</b> {tutorItem.Achievement}</p>
                     <p><b>Kinh nghiệm:</b> {tutorItem.Experience}</p>
                   </div>
@@ -151,7 +151,7 @@ const ParentTeachingDetailPage: FC = () => {
           <Input
             value={feedback}
             onChange={(e) => setFeedback(e.target.value)}
-            className="w-full h-24 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full h-24 border border-gray-300 rounded-lg p-2"
             placeholder="Nhập nhận xét"
           />
         </div>

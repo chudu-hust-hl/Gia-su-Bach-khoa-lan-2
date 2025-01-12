@@ -5,10 +5,12 @@ import {
   selectedDistrictsState, 
   selectedLevelsState,
   selectedFormTeachState,
-  selectedSubjectsState} from "state";
+  selectedSubjectsState,
+  loadingState} from "state";
 import { ClassGrid } from "components/class-grid";
 import ClassFilter from "./class-filter";
 import { Header, Page } from "zmp-ui";
+import { TextSkeleton } from "components/skeletons";
 
 const mapValueClassToLevel = (ValueClass: string) => {
   const classNum = parseInt(ValueClass.replace(/\D/g, ''));
@@ -20,7 +22,7 @@ const mapValueClassToLevel = (ValueClass: string) => {
 
 const ClassListPage: FC = () => {
   const classes =  useRecoilValue(classesState);
-  console.log("classes: ", classes);
+  // const isLoading = useRecoilValue(loadingState);
   const selectedDistricts =  useRecoilValue(selectedDistrictsState);
   const selectedLevels =  useRecoilValue(selectedLevelsState);
   const selectedSubjects =  useRecoilValue(selectedSubjectsState);
@@ -44,12 +46,24 @@ const ClassListPage: FC = () => {
       (classItem.FormTeach === "Cả 2") // Include classes that are "Cả 2" for both filters
     );  
     return  districtMatch  && levelMatch  && formTeachMatch;
-
-
   });
 
+  // if (isLoading) {
+  //   return (
+  //     <Page className='bg-gradient-to-b from-[#bbc7ff] to-[#2F529B]'>
+  //       <div className="sticky top-0 bg-white z-10">
+  //         <Header title="Danh sách lớp mới" showBackIcon={false} />
+  //         <ClassFilter />
+  //       </div>
+  //       <div className="pt-5">
+  //         <TextSkeleton>Loading...</TextSkeleton>
+  //       </div>
+  //     </Page>
+  //   );
+  // }
+
   return (
-    <Page>
+    <Page className='bg-gradient-to-b from-[#bbc7ff] to-[#2F529B]'>
       <div className="sticky top-0 bg-white z-10">
       <Header title="Danh sách lớp mới" showBackIcon={false}/>
        {/* Fixed positioning */}

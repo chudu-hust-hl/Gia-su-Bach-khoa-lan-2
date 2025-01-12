@@ -9,7 +9,7 @@ export const TeachingItem: FC<{propClass: GSClass}> = ({propClass}) => {
       className="flex flex-col cursor-pointer group bg-white p-4 rounded-lg shadow-md"
       to={`/teaching-detail/${propClass.ClassID}`}
     >
-      <div className="text-lg font-semibold mb-2">
+      <div className="text-lg font-bold mb-2 text-center border rounded-md bg-[#AD493A] text-white p-1">
         Bạn đang có lớp gia sư {propClass.Subjects}
       </div>
       <div className="text-sm text-gray-600 mb-1">
