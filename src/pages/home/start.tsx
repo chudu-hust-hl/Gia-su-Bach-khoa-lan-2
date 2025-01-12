@@ -12,56 +12,6 @@ const StartPage: FC = () => {
   const [userCurrent, setUserCurrentType] = useRecoilState(userCurrentState);
   const navigate = useNavigate();
 
-  // const authorizeUser = async () => {
-  //   try {
-  //     const data = await authorize({
-  //       scopes: ["scope.userLocation", "scope.userPhonenumber"],
-  //     });
-  //     console.log("cai gi day", data);
-  //   } catch (error) {
-  //     // xử lý khi gọi api thất bại
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   authorizeUser();
-  // }, []);
-
-  // const setDataToStorage = async () => {
-  //   try {
-  //     const { errorKeys } = await setStorage({
-  //       data: {
-  //         studentID: "20226030",
-  //       }
-  //     });
-  //     console.log("key", errorKeys)
-  //   } catch (error) {
-  //     // xử lý khi gọi api thất bại
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //    setDataToStorage();
-  // }, []);
-
-//   const getDataFromStorage = async () => {
-//     try {
-//       const { studentID } = await getStorage({
-//         keys: ["studentID"]
-//       });
-//       console.log(studentID)
-//     } catch (error) {
-//       // xử lý khi gọi api thất bại
-//       console.log(error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     getDataFromStorage();
-//  }, []);
-
   const handleUserTypeSelect = (type: 0|1) => {
     // Create an updated user type object
       
@@ -83,7 +33,7 @@ const StartPage: FC = () => {
     <Page>
       <Box className="min-h-screen bg-white flex flex-col items-center justify-center">
         {/* Container chính */}
-        <div className="relative w-[90%] max-w-md bg-[#060f44] p-6 rounded-2xl drop-shadow-md">
+        <div className="relative w-[90%] max-w-md bg-[#AD493A] p-6 rounded-2xl drop-shadow-md">
           {/* Logo */}
           <img
             className="absolute top-[-50px] left-1/2 transform -translate-x-1/2 w-[100px] h-[100px] rounded-full border-4 border-white"
@@ -97,13 +47,13 @@ const StartPage: FC = () => {
           {/* Nút chọn vai trò */}
           <div className="mt-6 flex flex-col space-y-4 items-center">
             <Button
-              className="border-none w-[80%] py-3 text-lg font-semibold bg-[#FFB600] text-[#050C33] rounded-lg hover:bg-blue-600"
+              className="border-none w-[80%] py-3 text-lg font-semibold bg-[#3a65ad] text-[#FFFFFF] rounded-lg hover:bg-blue-600"
               onClick={() => handleUserTypeSelect(0)}
             >
               Phụ huynh / người học
             </Button>
             <Button
-              className="border-none w-[80%] py-3 text-lg font-semibold bg-[#FFB600] text-[#050C33] rounded-lg hover:bg-blue-600"
+              className="border-none w-[80%] py-3 text-lg font-semibold bg-[#3a65ad] text-[#FFFFFF] rounded-lg hover:bg-blue-600"
               onClick={() => handleUserTypeSelect(1)}
             >
               Gia sư

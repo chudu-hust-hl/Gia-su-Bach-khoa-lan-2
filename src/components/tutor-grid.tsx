@@ -9,7 +9,7 @@ export const TutorItem: FC<{ student: GSStudentInfo}> = ({ student }) => {
         className="flex flex-col cursor-pointer group bg-white p-4 rounded-lg shadow-md"
         to={`/tutor/${student.StudentID}`} // Link to the tutor's detail page
       >
-        <div className="text-lg font-bold mb-2 text-center border rounded-md bg-[#465888] text-white p-1">
+        <div className="text-lg font-bold mb-2 text-center border rounded-md bg-[#AD493A] text-white p-1">
           {student.StudentName} {/* Display the tutor's name */}
         </div>
         <hr className='my-1'/>
@@ -17,16 +17,7 @@ export const TutorItem: FC<{ student: GSStudentInfo}> = ({ student }) => {
           <b>Giới tính:</b> {student.SexStudent} {/* Display the tutor's gender */}
         </div>
         <div className="text-sm text-gray-600 mb-1">
-          <b>Trường:</b> {student.SelectSchool} {/* Display the tutor's school */}
-        </div>
-        <div className="text-sm text-gray-600 mb-1">
           <b>Môn học:</b> {student.Subjects} {/* Display the subjects the tutor teaches */}
-        </div>
-        <div className="text-sm text-gray-600 mb-1">
-          <b>Hình thức dạy:</b> {student.FormTeach} {/* Display the teaching method */}
-        </div>
-        <div className="text-sm text-gray-600 mb-1">
-          <b>Địa chỉ:</b> {student.Address} {/* Display the tutor's address */}
         </div>
         <div className="text-sm text-gray-600 mb-1">
           <b>Kinh nghiệm:</b> {student.Experience} {/* Display the tutor's experience */}

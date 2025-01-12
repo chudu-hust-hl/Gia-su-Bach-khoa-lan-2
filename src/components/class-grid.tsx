@@ -9,9 +9,10 @@ export const ClassItem: FC<{propClass: GSClass}> = ({propClass}) => {
       className="flex flex-col cursor-pointer group bg-white p-4 rounded-lg shadow-md"
       to={`/class/${propClass.ClassID}`}
     >
-      <div className="text-lg font-semibold mb-2">
-        Tìm gia sư môn {propClass.Subjects}
+      <div className="text-lg font-bold mb-2 text-center border rounded-md bg-[#AD493A] text-white p-1">
+        Tìm gia sư môn {propClass.Subjects} 
       </div>
+      <hr className='my-1'/>
       <div className="text-sm text-gray-600 mb-1">
         Môn học: {propClass.Subjects}
       </div>
@@ -20,6 +21,9 @@ export const ClassItem: FC<{propClass: GSClass}> = ({propClass}) => {
       </div>
       <div className="text-sm text-gray-600">
         Địa chỉ: {propClass.AddressParent}
+      </div>
+      <div className="text-sm text-gray-600">
+        Yêu cầu: {propClass.InfoMore}
       </div>
     </TransitionLink>
   );
