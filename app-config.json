@@ -17,7 +17,7 @@
     "primaryColor": "#AD493A",
     "apiUrls":{
       
-      "default": "https://localhost:44354/",
+      "default": "https://crm.icpc1hn.work/giasuapi/",
       "location": "https://ctsv.hust.edu.vn/"
     },
     "prefixCurrencySymbol": false,

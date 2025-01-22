@@ -23,7 +23,7 @@ export const ApplyingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
     console.log(userAsTutor?.Apply)
 
   return (
-    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">
+    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-gradient-to-b from-[#bbc7ff] to-[#2F529B]">
       {appliedClasses.length > 0 ? (
         <ClassGrid classes={appliedClasses} />
       ) : (
@@ -44,7 +44,7 @@ export const TeachingList: FC<{ classes: GSClass[]; studentID: string; phoneNumb
 
 
   return (
-    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">
+    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-gradient-to-b from-[#bbc7ff] to-[#2F529B]">
       {appliedClasses.length > 0 ? (
         <TeachingGrid classes={appliedClasses} />
       ) : (
@@ -64,7 +64,7 @@ export const DoneList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: 
     : classes.filter(classItem => (userAsTutor?.Done || []).includes(classItem.ClassID.toString()));
 
   return (
-    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-[#A5B4FC]">
+    <div className="grid grid-cols-1 px-4 py-2 gap-4 bg-gradient-to-b from-[#bbc7ff] to-[#2F529B]">
       {doneClasses.length > 0 ? (
         <TeachingGrid classes={doneClasses} />
       ) : (

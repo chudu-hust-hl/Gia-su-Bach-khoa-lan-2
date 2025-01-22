@@ -6,15 +6,19 @@ import { parentApi } from "api/parrent";
 import {toast} from "react-hot-toast";
 import { getConfig } from 'utils/config';
 import logo from "static/logo.png";
+import { useNavigate } from 'react-router'; // Import useNavigate
+import { GSZaloUserInfo } from "types";
+import { authApi } from "api/auth";
+import { setUserZaloID, setToken, setStudentID, setPhoneNum, getPhoneNum, getStudentID, getUserZaloID, getToken, getAvatar, getName, removeUserZaloID, removeToken } from "utils/auth";
+
 
 const { Option } = Select;
 
 const FormParrent: FC = () => {
-  // State to hold form data
   const [formData, setFormData] = useState<GSParentReqInfo>({
     ParentID: "", 
     NameParent: "",
-    PhoneParent: "",
+    PhoneParent: getPhoneNum() || "",
     AddressParent: "",
     FormTeach: "",
     InfoMore: "",
@@ -181,7 +185,8 @@ const FormParrent: FC = () => {
   
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+  const navigate = useNavigate();
+
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -231,13 +236,26 @@ const FormParrent: FC = () => {
       
     try {
       console.log("Sending data:", requestBody); // Log the data being sent
-      
+      setPhoneNum(requestBody.ParentInfo.PhoneParent);
       const result = await parentApi.createParentInfo(parentInfo);
-  
+      // Store Zalo user info
+      const userZaloID = getUserZaloID();
+      const token = getToken();
+      const zaloUserInfo: GSZaloUserInfo = {
+        UserID: String(userZaloID),
+        Token: String(token),
+        Avatar: String(getAvatar()),
+        Name: String(getName()),
+        PhoneNumber: String(getPhoneNum()),
+        StudentID: String(getStudentID()),
+      };
+      const storeResult = await authApi.storeZaloUserInfo(zaloUserInfo);
+      console.log("Store user info result:", storeResult);
       console.log("API Response:", result);
   
       if (result.RespCode === 0) {
         toast.success("Đã gửi thông tin thành công!");
+        navigate("/formSuccess");
       } else {
         toast.error("Có lỗi xảy ra");
       }
@@ -309,7 +327,6 @@ const FormParrent: FC = () => {
 
           {/* District Dropdown - Enabled only after City is selected */}
           <Box>
-            <span>Quận/Huyện:</span>
             <Select
               name="District"
               label="Quận/Huyện"

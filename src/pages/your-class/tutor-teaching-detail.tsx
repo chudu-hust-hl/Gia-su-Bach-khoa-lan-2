@@ -14,7 +14,7 @@ const TutorTeachingDetailPage:FC = () => {
   const classItem =  useRecoilValue(classState(String(id)))!;
   const [feedback, setFeedback] = useState<string>("");
   const [schedule, setSchedule] = useState<{ date: string; note: string }[]>([]);
-  const [selectedDate, setSelectedDate] = useState<string | null>(null); // State to hold the selected date
+  const [selectedDate, setSelectedDate] = useState<string | null>(new Date().toISOString().slice(0, 10));
   const [note, setNote] = useState<string>(''); // State to hold the note input
   const [selectedMonth, setSelectedMonth] = useState<string>(new Date().toISOString().slice(0, 7)); // Default to current month
 
@@ -57,6 +57,7 @@ const TutorTeachingDetailPage:FC = () => {
     fetchScheduleData();
   }, [selectedMonth]);
 
+  
 
   const handleAddSchedule = async () => {
     if (selectedDate && note) {
@@ -64,7 +65,7 @@ const TutorTeachingDetailPage:FC = () => {
         // Assuming you have access to the StudentID and ClassID
         const StudentID = getStudentID() || "20226030"; // Replace with actual StudentID
         const ClassID = classItem.ClassID; // Use the ClassID from the classItem
-  
+        
         // Call the API to create a daily comment
         const result = await classApi.createStudentDailyComment(
           StudentID,
@@ -86,6 +87,14 @@ const TutorTeachingDetailPage:FC = () => {
         console.error("Error in handleAddSchedule:", error);
       }
     }
+    else{
+      try{
+        console.log("Date: " + selectedDate);
+      }
+      catch (error) {
+        console.error("Error in handleAddSchedule:", error);
+      }
+    };
   };
 
   const handlePhoneClick = (phoneNumber: string) => {
@@ -152,6 +161,7 @@ const TutorTeachingDetailPage:FC = () => {
       {/* Schedule Section */}
       <Box className="mt-4 p-4 border rounded shadow">
         <h2 className="text-xl font-semibold">Lịch học</h2>
+        
         <Calendar
           fullscreen={false} // Không hiển thị toàn màn hình
           //numberOfWeek={1}
@@ -159,9 +169,9 @@ const TutorTeachingDetailPage:FC = () => {
             // `date` is a DateType. Convert it to a JavaScript Date object.
             const jsDate = new Date(date); // Ensure valid JS Date conversion
             if (!isNaN(jsDate.getTime())) {
-              // Chuyển đổi ngày sang định dạng dd/mm/yyyy
-              const formattedDate = jsDate.toLocaleDateString("en-GB");
+              const formattedDate = jsDate.toISOString().slice(0, 10);
               setSelectedDate(formattedDate);
+              console.log("Date: ",formattedDate, selectedDate);
 
               // Extract the month in "yyyy-mm" format and update the selectedMonth state
               const year = jsDate.getFullYear();

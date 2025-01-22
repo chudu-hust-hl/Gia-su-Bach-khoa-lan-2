@@ -1,4 +1,5 @@
 	import React, { useState, useEffect, FC } from "react";
+	import { useNavigate } from "react-router-dom";
 	import { Page, Box, Text, Input, Select, Checkbox, Button, Radio, Header } from "zmp-ui";
 	import { GSStudentInfo } from "types";
 	import { locationApi } from "api/location";
@@ -6,6 +7,10 @@
 	import toast from "react-hot-toast";
 	import { getConfig } from 'utils/config';
 	import logo from "static/logo.png";
+	import { GSZaloUserInfo } from "types";
+	import { authApi } from "api/auth";
+	import { setUserZaloID, setToken, setStudentID, setPhoneNum, getPhoneNum, getStudentID, getUserZaloID, getToken, getAvatar, getName, removeUserZaloID, removeToken } from "utils/auth";
+
 
 	const { Option } = Select;
 
@@ -13,7 +18,7 @@
 	// State to hold form data
 	const [formData, setFormData] = useState<GSStudentInfo>({
 		ReqStudentID: "",
-		StudentID: "",
+		StudentID: getStudentID() || "",
 		StudentName: "",
 		Phone: "",
 		Address: "",
@@ -166,6 +171,7 @@
 	};
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const navigate = useNavigate();
 
 	// Handle form submission
 	const handleSubmit = async (e: React.FormEvent) => {
@@ -214,13 +220,28 @@
 		
 	try {
 			console.log("Sending data:", requestBody); // Log the data being sent
-			
+			setStudentID(requestBody.StudentInfo.StudentID);
 			const result = await studentApi.createStudentInfo(requestBody);
 
 			console.log("API Response:", result);
 
 			if (result.RespCode === 0) {
 				toast.success("Đã gửi thông tin thành công!");
+
+				// Store Zalo user info
+				const userZaloID = getUserZaloID();
+				const token = getToken();
+				const zaloUserInfo: GSZaloUserInfo = {
+				  UserID: String(userZaloID),
+				  Token: String(token),
+				  Avatar: String(getAvatar()),
+				  Name: String(getName()),
+				  PhoneNumber: String(getPhoneNum()),
+				  StudentID: String(getStudentID()),
+				};
+				const storeResult = await authApi.storeZaloUserInfo(zaloUserInfo);
+				console.log("Store user info result:", storeResult);
+				navigate("/formSuccess");
 			} else {
 				toast.error("Có lỗi xảy ra");
 			}
@@ -306,6 +327,7 @@
 					name="StudentID"
 					label="Mã số sinh viên"
 					placeholder="Mã số sinh viên"
+					defaultValue={getStudentID() || ""}
 					value={formData.StudentID}
 					onChange={handleChange}
 					className="input-field"
@@ -438,7 +460,7 @@
 						type="text"
 						name="NameSupports"
 						label="Năng lực của bạn"
-						placeholder="Điều bạn mang tới cho học sinh"
+						placeholder="VD: Giúp học sinh tập trung"
 						value={formData.NameSupports}
 						onChange={handleChange}
 						className="input-field"
@@ -447,7 +469,7 @@
 
 				<hr className="mt-4" />
 				<Box className="py-4">
-					<Text className="font-semibold text-xl mb-4">Lịch có thể học:</Text>
+					<Text className="font-semibold text-xl mb-4">Lịch có thể dạy:</Text>
 					<div className="space-y-6">
 					{(["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 7", "Chủ nhật"] as DayOfWeek[]).map((day) => (
 						<Box key={day} className="bg-white p-3 rounded-lg shadow-md">
@@ -462,7 +484,7 @@
 									formData.TimeSupport.split('; ').includes(`${time} ${day}`)
 									? "bg-[#AD493A] text-white"
 									: "bg-gray-100 text-gray-700"
-								} hover:bg-[#cc7467] hover:text-white`}
+								} `}
 								>
 								{/* Biểu tượng hoặc icon thay cho checkbox */}
 								<i className={`fa ${formData.TimeSupport.split('; ').includes(`${time} ${day}`) ? "fa-check-circle" : "fa-circle"} text-xl`}></i>

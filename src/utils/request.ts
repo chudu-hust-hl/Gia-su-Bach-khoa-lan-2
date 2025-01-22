@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import { getConfig } from "./config";
 import { userState } from "state";
-import { getUserZaloID } from "./auth";
+import { getUserZaloID, getToken} from "./auth";
 
 // Get the API URL from the configuration
 const API_URL = getConfig((config) => config.template.apiUrls.default);
@@ -19,15 +19,15 @@ export async function request<T>(
   options.body = options.body || {};
 
   // Pre-request modifications (similar to interceptor behavior)
-  const token = "example-token-code" //getToken();
-  //const userID = getUserZaloID();
+  const token = getToken() || "example-token-code"; 
+  const userID = getUserZaloID() || "Zalo123456";
   if (token) {
     // Ensure the body is parsed if it's a string
     const parsedBody = typeof options.body === "string" ? JSON.parse(options.body) : options.body;
 
     // Add Token and UserID to the payload
     parsedBody.Token = token;
-    parsedBody.UserID = "Zalo123456"  //getUserName();
+    parsedBody.UserID = userID;
 
     // Convert the modified body back to a string
     options.body = JSON.stringify(parsedBody);

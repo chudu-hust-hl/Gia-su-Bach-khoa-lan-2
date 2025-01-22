@@ -104,25 +104,6 @@ export default function ClassFilter() {
 
       <Suspense fallback={<SelectSkeleton width={110} />}>
         <Select
-          label="Hình thức dạy"
-          placeholder="Chọn hình thức dạy"
-          multiple
-          closeOnSelect
-          value={selectedFormTeach}
-          onChange={handleFormTeachChange}
-        >
-          {formTeachOptions.map((option) => (
-            <Option 
-              key={option.label} 
-              value={option.value} 
-              title={option.label} 
-            />
-          ))}
-        </Select>
-      </Suspense>
-
-      <Suspense fallback={<SelectSkeleton width={110} />}>
-        <Select
           label="Môn học"
           placeholder="Chọn môn học"
           multiple

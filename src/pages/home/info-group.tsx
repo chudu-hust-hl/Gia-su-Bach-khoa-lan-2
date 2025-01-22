@@ -8,24 +8,26 @@ export const MoreInfoGroup: FC=() => {
 
   return (
     <div className="flex justify-around h-11">
-      <Button
-        className="w-1/3 bg-[#AD493A] border-r-white text-white rounded-none"
-        onClick={() => navigate("/app-info")}
-      >
-        Thông tin
-      </Button>
-      <Button
-        className="w-1/3 !border-r-white bg-[#AD493A] text-white rounded-none"
-        onClick={() => navigate("/app-standards")}
-      >
-        Tiêu chuẩn
-      </Button>
-      <Button
-        className="w-1/3 bg-[#AD493A] text-white rounded-none"
-        onClick={() => navigate("/download-app")}
-      >
-        Cài đặt
-      </Button>
-    </div>
+    <Button
+      className="w-1/3 bg-[#AD493A] border-r-white text-white text-sm rounded-none"
+      onClick={() => navigate("/app-info")}
+    >
+      Thông tin
+    </Button>
+    <div className="w-px bg-white" />
+    <Button
+      className="w-1/3 !border-r-white bg-[#AD493A] text-white text-sm rounded-none"
+      onClick={() => navigate("/app-standards")}
+    >
+      Tiêu chuẩn
+    </Button>
+    <div className="w-px bg-white" />
+    <Button
+      className="w-1/3 bg-[#AD493A] text-white text-sm rounded-none"
+      onClick={() => navigate("/download-app")}
+    >
+      Cài đặt
+    </Button>
+  </div>
   );
 };

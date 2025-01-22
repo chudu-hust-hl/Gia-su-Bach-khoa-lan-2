@@ -1,4 +1,3 @@
-import Cookies from "js-cookie";
 
 const TokenKey = "TokenGSBK";
 const UserZaloID = "UserZaloIDGSBK";
@@ -12,88 +11,88 @@ const RowspPage = "RowspPageGSBK";
 
 // Token
 export function setToken(token: string): void {
-  Cookies.set(TokenKey, token, { expires: 356 });
+  localStorage.setItem(TokenKey, token);
 }
-export function getToken(): string | undefined {
-  return Cookies.get(TokenKey);
+export function getToken(): string | null {
+  return localStorage.getItem(TokenKey);
 }
 export function removeToken(): void {
-  Cookies.remove(TokenKey);
+  localStorage.removeItem(TokenKey);
 }
 
 // UserName
 export function setUserZaloID(id: string): void {
-  Cookies.set(UserZaloID, id);
+  localStorage.setItem(UserZaloID, id);
 }
-export function getUserZaloID(): string | undefined {
-  return Cookies.get(UserZaloID);
+export function getUserZaloID(): string | null {
+  return localStorage.getItem(UserZaloID);
 }
 export function removeUserZaloID(): void {
-  Cookies.remove(UserZaloID);
+  localStorage.removeItem(UserZaloID);
 }
 
 // PhoneNumber
 export function setPhoneNum(phoneNumber: string): void {
-  Cookies.set(PhoneNumber, phoneNumber);
+  localStorage.setItem(PhoneNumber, phoneNumber);
 }
-export function getPhoneNum(): string | undefined {
-  return Cookies.get(PhoneNumber);
+export function getPhoneNum(): string | null {
+  return localStorage.getItem(PhoneNumber);
 }
 export function removePhoneNum(): void {
-  Cookies.remove(PhoneNumber);
+  localStorage.removeItem(PhoneNumber);
 }
 
 //StudentID
 export function setStudentID(studentID: string): void {
-  Cookies.set(StudentID, studentID);
+  localStorage.setItem(StudentID, studentID);
 }
-export function getStudentID(): string | undefined {
-  return Cookies.get(StudentID);
+export function getStudentID(): string | null {
+  return localStorage.getItem(StudentID);
 }
 export function removeStudentID(): void {
-  Cookies.remove(StudentID);
+  localStorage.removeItem(StudentID);
 }
 
 // Avatar
 export function setAvatar(studentID: string): void {
-  Cookies.set(Avatar, studentID);
+  localStorage.setItem(Avatar, studentID);
 }
-export function getAvatar(): string | undefined {
-  return Cookies.get(Avatar);
+export function getAvatar(): string | null {
+  return localStorage.getItem(Avatar);
 }
 export function removeAvatar(): void {
-  Cookies.remove(Avatar);
+  localStorage.removeItem(Avatar);
 }
 
 // Avatar
 export function setName(studentID: string): void {
-  Cookies.set(Name, studentID);
+  localStorage.setItem(Name, studentID);
 }
-export function getName(): string | undefined {
-  return Cookies.get(Name);
+export function getName(): string | null {
+  return localStorage.getItem(Name);
 }
 export function removeName(): void {
-  Cookies.remove(Name);
+  localStorage.removeItem(Name);
 }
 
 // PageNumber
 export function setPageNumber(pageNumber: string): void {
-  Cookies.set(PageNumber, pageNumber);
+  localStorage.setItem(PageNumber, pageNumber);
 }
-export function getPageNumber(): string | undefined {
-  return Cookies.get(PageNumber);
+export function getPageNumber(): string | null {
+  return localStorage.getItem(PageNumber);
 }
 export function removePageNumber(): void {
-  Cookies.remove(PageNumber);
+  localStorage.removeItem(PageNumber);
 }
 
 // RowspPage
 export function setRowspPage(rowspPage: string): void {
-  Cookies.set(RowspPage, rowspPage);
+  localStorage.setItem(RowspPage, rowspPage);
 }
-export function getRowspPage(): string | undefined {
-  return Cookies.get(RowspPage);
+export function getRowspPage(): string | null {
+  return localStorage.getItem(RowspPage);
 }
 export function removeRowspPage(): void {
-  Cookies.remove(RowspPage);
+  localStorage.removeItem(RowspPage);
 }
