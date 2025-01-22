@@ -22,7 +22,6 @@ const mapValueClassToLevel = (ValueClass: string) => {
 
 const ClassListPage: FC = () => {
   const classes =  useRecoilValue(classesState);
-  // const isLoading = useRecoilValue(loadingState);
   const selectedDistricts =  useRecoilValue(selectedDistrictsState);
   const selectedLevels =  useRecoilValue(selectedLevelsState);
   const selectedSubjects =  useRecoilValue(selectedSubjectsState);
@@ -48,19 +47,6 @@ const ClassListPage: FC = () => {
     return  districtMatch  && levelMatch  && formTeachMatch;
   });
 
-  // if (isLoading) {
-  //   return (
-  //     <Page className='bg-gradient-to-b from-[#bbc7ff] to-[#2F529B]'>
-  //       <div className="sticky top-0 bg-white z-10">
-  //         <Header title="Danh sách lớp mới" showBackIcon={false} />
-  //         <ClassFilter />
-  //       </div>
-  //       <div className="pt-5">
-  //         <TextSkeleton>Loading...</TextSkeleton>
-  //       </div>
-  //     </Page>
-  //   );
-  // }
 
   return (
     <Page className='bg-gradient-to-b from-[#bbc7ff] to-[#2F529B]'>

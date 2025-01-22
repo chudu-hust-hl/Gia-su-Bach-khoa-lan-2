@@ -6,15 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import { userCurrentState, grantAuthorization } from 'state';
 import { getConfig } from 'utils/config';
 import logo from "static/logo.png";
-import { authorize, showToast, setStorage, getStorage } from "zmp-sdk/apis";
+import { getPhoneNum, getStudentID, getUserZaloID, getToken, getAvatar, getName, removeUserZaloID, removeToken, removeStudentID } from "utils/auth";
+import { authApi } from 'api/auth';
+import { GSZaloUserInfo } from 'types';
+import { authorize, showToast} from "zmp-sdk/apis";
 
 const StartPage: FC = () => {
   const [userCurrent, setUserCurrentType] = useRecoilState(userCurrentState);
   const navigate = useNavigate();
 
-  const handleUserTypeSelect = (type: 0|1) => {
+
+  const handleUserTypeSelect = async (type: 0|1) => {
     // Create an updated user type object
-      
     const updatedUserType = {
       userCurrentType: type, // Set the user type based on the selection
     };
@@ -25,8 +28,38 @@ const StartPage: FC = () => {
     // Store the updated user type in localStorage
     localStorage.setItem('userType', JSON.stringify(updatedUserType));
   
-    // Optional: Navigate to a different page if needed
-    navigate("/"); // Navigate to the home page or another page
+    // Get the userZaloID and token
+    const userZaloID = getUserZaloID();
+    const token = getToken();
+  
+    // Create the zaloUserInfo object
+    const zaloUserInfo: GSZaloUserInfo = {
+      UserID: String(userZaloID),
+      Token: String(token),
+      Avatar: String(getAvatar()),
+      Name: String(getName()),
+      PhoneNumber: String(getPhoneNum()),
+      StudentID: String(getStudentID()),
+    };
+  
+    // Store the zaloUserInfo using the API
+    try {
+      console.log("User Info:", zaloUserInfo);
+      const result = await authApi.storeZaloUserInfo(zaloUserInfo);
+      console.log('Store user info:', result); // Log the result of storing user info
+    } catch (error) {
+      console.error('Failed to store user ID:', error);
+    }
+  
+    // Check if StudentID is null
+    const studentID = getStudentID();
+    if (studentID === null) {
+      // Navigate to /formStudent if StudentID is null
+      navigate("/formStudent");
+    } else {
+      // Navigate to the home page or another page if StudentID is not null
+      navigate("/");
+    }
   };
 
   return (

@@ -20,17 +20,15 @@ const MyApp = () => {
       try {
         removeUserZaloID();
         const id = await getUserID({}); // Call the API to get the user ID
+        console.log('UserID 1:', id, getUserZaloID());
         setUserZaloID(id); // Update the state with the fetched user ID
-        console.log('UserID:', id);
+        const CookiesID = getUserZaloID();
+        console.log('UserID 2:', id, CookiesID);
       } catch (error) {
         console.error('Failed to fetch user ID:', error);
       }
     };
 
-    fetchUserID(); // Call the function to fetch the user ID
-  }, []);
-
-  useEffect(() => {
     const fetchToken = async () => {
       try {
         removeToken();
@@ -42,59 +40,38 @@ const MyApp = () => {
       }
     };
 
-    fetchToken(); // Call the function to fetch the user ID
-  }, []);
-
-  // useEffect(() => {
-  //   const fetchPhoneNumber = async () => {
-  //     try {
-  //       const phoneNumber = await getPhoneNumber({}); // Call the API to get the user ID
-  //       setPhoneNum(phoneNumber); // Update the state with the fetched user ID
-  //       console.log('Access Token:', token);
-  //     } catch (error) {
-  //       console.error('Failed to fetch user ID:', error);
-  //     }
-  //   };
-
-  //   fetchToken(); // Call the function to fetch the user ID
-  // }, []);
-
-  useEffect(() => {
-    const zaloUserInfo = async () => {
+    const fetchPhoneNumber = async () => {
       try {
-        const zaloUser = (await authApi.getZaloUserInfo()); // Call the API to get the user ID
-        setStudentID(zaloUser.ZaloUserInfo.StudentID);
-        setPhoneNum(zaloUser.ZaloUserInfo.PhoneNumber);
-        console.log('StudentID from app database:', zaloUser.ZaloUserInfo.StudentID);
-        console.log('PhoneNumber from app database:', zaloUser.ZaloUserInfo.PhoneNumber);
+        const phoneNumber = await getPhoneNumber({}); // Call the API to get the user ID
+        //setPhoneNum(phoneNumber); // Update the state with the fetched user ID
+        console.log('Phone Number Token:', phoneNumber);
       } catch (error) {
-        console.error('Failed to fetch user ID:', error);
+        console.error('Failed to fetch user phoneNumber Token:', error);
       }
     };
 
-    zaloUserInfo(); // Call the function to fetch the user ID
-  }, []);
-
-  useEffect(() => {
-    const zaloUserInfo: GSZaloUserInfo ={
-      UserID: getUserZaloID() || "Zalo12345678",
-      Token: getToken() || "example-token-code-test1",
-      Avatar: getAvatar() || "example-avatar",
-      Name: getName() || "Nguyễn Trung Dũng",
-      PhoneNumber: getPhoneNum() || "0904485061",
-      StudentID: getStudentID() || "20226030",
-    }
-    const storeZaloUserInfo = async () => {
+    const storeUserInfo = async () => {
       try {
+        const userZaloID = getUserZaloID();
+        const token = getToken();
+        const zaloUserInfo: GSZaloUserInfo = {
+          UserID: String(userZaloID),
+          Token: String(token),
+          Avatar: String(getAvatar()),
+          Name: String(getName()),
+          PhoneNumber: String(getPhoneNum()),
+          StudentID: String(getStudentID()),
+        };
         const result = await authApi.storeZaloUserInfo(zaloUserInfo);
         console.log('Store user info:', result); // Log the result of storing user info
-
       } catch (error) {
-        console.error('Failed to store user ID:', error);
+        console.error('Failed to store user info:', error);
       }
     };
 
-    storeZaloUserInfo(); // Call the function to fetch the user ID
+    Promise.all([fetchUserID(), fetchToken(), fetchPhoneNumber()]).then(() => {
+      storeUserInfo();
+    });
   }, []);
 
   return (

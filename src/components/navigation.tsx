@@ -1,5 +1,5 @@
 import { useVirtualKeyboardVisible } from "hooks";
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useMemo, useState, startTransition } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { MenuItem } from "types";
 import { BottomNavigation, Icon } from "zmp-ui";
@@ -25,7 +25,7 @@ const tabs: Record<string, MenuItem> = {
 
 export type TabKeys = keyof typeof tabs;
 
-export const NO_BOTTOM_NAVIGATION_PAGES = ["/start", "/formParent", "/formStudent"];
+export const NO_BOTTOM_NAVIGATION_PAGES = ["/start", "/formParent", "/formStudent", "/formSuccess"];
 
 export const Navigation: FC = () => {
   const keyboardVisible = useVirtualKeyboardVisible();
@@ -44,7 +44,11 @@ export const Navigation: FC = () => {
     <BottomNavigation
       id="footer"
       activeKey={location.pathname}
-      onChange={navigate}
+      onChange={(path) => {
+        startTransition(() => {
+          navigate(path);
+        });
+      }}
       className="z-50"
     >
       {Object.keys(tabs).map((path: TabKeys) => (
