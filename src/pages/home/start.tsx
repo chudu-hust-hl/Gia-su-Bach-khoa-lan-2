@@ -53,7 +53,7 @@ const StartPage: FC = () => {
   
     // Check if StudentID is null
     const studentID = getStudentID();
-    if (studentID === null) {
+    if (studentID === null && type==1) {
       // Navigate to /formStudent if StudentID is null
       navigate("/formStudent");
     } else {

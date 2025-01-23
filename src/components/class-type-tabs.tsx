@@ -1,15 +1,14 @@
 import { tabsState, tutorState, parentState, userCurrentState } from "state";
-import { useRecoilState, useRecoilValue } from "recoil";
-import React, { FC } from "react";
+import { useRecoilRefresher_UNSTABLE, useRecoilState, useRecoilValue } from "recoil";
+import React, { FC, useEffect } from "react";
 import {Tabs} from "zmp-ui";
 import { ClassGrid } from "components/class-grid";
 import { GSClass } from "types";
+import { classesState } from "state";
 import { TeachingGrid } from "components/teaching-grid";
+import Button from "./button";
 
-interface ClassTypeTabsProps {
-  selectedIndex: number;
-  onChange: (index: number) => void;
-}
+
 
 export const ApplyingList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: string }> = ({ classes, studentID, phoneNumber }) => {
   const userType = useRecoilValue(userCurrentState);
@@ -74,24 +73,27 @@ export const DoneList: FC<{ classes: GSClass[]; studentID: string; phoneNumber: 
   );
 }
 
-export const ClassTypeTabs: FC<{classes: GSClass[], studentID: string, phoneNumber: string}> = ({classes, studentID, phoneNumber}) => { 
+export const ClassTypeTabs: FC<{ studentID: string, phoneNumber: string}> = ({ studentID, phoneNumber}) => { 
   const tabs = useRecoilValue(tabsState);
+  const classes = useRecoilValue(classesState);
 
   return (
-    <Tabs
-    scrollable
-    defaultActiveKey="tab_1"
-    className="category-tabs relative top-4"
-    >
-      <Tabs.Tab key="tab_1" label= "Lớp đang diễn ra">
-        <TeachingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
-      </Tabs.Tab>
-      <Tabs.Tab key="tab_2" label= "Lớp đang gửi yêu cầu">
-        <ApplyingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
-      </Tabs.Tab>
-      <Tabs.Tab key="tab_3" label= "Lớp đã kết thúc">
-      <DoneList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
-      </Tabs.Tab>
-    </Tabs>
+    <div>
+      <Tabs
+      scrollable
+      defaultActiveKey="tab_1"
+      className="category-tabs relative top-4"
+      >
+        <Tabs.Tab key="tab_1" label= "Lớp đang diễn ra">
+          <TeachingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
+        </Tabs.Tab>
+        <Tabs.Tab key="tab_2" label= "Lớp đang gửi yêu cầu">
+          <ApplyingList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
+        </Tabs.Tab>
+        <Tabs.Tab key="tab_3" label= "Lớp đã kết thúc">
+        <DoneList classes={classes} studentID={studentID} phoneNumber={phoneNumber} />
+        </Tabs.Tab>
+      </Tabs>
+    </div>
   );
 };

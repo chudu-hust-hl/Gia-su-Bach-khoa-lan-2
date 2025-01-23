@@ -16,7 +16,7 @@ const YourClassPage: FC = () => {
     <Page>
       <Header title="Danh sách lớp" />
       <div>
-      <ClassTypeTabs classes={classes} studentID={studentID} phoneNumber={phoneNumber}/>
+      <ClassTypeTabs studentID={studentID} phoneNumber={phoneNumber}/>
       </div>
     </Page>
   );

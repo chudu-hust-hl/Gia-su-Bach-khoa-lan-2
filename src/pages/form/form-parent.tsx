@@ -394,7 +394,7 @@ const FormParrent: FC = () => {
                 onChange={handleRadioChange("Subjects")}
                 className="grid grid-cols-3 gap-4"
               >
-                {["Toán học", "Vật lý", "Hóa học", "Tin học", "Sinh học", "Ngoại ngữ", "Ngữ văn", "Giá tư duy Bách khoa", "Kĩ năng mềm", "STEM", "Tin học văn phòng", "Các môn tiểu học"].map((subject) => (
+                {["Toán học", "Vật lý", "Hóa học", "Tin học", "Sinh học", "Ngoại ngữ", "Ngữ văn", "Đánh giá tư duy", "Kĩ năng mềm", "STEM", "Tin học văn phòng", "Các môn tiểu học"].map((subject) => (
                   <Radio
                     key={subject}
                     label={subject}
@@ -482,6 +482,7 @@ const FormParrent: FC = () => {
               value={formData.FormTeach}  
               onChange={handleRadioChange("FormTeach")}
               className="grid grid-cols-3 p-2"
+              defaultValue={"Offline"}
             >
               {["Online", "Offline", "Cả 2"].map((mode) => (
                 <Radio
@@ -499,6 +500,7 @@ const FormParrent: FC = () => {
               value={formData.QuantityStudent}
               onChange={handleRadioChange("QuantityStudent")}
               className="grid grid-cols-3 p-2"
+              defaultValue={"Học 1-1"}
             >
               {["Học 1-1", "Học nhóm"].map((quantity) => (
                 <Radio
@@ -514,6 +516,7 @@ const FormParrent: FC = () => {
             <Text className="font-semibold my-2">Giới tính gia sư</Text>
             <Radio.Group
               value={formData.SexTeacher}
+              defaultValue={"Không yêu cầu"}
               onChange={handleRadioChange("SexTeacher")}    
               className="grid grid-cols-3 gap-2 px-2"          
             >
@@ -556,7 +559,7 @@ const FormParrent: FC = () => {
                             formData.TimeSupport.split('; ').includes(`${time} ${day}`)
                               ? "bg-[#AD493A] text-white"
                               : "bg-gray-100 text-gray-700"
-                          } hover:bg-[#cc7467] hover:text-white`}
+                          } `}
                         >
                           {/* Biểu tượng hoặc icon thay cho checkbox */}
                           <i className={`fa ${formData.TimeSupport.split('; ').includes(`${time} ${day}`) ? "fa-check-circle" : "fa-circle"} text-xl`}></i>
