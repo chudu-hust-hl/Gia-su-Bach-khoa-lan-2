@@ -1,11 +1,22 @@
-import React, {useEffect, startTransition} from "react";
+import React, {useEffect, useState, startTransition} from "react";
 import { Page, Box, Text, Button } from "zmp-ui";
 import {useNavigate} from "react-router";
 import { getUserZaloID } from "utils/auth";
 import { followOA } from "zmp-sdk/apis";
 import { getConfig } from "utils/config";
 import logo from "static/logo.png";
+import { useRecoilValue, useRecoilRefresher_UNSTABLE } from "recoil";
+import { classesState } from "state";
+
 const SuccessPage: React.FC = () => {
+const classes = useRecoilValue(classesState);
+
+const handleClick = () => {
+  startTransition(() => {
+    navigate("/your-class");
+  });
+};
+
 
 useEffect(() => {
     const fetchUserID = async () => {
@@ -14,7 +25,7 @@ useEffect(() => {
         const follow = id ? await followOA({id: id}) : null;// Update the state with the fetched user ID
         console.log('UserID:', id);
         } catch (error) {
-        console.error('Failed to fetch user ID:', error);
+        console.error('Failed following ZaloOA:', error);
         }
     };
 
@@ -42,19 +53,14 @@ useEffect(() => {
           <div className="mt-6 flex flex-col space-y-4 items-center">
             <Button
               className="border-none w-[80%] py-3 text-lg font-semibold bg-[#3a65ad] text-[#FFFFFF] rounded-lg hover:bg-blue-600"
-              onClick={() => 
-                startTransition(() => {
-                    navigate("/your-class");
-              })}
+              onClick={handleClick}
+              
             >
                 Tiếp tục
             </Button>
             <Button
               className="border-none w-[80%] py-3 text-lg font-semibold bg-[#FFFFFF] text-[#FFFFFF] rounded-lg"
-              onClick={() => 
-                startTransition(() => {
-                    navigate("/your-class");
-              })}
+              onClick={handleClick}
             >
                 Để sau
             </Button>

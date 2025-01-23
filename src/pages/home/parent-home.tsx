@@ -38,7 +38,7 @@ const ParentHomePage: FC = () => {
           <MoreInfoGroup/>
         </div>
         <Box>
-          <ClassTypeTabs classes={classes} studentID={studentID} phoneNumber={phoneNumber}/>
+          <ClassTypeTabs studentID={studentID} phoneNumber={phoneNumber}/>
         </Box>
       </div>
     </Page>

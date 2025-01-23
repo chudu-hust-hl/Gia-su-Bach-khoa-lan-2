@@ -113,7 +113,8 @@ export const classesState = selector<GSClass[]>({
   key: "classesState",
   get: async () => {
     try {
-        const result = (await classApi.getClassList(1, 20,""));
+        const result = (await classApi.getClassList(1, 10000,""));
+        await wait(500);
         if (result.RespCode === 0) { // Assuming 0 indicates success
             console.log("Success", result.ClassList)
             return result.ClassList; // Return the ClassList from the response
