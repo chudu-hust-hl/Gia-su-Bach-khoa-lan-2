@@ -1,18 +1,24 @@
 import { ChevronRight, ShareDecor } from "components/vectors";
 import { GSClass } from "types"; // Assuming you have a Class type defined
 import React, {FC} from "react";
+import logo from "static/logo.png";
 import { openShareSheet } from "zmp-sdk";
 
 export const ShareButton: FC<{classItem: GSClass}> =({classItem}) => {
-  const share = () => {
-    openShareSheet({
-      type: "zmp_deep_link",
-      data: {
-        title: `Tìm gia sư môn ${classItem.Subjects}`,
-        thumbnail: classItem.Subjects, // Assuming classItem has an image property
-        path: `/class/${classItem.id}`, // Adjust the path to match your routing
-      },
-    });
+  const share = async () => {
+    try{
+      const data = await openShareSheet({
+        type: "zmp_deep_link",
+        data: {
+          title: `Tìm gia sư môn ${classItem.Subjects}`,
+          description: "Lớp tìm gia sư",
+          thumbnail: logo,
+        },
+      });
+    }
+    catch (err) {
+      console.error("Error sharing:", err);
+    }
   };
 
   return (
